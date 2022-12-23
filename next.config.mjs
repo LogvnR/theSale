@@ -13,5 +13,13 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "drive.google.com",
+      },
+    ],
+  },
 };
 export default config;

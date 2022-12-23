@@ -64,3 +64,33 @@ model VerificationToken {
 
   @@unique([identifier, token])
 }
+
+// npx prisma migrate dev
+// npx prisma generate
+
+model Category {
+  id    String @id @default(uuid())
+  title String
+
+  products Product[]
+}
+
+model Product {
+  id    String @id @default(uuid())
+  title String
+  isFeatured Boolean
+
+  photos Photo[]
+
+  Category   Category? @relation(fields: [categoryId], references: [id])
+  categoryId String?
+}
+
+model Photo {
+  id        String   @id @default(uuid())
+  title     String
+  url       String
+
+  Product   Product? @relation(fields: [productId], references: [id])
+  productId String?
+}
