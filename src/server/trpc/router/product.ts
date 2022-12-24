@@ -8,13 +8,8 @@ export const productRouter = router({
       where: {
         isFeatured: true,
       },
-      select: {
-        title: true,
-        photos: {
-          select: {
-            url: true,
-          },
-        },
+      include: {
+        photos: true,
       },
     });
   }),
