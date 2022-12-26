@@ -76,8 +76,8 @@ model Category {
 }
 
 model Product {
-  id    String @id @default(uuid())
-  title String
+  id         String  @id @default(uuid())
+  title      String
   isFeatured Boolean
 
   photos Photo[]
@@ -87,9 +87,10 @@ model Product {
 }
 
 model Photo {
-  id        String   @id @default(uuid())
-  title     String
-  url       String
+  id             String  @id @default(uuid())
+  title          String
+  url            String
+  isFeaturePhoto Boolean @default(false)
 
   Product   Product? @relation(fields: [productId], references: [id])
   productId String?

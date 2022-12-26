@@ -13,4 +13,32 @@ export const productRouter = router({
       },
     });
   }),
+  addProduct: publicProcedure
+    .input(
+      z.object({
+        title: z.string(),
+        isFeatured: z.boolean(),
+        photos: z.object({
+          title: z.string(),
+          url: z.string(),
+          isFeaturePhoto: z.boolean().optional(),
+        }),
+      })
+    )
+    .mutation(({ ctx, input }) => {
+      return ctx.prisma.product.create({
+        data: {
+          title: input.title,
+          isFeatured: input.isFeatured,
+          photos: {
+            create: [
+              {
+                title: input.photos.title,
+                url: input.photos.url,
+              },
+            ],
+          },
+        },
+      });
+    }),
 });
