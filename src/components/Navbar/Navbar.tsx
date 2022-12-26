@@ -1,7 +1,14 @@
 import { Disclosure } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { signIn, signOut, useSession } from "next-auth/react";
+import { trpc } from "../../utils/trpc";
 
 const Navbar = () => {
+  const { data: sessionData } = useSession();
+
+  console.log(sessionData?.user);
+
   return (
     <Disclosure as="nav" className="bg-white shadow">
       {({ open }) => (
@@ -12,7 +19,11 @@ const Navbar = () => {
                 <div className="flex flex-shrink-0 items-center">
                   <img
                     className="block h-8 w-auto lg:hidden"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                    src={`https://tailwindui.com/img/logos/mark.svg?color=${
+                      sessionData?.user?.name === "TooVeryLegit"
+                        ? "emerald&shade=500"
+                        : "indigo&shade=600"
+                    }`}
                     alt="Your Company"
                   />
                   <img
@@ -89,12 +100,16 @@ const Navbar = () => {
                 Items for sale
               </Disclosure.Button>
               <Disclosure.Button
-                as="a"
-                href="#"
+                onClick={sessionData ? () => signOut() : () => signIn()}
                 className="block border-l-4 border-transparent py-2 pl-3 pr-4 text-base font-medium text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700"
               >
                 Admin
               </Disclosure.Button>
+              {sessionData?.user ? (
+                <Disclosure.Button className="block w-full border-l-4 border-emerald-500 bg-emerald-50 py-2 pl-3 pr-4 text-left text-base font-medium text-emerald-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700">
+                  <span className="animate-pulse">Add Items</span>
+                </Disclosure.Button>
+              ) : null}
             </div>
           </Disclosure.Panel>
         </>
