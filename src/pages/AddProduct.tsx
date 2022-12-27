@@ -1,7 +1,7 @@
 import { useSession } from "next-auth/react";
 import AdminForm from "../components/Admin Form/AdminForm";
 
-const AdminPage = () => {
+const AddProductPage = () => {
   const { data: sessionData } = useSession();
 
   if (!sessionData)
@@ -13,10 +13,10 @@ const AdminPage = () => {
 
   return (
     <div className="flex w-full flex-col">
-      <h2>This is the Admin Page</h2>
+      <h2 className="ml-4 mt-4 text-lg text-gray-800">Add Product Page</h2>
       <AdminForm />
     </div>
   );
 };
 
-export default AdminPage;
+export default AddProductPage;

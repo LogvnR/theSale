@@ -18,6 +18,8 @@ export const productRouter = router({
       z.object({
         title: z.string(),
         isFeatured: z.boolean(),
+        price: z.string(),
+        description: z.string(),
         photos: z
           .object({
             title: z.string(),
@@ -35,6 +37,8 @@ export const productRouter = router({
         data: {
           title: input.title,
           isFeatured: input.isFeatured,
+          price: input.price,
+          description: input.description,
           photos: {
             create: input.photos,
           },
