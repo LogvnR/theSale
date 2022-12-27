@@ -18,10 +18,15 @@ export const productRouter = router({
       z.object({
         title: z.string(),
         isFeatured: z.boolean(),
-        photos: z.object({
+        photos: z
+          .object({
+            title: z.string(),
+            url: z.string(),
+            isFeaturePhoto: z.boolean().optional(),
+          })
+          .array(),
+        category: z.object({
           title: z.string(),
-          url: z.string(),
-          isFeaturePhoto: z.boolean().optional(),
         }),
       })
     )
@@ -31,12 +36,12 @@ export const productRouter = router({
           title: input.title,
           isFeatured: input.isFeatured,
           photos: {
-            create: [
-              {
-                title: input.photos.title,
-                url: input.photos.url,
-              },
-            ],
+            create: input.photos,
+          },
+          Category: {
+            create: {
+              title: input.category.title,
+            },
           },
         },
       });
