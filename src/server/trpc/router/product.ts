@@ -13,6 +13,9 @@ export const productRouter = router({
       },
     });
   }),
+  allProducts: publicProcedure.query(({ ctx }) => {
+    return ctx.prisma.product.findMany();
+  }),
   addProduct: publicProcedure
     .input(
       z.object({
@@ -47,6 +50,19 @@ export const productRouter = router({
               title: input.category.title,
             },
           },
+        },
+      });
+    }),
+  removeProduct: publicProcedure
+    .input(
+      z.object({
+        id: z.string(),
+      })
+    )
+    .mutation(({ ctx, input }) => {
+      return ctx.prisma.product.delete({
+        where: {
+          id: input.id,
         },
       });
     }),
