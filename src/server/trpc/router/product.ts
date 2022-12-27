@@ -19,10 +19,12 @@ export const productRouter = router({
   addProduct: publicProcedure
     .input(
       z.object({
-        title: z.string(),
+        titleEng: z.string(),
+        titleEsp: z.string(),
         isFeatured: z.boolean(),
         price: z.string(),
-        description: z.string(),
+        descriptionEng: z.string(),
+        descriptionEsp: z.string(),
         photos: z
           .object({
             title: z.string(),
@@ -38,10 +40,12 @@ export const productRouter = router({
     .mutation(({ ctx, input }) => {
       return ctx.prisma.product.create({
         data: {
-          title: input.title,
+          titleEng: input.titleEng,
+          titleEsp: input.titleEsp,
           isFeatured: input.isFeatured,
           price: input.price,
-          description: input.description,
+          descriptionEng: input.descriptionEng,
+          descriptionEsp: input.descriptionEsp,
           photos: {
             create: input.photos,
           },

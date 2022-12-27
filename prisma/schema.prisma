@@ -76,11 +76,13 @@ model Category {
 }
 
 model Product {
-  id          String  @id @default(uuid())
-  title       String
-  isFeatured  Boolean
-  price       String @default("0")
-  description String @default("")
+  id             String  @id @default(uuid())
+  titleEng       String
+  titleEsp       String
+  isFeatured     Boolean
+  price          String  @default("0")
+  descriptionEng String  @default("")
+  descriptionEsp String  @default("")
 
   photos Photo[]
 

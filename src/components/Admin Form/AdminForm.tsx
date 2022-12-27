@@ -12,23 +12,31 @@ import * as z from "zod";
 import { trpc } from "../../utils/trpc";
 
 const schema = z.object({
-  newProduct: z
+  newProductEng: z
+    .string()
+    .min(1, { message: "Name must be greater than 1 character" }),
+  newProductEsp: z
     .string()
     .min(1, { message: "Name must be greater than 1 character" }),
   newPrice: z.coerce
     .number()
     .nonnegative({ message: " Price cannot be negative" }),
-  newDescription: z
+  newDescriptionEng: z
+    .string()
+    .min(1, { message: "Description must be greater than 1 character" }),
+  newDescriptionEsp: z
     .string()
     .min(1, { message: "Description must be greater than 1 character" }),
 });
 
 const AdminForm = () => {
   const [isFeatured, setIsFeatured] = useState<boolean>(false);
-  const [title, setTitle] = useState<string>("");
+  const [titleEng, setTitleEng] = useState<string>("");
+  const [titleEsp, setTitleEsp] = useState<string>("");
   const [category, setCategory] = useState<string>("Tech");
   const [price, setPrice] = useState<string>("");
-  const [description, setDescription] = useState<string>("");
+  const [descriptionEng, setDescriptionEng] = useState<string>("");
+  const [descriptionEsp, setDescriptionEsp] = useState<string>("");
   const [photo, setPhoto] = useState<string>("");
   const [photos, setPhotos] = useState<
     { isFeaturePhoto?: boolean | undefined; title: string; url: string }[]
@@ -39,12 +47,13 @@ const AdminForm = () => {
   const addProduct = trpc.product.addProduct.useMutation();
 
   const addProductHandler = async () => {
-    console.log(title, isFeatured);
     addProduct.mutate({
-      title: title,
+      titleEng: titleEng,
+      titleEsp: titleEsp,
       isFeatured: isFeatured,
       price: price,
-      description: description,
+      descriptionEng: descriptionEng,
+      descriptionEsp: descriptionEsp,
       photos: photos,
       category: {
         title: category,
@@ -61,10 +70,10 @@ const AdminForm = () => {
     if (photos.length === 0) {
       setPhotos([
         ...photos,
-        { title: title + `${idx + 1}`, url: newUrl, isFeaturePhoto: true },
+        { title: titleEng + `${idx + 1}`, url: newUrl, isFeaturePhoto: true },
       ]);
     } else {
-      setPhotos([...photos, { title: title + `${idx + 1}`, url: newUrl }]);
+      setPhotos([...photos, { title: titleEng + `${idx + 1}`, url: newUrl }]);
     }
   };
 
@@ -82,29 +91,54 @@ const AdminForm = () => {
         onSubmit={handleSubmit(addProductHandler)}
         className="mx-8 my-6 flex flex-col justify-center gap-4"
       >
-        {/* ===== item Name ===== */}
+        {/* ===== Item Names ===== */}
         <div
           className={`relative rounded-md border ${
-            errors.newProduct
+            errors.newProductEng
               ? "border-red-300 focus-within:border-red-600 focus-within:ring-red-600"
               : "border-gray-300 focus-within:border-emerald-600 focus-within:ring-emerald-600"
           }  px-3 py-2 shadow-sm  focus-within:ring-1 `}
         >
           {errors.newProduct ? (
             <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-red-600">
-              {String(errors.newProduct?.message)}
+              {String(errors.newProductEng?.message)}
             </label>
           ) : (
             <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900">
-              New Product
+              New Title Eng
             </label>
           )}
           <input
             type="text"
             className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 outline-none focus:ring-0 sm:text-sm"
             placeholder="New Item"
-            {...register("newProduct")}
-            onChange={(e) => setTitle(e.target.value)}
+            {...register("newProductEng")}
+            onChange={(e) => setTitleEng(e.target.value)}
+          />
+        </div>
+
+        <div
+          className={`relative rounded-md border ${
+            errors.newProductEsp
+              ? "border-red-300 focus-within:border-red-600 focus-within:ring-red-600"
+              : "border-gray-300 focus-within:border-emerald-600 focus-within:ring-emerald-600"
+          }  px-3 py-2 shadow-sm  focus-within:ring-1 `}
+        >
+          {errors.newProduct ? (
+            <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-red-600">
+              {String(errors.newProductEsp?.message)}
+            </label>
+          ) : (
+            <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900">
+              New Title Esp
+            </label>
+          )}
+          <input
+            type="text"
+            className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 outline-none focus:ring-0 sm:text-sm"
+            placeholder="Nuevo Título"
+            {...register("newProductEsp")}
+            onChange={(e) => setTitleEsp(e.target.value)}
           />
         </div>
 
@@ -174,13 +208,13 @@ const AdminForm = () => {
 
         {/* ===== Item Description ===== */}
         <div>
-          {errors.newDescription ? (
+          {errors.newDescriptionEng ? (
             <label className="block text-sm font-medium text-red-600">
-              {String(errors.newDescription?.message)}
+              {String(errors.newDescriptionEng?.message)}
             </label>
           ) : (
             <label className="block text-sm font-medium text-gray-900">
-              Description
+              Description Eng
             </label>
           )}
           <div className="mt-1">
@@ -188,20 +222,53 @@ const AdminForm = () => {
               rows={4}
               draggable={false}
               className={`block w-full rounded-md border ${
-                errors.newDescription
+                errors.newDescriptionEng
                   ? "border-red-300 focus:border-red-600 focus:ring-red-600"
                   : "border-gray-300 focus:border-emerald-500 focus:ring-emerald-500"
               } p-1 shadow-sm sm:text-sm`}
               placeholder="Type a description for this product"
-              {...register("newDescription")}
-              onChange={(e) => setDescription(e.target.value)}
+              {...register("newDescriptionEng")}
+              onChange={(e) => setDescriptionEng(e.target.value)}
+            />
+          </div>
+        </div>
+
+        <div>
+          {errors.newDescription ? (
+            <label className="block text-sm font-medium text-red-600">
+              {String(errors.newDescriptionEsp?.message)}
+            </label>
+          ) : (
+            <label className="block text-sm font-medium text-gray-900">
+              Description Esp
+            </label>
+          )}
+          <div className="mt-1">
+            <textarea
+              rows={4}
+              draggable={false}
+              className={`block w-full rounded-md border ${
+                errors.newDescriptionEsp
+                  ? "border-red-300 focus:border-red-600 focus:ring-red-600"
+                  : "border-gray-300 focus:border-emerald-500 focus:ring-emerald-500"
+              } p-1 shadow-sm sm:text-sm`}
+              placeholder="Escriba una descripción para este producto"
+              {...register("newDescriptionEsp")}
+              onChange={(e) => setDescriptionEsp(e.target.value)}
             />
           </div>
         </div>
 
         {/* ===== Add New Photos ===== */}
         <div className="flex flex-col gap-2">
-          <p>First Photo is always featured</p>
+          <p className="text-sm italic tracking-wide">
+            First Photo is always featured
+          </p>
+          <p className="mb-2 flex items-center text-sm font-medium tracking-wide">
+            Always click{" "}
+            <CheckIcon className="mx-2 h-4 w-4" aria-hidden="true" /> after
+            every new photo
+          </p>
           {inputContainer.map((input, i) => (
             <div
               key={i}
@@ -287,14 +354,6 @@ const AdminForm = () => {
           </div>
         </div>
       </form>
-      {/* <button
-        onClick={() => {
-          console.log("inputs", inputContainer);
-          console.log("photos", photos);
-        }}
-      >
-        test
-      </button> */}
     </>
   );
 };
