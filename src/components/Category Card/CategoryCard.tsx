@@ -9,9 +9,9 @@ interface CategoryCardProps {
 
 const CategoryCard = ({ ...props }: CategoryCardProps) => {
   return (
-    <Link href={`/products/${props.titleEng.toLowerCase()}`}>
-      <div key={props.catId} className="group relative">
-        <div className="sm:aspect-w-2 sm:aspect-h-1 lg:aspect-w-1 lg:aspect-h-1 relative h-80 w-full overflow-hidden rounded-lg bg-white grayscale transition group-hover:grayscale-0 sm:h-64">
+    <Link href={`/products/${props.catId.toLowerCase()}`}>
+      <div key={props.catId} className="group relative mb-4">
+        <div className="sm:aspect-w-2 sm:aspect-h-1 lg:aspect-w-1 lg:aspect-h-1 relative h-80 w-full overflow-hidden rounded-lg bg-white transition group-hover:grayscale-0 sm:h-64 lg:grayscale">
           <img
             src="https://tailwindui.com/img/ecommerce-images/home-page-02-edition-01.jpg"
             alt="Test Img"
@@ -19,10 +19,8 @@ const CategoryCard = ({ ...props }: CategoryCardProps) => {
           />
         </div>
         <h3 className="mt-6 text-sm text-gray-500">
-          <a href="">
-            <span className="absolute inset-0" />
-            {props.titleEsp}
-          </a>
+          <span className="absolute inset-0" />
+          {props.titleEsp}
         </h3>
         <p className="text-base font-semibold text-gray-900">
           {props.titleEng}

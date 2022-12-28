@@ -21,6 +21,30 @@ export const categoryRouter = router({
         },
       });
     }),
+  products: publicProcedure
+    .input(
+      z.object({
+        categoryId: z.string(),
+      })
+    )
+    .query(({ ctx, input }) => {
+      return ctx.prisma.category.findUnique({
+        where: {
+          id: input.categoryId,
+        },
+        include: {
+          products: {
+            include: {
+              photos: {
+                where: {
+                  isFeaturePhoto: true,
+                },
+              },
+            },
+          },
+        },
+      });
+    }),
   //   removeProduct: publicProcedure
   //     .input(
   //       z.object({
