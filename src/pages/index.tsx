@@ -63,7 +63,7 @@ const Home: NextPage = () => {
 
               <div className="absolute bottom-0 left-0 w-2/3 -translate-x-1 skew-x-12 border-r-4 border-r-blue-500 bg-gray-200">
                 <h4 className="mx-4 my-1 -skew-x-12 text-sm font-medium tracking-wide text-gray-700">
-                  {item.title}
+                  {item.titleEng}
                 </h4>
               </div>
             </div>

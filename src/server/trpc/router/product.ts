@@ -32,9 +32,7 @@ export const productRouter = router({
             isFeaturePhoto: z.boolean().optional(),
           })
           .array(),
-        category: z.object({
-          title: z.string(),
-        }),
+        categoryId: z.string(),
       })
     )
     .mutation(({ ctx, input }) => {
@@ -50,8 +48,8 @@ export const productRouter = router({
             create: input.photos,
           },
           Category: {
-            create: {
-              title: input.category.title,
+            connect: {
+              id: input.categoryId,
             },
           },
         },

@@ -3,15 +3,6 @@ import Link from "next/link";
 
 import { trpc } from "../../utils/trpc";
 
-const people = [
-  {
-    name: "Lindsay Walton",
-    title: "Front-end Developer",
-    email: "lindsay.walton@example.com",
-    role: "Member",
-  },
-];
-
 const AdminList = () => {
   const utils = trpc.useContext();
 

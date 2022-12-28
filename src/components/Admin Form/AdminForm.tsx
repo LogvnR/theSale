@@ -10,6 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
 import { trpc } from "../../utils/trpc";
+import CategoryForm from "./CategoryForm";
 
 const schema = z.object({
   newProductEng: z
@@ -44,6 +45,7 @@ const AdminForm = () => {
 
   const [inputContainer, setInputContainer] = useState([{ url: "" }]);
 
+  const categories = trpc.category.allCategories.useQuery().data;
   const addProduct = trpc.product.addProduct.useMutation();
 
   const addProductHandler = async () => {
@@ -55,9 +57,7 @@ const AdminForm = () => {
       descriptionEng: descriptionEng,
       descriptionEsp: descriptionEsp,
       photos: photos,
-      category: {
-        title: category,
-      },
+      categoryId: category,
     });
   };
 
@@ -149,14 +149,16 @@ const AdminForm = () => {
           </label>
           <select
             className="mt-1 block w-full rounded-md border border-gray-400 py-2 pl-3 pr-10 text-base focus:border-emerald-500 focus:outline-none focus:ring-emerald-500 sm:text-sm"
-            defaultValue="Tech"
+            defaultValue=""
             {...register("category")}
             onChange={(e) => setCategory(e.target.value)}
           >
-            <option value="Tech">Tech</option>
-            <option value="Clothing">Clothing</option>
-            <option value="Tools">Tools</option>
-            <option value="Appliances">Appliances</option>
+            <option value="">Select Category</option>
+            {categories?.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.titleEng}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -328,23 +330,8 @@ const AdminForm = () => {
             </button>
           </div>
 
-          {/* ===== Divider ===== */}
-          <div className="relative my-4">
-            <div
-              className="absolute inset-0 flex items-center"
-              aria-hidden="true"
-            >
-              <div className="w-full border-t border-gray-300" />
-            </div>
-            <div className="relative flex justify-center">
-              <span className="bg-gray-50 px-2 text-sm text-gray-500">
-                the Sale
-              </span>
-            </div>
-          </div>
-
           {/* ===== Submit New Items ===== */}
-          <div className="flex w-full items-center justify-end">
+          <div className="mt-4 flex w-full items-center justify-end">
             <button
               type="submit"
               className="inline-flex items-center rounded-md border border-transparent bg-emerald-100 px-4 py-2 text-sm font-medium text-emerald-700 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
@@ -354,6 +341,18 @@ const AdminForm = () => {
           </div>
         </div>
       </form>
+      {/* ===== Divider ===== */}
+      <div className="relative my-4 mx-8">
+        <div className="absolute inset-0 flex items-center" aria-hidden="true">
+          <div className="w-full border-t border-gray-300" />
+        </div>
+        <div className="relative flex justify-center">
+          <span className="bg-gray-50 px-2 text-sm text-gray-500">
+            Add New Category
+          </span>
+        </div>
+      </div>
+      <CategoryForm />
     </>
   );
 };
