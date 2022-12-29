@@ -1,52 +1,10 @@
 import { useRouter } from "next/router";
 import { ShoppingBagIcon } from "@heroicons/react/24/outline";
+import { ArrowLeftIcon } from "@heroicons/react/20/solid";
 import ProductCard from "../../../components/Product Card/ProductCard";
+import Link from "next/link";
 
 import { trpc } from "../../../utils/trpc";
-
-const products = [
-  {
-    id: 1,
-    name: "Earthen Bottle",
-    href: "#",
-    price: "$48",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-01.jpg",
-    imageAlt:
-      "Tall slender porcelain bottle with natural clay textured body and cork stopper.",
-  },
-  {
-    id: 2,
-    name: "Nomad Tumbler",
-    href: "#",
-    price: "$35",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-02.jpg",
-    imageAlt:
-      "Olive drab green insulated bottle with flared screw lid and flat top.",
-  },
-  {
-    id: 3,
-    name: "Focus Paper Refill",
-    href: "#",
-    price: "$89",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-03.jpg",
-    imageAlt:
-      "Person using a pen to cross a task off a productivity paper card.",
-  },
-  {
-    id: 4,
-    name: "Machined Mechanical Pencil",
-    href: "#",
-    price: "$35",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/category-page-04-image-card-04.jpg",
-    imageAlt:
-      "Hand holding black machined steel mechanical pencil with brass tip and top.",
-  },
-  // More products...
-];
 
 const ProductType = () => {
   const router = useRouter();
@@ -59,6 +17,15 @@ const ProductType = () => {
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl py-4 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+        <Link href={"/products"}>
+          <button
+            type="button"
+            className="mb-4 inline-flex items-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-500 shadow-sm hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+          >
+            <ArrowLeftIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
+            Back &#x2022; Retorno
+          </button>
+        </Link>
         <section>
           <h2 className="text-2xl font-bold text-gray-900">
             {categoryProducts?.titleEng}
@@ -88,6 +55,7 @@ const ProductType = () => {
           {categoryProducts?.products?.map((product) => (
             <ProductCard
               key={product.id}
+              catId={categoryProducts.id}
               prodId={product.id}
               titleEng={product.titleEng}
               titleEsp={product.titleEsp}

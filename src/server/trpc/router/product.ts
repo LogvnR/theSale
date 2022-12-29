@@ -13,6 +13,22 @@ export const productRouter = router({
       },
     });
   }),
+  oneProduct: publicProcedure
+    .input(
+      z.object({
+        productId: z.string(),
+      })
+    )
+    .query(({ ctx, input }) => {
+      return ctx.prisma.product.findUnique({
+        where: {
+          id: input.productId,
+        },
+        include: {
+          photos: true,
+        },
+      });
+    }),
   allProducts: publicProcedure.query(({ ctx }) => {
     return ctx.prisma.product.findMany();
   }),
