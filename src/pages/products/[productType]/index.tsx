@@ -22,7 +22,7 @@ const ProductType = () => {
           <h2 className="text-2xl font-bold text-gray-900">
             {categoryProducts?.titleEng}
           </h2>
-          <p className="text-xl font-normal italic text-gray-900">
+          <p className="text-xl font-normal italic text-gray-500">
             {categoryProducts?.titleEsp}
           </p>
         </section>

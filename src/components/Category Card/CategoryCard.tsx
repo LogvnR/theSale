@@ -18,13 +18,13 @@ const CategoryCard = ({ ...props }: CategoryCardProps) => {
             className="h-full w-full object-cover object-center"
           />
         </div>
-        <h3 className="mt-6 text-sm text-gray-500">
+        <p className="mt-2 text-base font-semibold text-gray-900">
+          {props.titleEng}
+        </p>
+        <h3 className="mb-6 text-sm italic text-gray-500">
           <span className="absolute inset-0" />
           {props.titleEsp}
         </h3>
-        <p className="text-base font-semibold text-gray-900">
-          {props.titleEng}
-        </p>
       </div>
     </Link>
   );

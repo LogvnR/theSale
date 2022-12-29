@@ -138,12 +138,12 @@ const Product = () => {
               ))} */}
               {mainProduct?.photos.map((photo) => (
                 <Tab.Panel key={photo.id}>
-                  <div className="relative h-[257px] w-full">
+                  <div className="relative h-[257px] w-full lg:h-[444px]">
                     <Image
                       src={photo.url}
                       fill
                       alt={photo.title}
-                      className="object-cover sm:rounded-lg"
+                      className="rounded-lg object-cover"
                     />
                   </div>
                 </Tab.Panel>
