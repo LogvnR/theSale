@@ -69,9 +69,10 @@ model VerificationToken {
 // npx prisma generate
 
 model Category {
-  id       String @id @default(uuid())
-  titleEng String @default("")
-  titleEsp String @default("")
+  id         String @id @default(uuid())
+  titleEng   String @default("")
+  titleEsp   String @default("")
+  coverPhoto String @default("")
 
   products Product[]
 }

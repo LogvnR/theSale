@@ -12,11 +12,13 @@ const schema = z.object({
   newCategoryEsp: z
     .string()
     .min(1, { message: "Category must be greater than 1 character" }),
+  coverPhoto: z.string().min(1, { message: "Cover Photo is Required" }),
 });
 
 const CategoryForm = () => {
   const [categoryEng, setCategoryEng] = useState<string>("");
   const [categoryEsp, setCategoryEsp] = useState<string>("");
+  const [coverPhoto, setCoverPhoto] = useState<string>("");
 
   const utils = trpc.useContext();
 
@@ -28,9 +30,16 @@ const CategoryForm = () => {
   });
 
   const addCategoryHandler = () => {
+    const newCoverPhoto = coverPhoto
+      .replace("file/d/", "uc?export=view&id=")
+      .replace("/view", "");
+
+    //
+
     addProduct.mutate({
       categoryEng: categoryEng,
       categoryEsp: categoryEsp,
+      coverPhoto: newCoverPhoto,
     });
   };
 
@@ -111,6 +120,30 @@ const CategoryForm = () => {
             placeholder="Nueva Categoría"
             {...register("newCategoryEsp")}
             onChange={(e) => setCategoryEsp(e.target.value)}
+          />
+        </div>
+        <div
+          className={`relative rounded-md border ${
+            errors.coverPhoto
+              ? "border-red-300 focus-within:border-red-600 focus-within:ring-red-600"
+              : "border-gray-300 focus-within:border-emerald-600 focus-within:ring-emerald-600"
+          }  px-3 py-2 shadow-sm  focus-within:ring-1 `}
+        >
+          {errors.coverPhoto ? (
+            <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-red-600">
+              {String(errors.coverPhoto?.message)}
+            </label>
+          ) : (
+            <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900">
+              Cover Photo
+            </label>
+          )}
+          <input
+            type="text"
+            className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 outline-none focus:ring-0 sm:text-sm"
+            placeholder="Cover Photo URL"
+            {...register("coverPhoto")}
+            onChange={(e) => setCoverPhoto(e.target.value)}
           />
         </div>
         <div className="flex w-full items-center justify-end">

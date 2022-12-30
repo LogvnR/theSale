@@ -21,6 +21,7 @@ const ProductCategories = () => {
                 catId={category.id}
                 titleEng={category.titleEng}
                 titleEsp={category.titleEsp}
+                coverPhoto={category.coverPhoto}
               />
             ))}
           </div>

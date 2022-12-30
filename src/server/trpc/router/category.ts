@@ -11,6 +11,7 @@ export const categoryRouter = router({
       z.object({
         categoryEng: z.string(),
         categoryEsp: z.string(),
+        coverPhoto: z.string(),
       })
     )
     .mutation(({ ctx, input }) => {
@@ -18,6 +19,7 @@ export const categoryRouter = router({
         data: {
           titleEng: input.categoryEng,
           titleEsp: input.categoryEsp,
+          coverPhoto: input.coverPhoto,
         },
       });
     }),

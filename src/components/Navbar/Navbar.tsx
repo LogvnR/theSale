@@ -1,5 +1,9 @@
 import { Disclosure } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  Bars3Icon,
+  XMarkIcon,
+  ShoppingCartIcon,
+} from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { trpc } from "../../utils/trpc";
@@ -16,7 +20,20 @@ const Navbar = () => {
     <Disclosure as="nav" className="bg-white shadow">
       <>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 justify-between">
+          <div className="flex h-16 justify-between md:flex-row-reverse">
+            <div className="-mr-2 flex items-center">
+              <button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                <div className="relative">
+                  <ShoppingCartIcon
+                    className="block h-6 w-6"
+                    aria-hidden="true"
+                  />
+                  <div className="absolute -right-3 -top-3 flex h-5 w-5 items-center justify-center rounded-full bg-orange-500">
+                    <p className="text-[10px] text-white">9+</p>
+                  </div>
+                </div>
+              </button>
+            </div>
             <div className="flex">
               <button
                 onClick={() => setSelectedPage("Home")}
