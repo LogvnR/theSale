@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Disclosure, RadioGroup, Tab } from "@headlessui/react";
 import { StarIcon } from "@heroicons/react/20/solid";
@@ -8,6 +8,7 @@ import { trpc } from "../../../../utils/trpc";
 
 import BackButton from "../../../../components/Back Button/BackButton";
 import Image from "next/image";
+import useCart from "../../../../hooks/useCart";
 
 const product = {
   name: "Zip Tote Basket",
@@ -72,14 +73,37 @@ function classNames(...classes: string[]) {
 }
 
 const Product = () => {
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
+  const [isDisabled, setIsDisabled] = useState<boolean>(false);
   const router = useRouter();
   const productId = String(router.query.product);
   const categoryId = String(router.query.productType);
+  const { cart, total, quantity, addToCart } = useCart();
 
   const mainProduct = trpc.product.oneProduct.useQuery({
     productId: productId,
   }).data;
+
+  const addToCartHandler = () => {
+    if (cart.filter((item) => item.prodId === mainProduct?.id).length > 0) {
+      setIsDisabled(true);
+    } else {
+      addToCart({
+        prodId: mainProduct!.id,
+        titleEng: mainProduct!.titleEng,
+        titleEsp: mainProduct!.titleEsp,
+        price: +mainProduct!.price,
+      });
+      setIsDisabled(false);
+    }
+  };
+
+  useEffect(() => {
+    if (cart.filter((item) => item.prodId === mainProduct?.id).length > 0) {
+      setIsDisabled(true);
+    } else {
+      setIsDisabled(false);
+    }
+  }, [cart]);
 
   console.log(mainProduct);
 
@@ -178,16 +202,35 @@ const Product = () => {
               </p>
             </div> */}
 
-            <form className="mt-6">
+            <div className="mt-6 flex flex-col">
               <div className="sm:flex-col1 mt-10 flex">
                 <button
-                  type="submit"
-                  className="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-blue-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full"
+                  onClick={() => addToCartHandler()}
+                  disabled={isDisabled}
+                  className={`flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent ${
+                    isDisabled
+                      ? "bg-gray-400"
+                      : "bg-blue-600 hover:bg-blue-700 focus:ring-blue-500"
+                  }  py-3 px-8 text-base font-medium text-white  focus:outline-none focus:ring-2  focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full`}
                 >
-                  Add to cart &#x2022; Añadir al carrito
+                  {isDisabled ? (
+                    <p>Item in cart &#x2022; Artículo en carrito</p>
+                  ) : (
+                    <p>Add to cart &#x2022; Añadir al carrito</p>
+                  )}
                 </button>
               </div>
-            </form>
+              <div className="sm:flex-col1 mt-10 flex">
+                <button
+                  onClick={() => {
+                    console.log(cart, total, quantity);
+                  }}
+                  className="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-blue-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full"
+                >
+                  Test
+                </button>
+              </div>
+            </div>
 
             <section aria-labelledby="details-heading" className="mt-12">
               <h2 id="details-heading" className="sr-only">

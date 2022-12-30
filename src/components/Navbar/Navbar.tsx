@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Disclosure } from "@headlessui/react";
 import {
   Bars3Icon,
@@ -6,13 +7,19 @@ import {
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/react";
-import { trpc } from "../../utils/trpc";
-import { useState } from "react";
+import useCart from "../../hooks/useCart";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedPage, setSelectedPage] = useState<string>("Home");
+  const [navQuantity, setNavQuantity] = useState<number>(0);
   const { data: sessionData } = useSession();
+
+  const { quantity } = useCart();
+
+  useEffect(() => {
+    setNavQuantity(quantity);
+  }, [quantity]);
 
   console.log(sessionData?.user);
 
@@ -29,7 +36,9 @@ const Navbar = () => {
                     aria-hidden="true"
                   />
                   <div className="absolute -right-3 -top-3 flex h-5 w-5 items-center justify-center rounded-full bg-orange-500">
-                    <p className="text-[10px] text-white">9+</p>
+                    <p className="text-[11px] text-white">
+                      {navQuantity > 9 ? "9+" : navQuantity}
+                    </p>
                   </div>
                 </div>
               </button>
