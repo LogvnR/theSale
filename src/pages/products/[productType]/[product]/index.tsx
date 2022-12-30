@@ -151,15 +151,6 @@ const Product = () => {
             </div>
 
             <Tab.Panels className="aspect-w-1 aspect-h-1 w-full">
-              {/* {product.images.map((image) => (
-                <Tab.Panel key={image.id}>
-                  <img
-                    src={image.src}
-                    alt={image.alt}
-                    className="h-full w-full object-cover object-center sm:rounded-lg"
-                  />
-                </Tab.Panel>
-              ))} */}
               {mainProduct?.photos.map((photo) => (
                 <Tab.Panel key={photo.id}>
                   <div className="relative h-[257px] w-full lg:h-[444px]">
@@ -190,17 +181,6 @@ const Product = () => {
                 $ {mainProduct?.price}
               </p>
             </div>
-
-            {/* <div className="mt-6">
-              <h3 className="sr-only">Description</h3>
-
-              <p className="space-y-6 border-l-4 border-l-blue-500 pl-2 text-base text-gray-700">
-                {mainProduct?.descriptionEng}
-              </p>
-              <p className="mt-3 space-y-6 border-l-4 border-l-orange-500 pl-2 text-base text-gray-700">
-                {mainProduct?.descriptionEsp}
-              </p>
-            </div> */}
 
             <div className="mt-6 flex flex-col">
               <div className="sm:flex-col1 mt-10 flex">

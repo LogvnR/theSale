@@ -29,19 +29,21 @@ const Navbar = () => {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 justify-between md:flex-row-reverse">
             <div className="-mr-2 flex items-center">
-              <button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-                <div className="relative">
-                  <ShoppingCartIcon
-                    className="block h-6 w-6"
-                    aria-hidden="true"
-                  />
-                  <div className="absolute -right-3 -top-3 flex h-5 w-5 items-center justify-center rounded-full bg-orange-500">
-                    <p className="text-[11px] text-white">
-                      {navQuantity > 9 ? "9+" : navQuantity}
-                    </p>
+              <Link href={"/MyCart"}>
+                <button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                  <div className="relative">
+                    <ShoppingCartIcon
+                      className="block h-6 w-6"
+                      aria-hidden="true"
+                    />
+                    <div className="absolute -right-3 -top-3 flex h-5 w-5 items-center justify-center rounded-full bg-orange-500">
+                      <p className="text-[11px] text-white">
+                        {navQuantity > 9 ? "9+" : navQuantity}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </button>
+                </button>
+              </Link>
             </div>
             <div className="flex">
               <button
