@@ -5,6 +5,7 @@ const CartSchema = z.object({
   titleEng: z.string(),
   titleEsp: z.string(),
   price: z.number(),
+  photo: z.string(),
 });
 
 export type CartProduct = z.infer<typeof CartSchema>;

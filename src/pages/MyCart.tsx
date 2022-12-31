@@ -1,43 +1,17 @@
 import { useState, useEffect } from "react";
 
-import { ArrowRightIcon } from "@heroicons/react/20/solid";
+import { ArrowRightIcon, IdentificationIcon } from "@heroicons/react/20/solid";
 import useCart from "../hooks/useCart";
 
 import { CartProduct } from "../helpers/types";
-
-const products = [
-  {
-    id: 1,
-    name: "Artwork Tee",
-    href: "#",
-    price: "$32.00",
-    color: "Mint",
-    size: "Medium",
-    inStock: true,
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/checkout-page-03-product-04.jpg",
-    imageAlt: "Front side of mint cotton t-shirt with wavey lines pattern.",
-  },
-  {
-    id: 2,
-    name: "Basic Tee",
-    href: "#",
-    price: "$32.00",
-    color: "Charcoal",
-    inStock: false,
-    leadTime: "7-8 years",
-    size: "Large",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-product-02.jpg",
-    imageAlt: "Front side of charcoal cotton t-shirt.",
-  },
-  // More products...
-];
+import Link from "next/link";
+import Image from "next/image";
+import CheckoutForm from "../components/Admin Form/CheckoutForm";
 
 const MyCart = () => {
   const [myTotal, setMyTotal] = useState<number>(0);
   const [myCart, setMyCart] = useState<CartProduct[]>();
-  const { cart, total, removeItem } = useCart();
+  const { cart, total, removeItem, resetCart } = useCart();
 
   useEffect(() => {
     setMyCart(cart);
@@ -54,11 +28,19 @@ const MyCart = () => {
           Mi carrito
         </h4>
 
-        <form className="mt-12">
+        <div className="mt-8">
           <section aria-labelledby="cart-heading">
             <h2 id="cart-heading" className="sr-only">
               Items in your shopping cart
             </h2>
+            <div className="mb-2 flex w-full justify-end">
+              <button
+                onClick={() => resetCart()}
+                className="text-sm font-medium text-blue-500 hover:text-blue-600"
+              >
+                Clear Cart &#x2022; Vaciar Carrito
+              </button>
+            </div>
 
             <ul
               role="list"
@@ -66,11 +48,12 @@ const MyCart = () => {
             >
               {myCart?.map((item) => (
                 <li key={item.prodId} className="flex py-6">
-                  <div className="flex-shrink-0">
-                    <img
-                      src="https://tailwindui.com/img/ecommerce-images/shopping-cart-page-01-product-02.jpg"
+                  <div className="relative h-24 w-24 flex-shrink-0 sm:h-32 sm:w-32">
+                    <Image
+                      src={item.photo}
                       alt={item.titleEng}
-                      className="h-24 w-24 rounded-md object-cover object-center sm:h-32 sm:w-32"
+                      fill
+                      className="rounded-md object-cover object-center"
                     />
                   </div>
 
@@ -96,7 +79,7 @@ const MyCart = () => {
                         <button
                           onClick={() => removeItem(item.prodId, item.price)}
                           type="button"
-                          className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
+                          className="text-sm font-medium text-orange-600 hover:text-orange-700"
                         >
                           <span>Remove</span>
                         </button>
@@ -127,24 +110,36 @@ const MyCart = () => {
               </div>
             </div>
 
-            <div className="mt-10">
-              <button
-                type="submit"
-                className="w-full rounded-md border border-transparent bg-indigo-600 py-3 px-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+            <div className="relative mt-8">
+              <div
+                className="absolute inset-0 flex items-center"
+                aria-hidden="true"
               >
-                Request Items
-              </button>
+                <div className="w-full border-t border-gray-300" />
+              </div>
+              <div className="relative flex justify-center">
+                <span className="bg-white px-2 text-gray-500">
+                  <IdentificationIcon
+                    className="h-5 w-5 text-gray-500"
+                    aria-hidden="true"
+                  />
+                </span>
+              </div>
             </div>
 
-            <div className="mt-6 flex cursor-pointer items-center justify-center gap-4 text-center text-sm hover:text-blue-500">
-              <p>Continue Shopping &#x2022; Seguir comprando</p>
-              <ArrowRightIcon
-                className="-ml-1 mr-2 h-5 w-5"
-                aria-hidden="true"
-              />
-            </div>
+            <CheckoutForm />
+
+            <Link href={"/products"}>
+              <div className="mt-6 flex cursor-pointer items-center justify-center gap-4 text-center text-sm hover:text-blue-500">
+                <p>Continue Shopping Seguir comprando</p>
+                <ArrowRightIcon
+                  className="-ml-1 mr-2 h-5 w-5"
+                  aria-hidden="true"
+                />
+              </div>
+            </Link>
           </section>
-        </form>
+        </div>
       </div>
     </div>
   );

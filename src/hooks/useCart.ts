@@ -34,7 +34,7 @@ const useCart = create<CartStore>()(
         set(() => ({
           cart: [],
           total: 0,
-          totalItems: 0,
+          quantity: 0,
         }));
       },
     }),

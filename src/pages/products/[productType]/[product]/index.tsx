@@ -92,6 +92,9 @@ const Product = () => {
         titleEng: mainProduct!.titleEng,
         titleEsp: mainProduct!.titleEsp,
         price: +mainProduct!.price,
+        photo: mainProduct!.photos!.find(
+          (photo) => photo.isFeaturePhoto === true
+        )!.url,
       });
       setIsDisabled(false);
     }
