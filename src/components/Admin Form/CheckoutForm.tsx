@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
+import { trpc } from "../../utils/trpc";
 import useCart from "../../hooks/useCart";
 import { CartProduct } from "../../helpers/types";
 
@@ -22,13 +23,24 @@ const CheckoutForm = () => {
   const [myCart, setMyCart] = useState<CartProduct[]>();
 
   const { cart } = useCart();
+  const addOrder = trpc.order.addOrder.useMutation();
 
   useEffect(() => {
     setMyCart(cart);
   }, [cart]);
 
   const checkoutFormHandler = () => {
-    console.log("checkout");
+    const newCart = myCart!.map((item) => ({
+      title: item.titleEng,
+      price: String(item.price),
+      url: item.photo,
+    }));
+    addOrder.mutate({
+      name: userName,
+      phone: userPhone,
+      language: preferredLang,
+      orders: newCart,
+    });
   };
 
   const {

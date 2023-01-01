@@ -200,6 +200,21 @@ const Navbar = () => {
                     All Items
                   </Disclosure.Button>
                 </Link>
+                <Link href={"/AllOrders"}>
+                  <Disclosure.Button
+                    onClick={() => {
+                      setSelectedPage("AllOrders");
+                      setIsOpen(false);
+                    }}
+                    className={`block w-full border-l-4 ${
+                      selectedPage === "AllOrders"
+                        ? "border-emerald-500 bg-emerald-50 text-emerald-600"
+                        : "border-transparent bg-transparent text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700"
+                    }  py-2 pl-3 pr-4 text-left text-base font-medium `}
+                  >
+                    All Orders
+                  </Disclosure.Button>
+                </Link>
               </>
             ) : null}
           </div>

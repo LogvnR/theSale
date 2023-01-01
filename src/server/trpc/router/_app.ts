@@ -2,6 +2,7 @@ import { router } from "../trpc";
 import { authRouter } from "./auth";
 import { categoryRouter } from "./category";
 import { exampleRouter } from "./example";
+import { orderRouter } from "./order";
 import { photoRouter } from "./photo";
 import { productRouter } from "./product";
 
@@ -11,6 +12,7 @@ export const appRouter = router({
   product: productRouter,
   photo: photoRouter,
   category: categoryRouter,
+  order: orderRouter,
 });
 
 // export type definition of API
