@@ -1,14 +1,13 @@
 import React from "react";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
-import { EllipsisVerticalIcon } from "@heroicons/react/24/outline";
-import { CheckCircleIcon } from "@heroicons/react/20/solid";
+import { EllipsisVerticalIcon, TrashIcon } from "@heroicons/react/24/outline";
+
 import { useRouter } from "next/router";
 
 import { trpc } from "../../../utils/trpc";
 import Image from "next/image";
 import BackButton from "../../../components/Back Button/BackButton";
-import { object } from "zod";
 
 const dateOptionsPre: Intl.DateTimeFormatOptions = {
   month: "short",
@@ -26,6 +25,12 @@ const Order = () => {
   const utils = trpc.useContext();
 
   const mainOrder = trpc.order.oneOrder.useQuery({ orderId: orderId }).data;
+  const removePhotos = trpc.photo.removePhoto.useMutation();
+  const removeProducts = trpc.product.removeProduct.useMutation({
+    onSuccess: () => {
+      utils.product.allProducts.invalidate();
+    },
+  });
   const removeOrder = trpc.order.removeOrder.useMutation({
     onSuccess: () => {
       utils.order.allOrders.invalidate();
@@ -35,6 +40,13 @@ const Order = () => {
 
   const removeOrderHandler = async (id: string) => {
     removeOrder.mutate({ id: id });
+  };
+
+  const removeItemHandler = async (id: string) => {
+    removePhotos.mutate({ id: id });
+    setTimeout(() => {
+      removeProducts.mutate({ id: id });
+    }, 2000);
   };
 
   return (
@@ -142,17 +154,6 @@ const Order = () => {
                               </button>
                             )}
                           </Menu.Item>
-                          <Menu.Item>
-                            {({ active }) => (
-                              <button
-                                className={
-                                  "mt-1 block w-full rounded bg-emerald-100 px-4 py-2 text-left text-sm text-emerald-700"
-                                }
-                              >
-                                Complete
-                              </button>
-                            )}
-                          </Menu.Item>
                         </div>
                       </Menu.Items>
                     </Transition>
@@ -160,15 +161,13 @@ const Order = () => {
 
                   <div className="hidden lg:col-span-2 lg:flex lg:items-center lg:justify-end lg:space-x-4">
                     <button
-                      onClick={() => removeOrderHandler(mainOrder!.id)}
-                      className="flex items-center justify-center rounded-md border border-red-500 bg-red-100 py-2 px-2.5 text-sm font-medium text-red-700 shadow-sm hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                      onClick={() => {
+                        removeOrderHandler(mainOrder!.id);
+                      }}
+                      className='focus:ring-red-500" flex items-center justify-center rounded-md border border-red-500 bg-red-100 py-2 px-2.5 text-sm font-medium text-red-700 shadow-sm  hover:bg-red-200  focus:outline-none focus:ring-2  focus:ring-offset-2'
                     >
                       <span>Delete Order</span>
                       <span className="sr-only">{mainOrder?.id}</span>
-                    </button>
-                    <button className="flex items-center justify-center rounded-md border border-emerald-500 bg-emerald-100 py-2 px-2.5 text-sm font-medium text-emerald-700 shadow-sm hover:bg-emerald-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">
-                      <span>Complete Order</span>
-                      <span className="sr-only">for order {mainOrder?.id}</span>
                     </button>
                   </div>
                 </div>
@@ -187,14 +186,29 @@ const Order = () => {
                             className="object-cover"
                           />
                         </div>
-                        <div className="ml-6 flex-1 text-sm">
-                          <div className="font-medium text-gray-900 sm:flex sm:justify-between">
-                            <h5>{order.titleEng}</h5>
-                            <p className="mt-2 sm:mt-0">$ {order.price}</p>
+                        <div className="flex h-full w-full flex-col justify-between">
+                          <div className="ml-6 flex-1 text-sm">
+                            <div className="font-medium text-gray-900 sm:flex sm:justify-between">
+                              <h5>{order.titleEng}</h5>
+                              <p className="mt-2 sm:mt-0">$ {order.price}</p>
+                            </div>
+                            <p className="mt-2 italic text-gray-500">
+                              {order.id.substring(0, 7).toUpperCase()}
+                            </p>
                           </div>
-                          <p className="mt-2 italic text-gray-500">
-                            {order.id.substring(0, 7).toUpperCase()}
-                          </p>
+
+                          <div className="flex w-full justify-end">
+                            <button
+                              type="button"
+                              onClick={() => removeItemHandler(order.id)}
+                              className="inline-flex items-center rounded-md border border-transparent bg-red-500 p-2 text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                            >
+                              <TrashIcon
+                                className="h-5 w-5"
+                                aria-hidden="true"
+                              />
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </li>
