@@ -1,6 +1,5 @@
-import { TrashIcon } from "@heroicons/react/24/outline";
+import { TrashIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { TlsOptions } from "tls";
 
 import { trpc } from "../../utils/trpc";
 
@@ -8,18 +7,14 @@ const AdminOrders = () => {
   const utils = trpc.useContext();
 
   const orders = trpc.order.allOrders.useQuery().data;
-  const removePhotos = trpc.photo.removePhoto.useMutation();
-  const removeProducts = trpc.product.removeProduct.useMutation({
+  const removeOrder = trpc.order.removeOrder.useMutation({
     onSuccess: () => {
-      utils.product.allProducts.invalidate();
+      utils.order.allOrders.invalidate();
     },
   });
 
   const removeItemHandler = async (id: string) => {
-    removePhotos.mutate({ id: id });
-    setTimeout(() => {
-      removeProducts.mutate({ id: id });
-    }, 2000);
+    removeOrder.mutate({ id: id });
   };
 
   const dateOptionsPre: Intl.DateTimeFormatOptions = {
@@ -110,13 +105,25 @@ const AdminOrders = () => {
                         </div>
                       </td>
                       <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                        <button
+                        {/* <button
                           type="button"
-                          //   onClick={() => removeItemHandler(product.id)}
+                          onClick={() => removeItemHandler(order.id)}
                           className="inline-flex items-center rounded-md border border-transparent bg-red-500 p-2 text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
                         >
                           <TrashIcon className="h-5 w-5" aria-hidden="true" />
-                        </button>
+                        </button> */}
+
+                        <Link href={`/orders/${order.id}`}>
+                          <button
+                            type="button"
+                            className="inline-flex items-center rounded-md border border-transparent bg-emerald-500 p-2 text-white shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+                          >
+                            <ArrowRightIcon
+                              className="h-5 w-5"
+                              aria-hidden="true"
+                            />
+                          </button>
+                        </Link>
                       </td>
                     </tr>
                   ))}

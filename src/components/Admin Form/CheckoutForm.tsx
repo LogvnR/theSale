@@ -20,14 +20,22 @@ const CheckoutForm = () => {
   const [userName, setUserName] = useState<string>("");
   const [userPhone, setUserPhone] = useState<string>("");
   const [preferredLang, setPreferredLang] = useState<string>("English");
+  const [myTotal, setMyTotal] = useState<number>(0);
   const [myCart, setMyCart] = useState<CartProduct[]>();
 
-  const { cart } = useCart();
-  const addOrder = trpc.order.addOrder.useMutation();
+  const { cart, resetCart, total } = useCart();
+  const addOrder = trpc.order.addOrder.useMutation({
+    onSuccess: () => {
+      resetCart();
+      reset({ userName: "", userPhone: "" });
+      setPreferredLang("English");
+    },
+  });
 
   useEffect(() => {
     setMyCart(cart);
-  }, [cart]);
+    setMyTotal(total);
+  }, [total, cart]);
 
   const checkoutFormHandler = () => {
     const newCart = myCart!.map((item) => ({
@@ -39,6 +47,7 @@ const CheckoutForm = () => {
       name: userName,
       phone: userPhone,
       language: preferredLang,
+      total: String(myTotal),
       orders: newCart,
     });
   };

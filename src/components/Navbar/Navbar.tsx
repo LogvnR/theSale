@@ -200,7 +200,7 @@ const Navbar = () => {
                     All Items
                   </Disclosure.Button>
                 </Link>
-                <Link href={"/AllOrders"}>
+                <Link href={"/orders"}>
                   <Disclosure.Button
                     onClick={() => {
                       setSelectedPage("AllOrders");

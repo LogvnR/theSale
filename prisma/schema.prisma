@@ -107,6 +107,7 @@ model Order {
   name     String
   phone    String
   language String
+  total    String @default("0")
 
   createdAt DateTime       @default(now())
   orders    OrderProduct[]
