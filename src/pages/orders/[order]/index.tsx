@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 
 import { trpc } from "../../../utils/trpc";
 import Image from "next/image";
+import BackButton from "../../../components/Back Button/BackButton";
 
 function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(" ");
@@ -33,12 +34,22 @@ const Order = () => {
       <div className="py-16 sm:py-24">
         <div className="mx-auto max-w-7xl sm:px-2 lg:px-8">
           <div className="mx-auto max-w-2xl px-4 lg:max-w-4xl lg:px-0">
+            <BackButton link="/orders" />
             <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
-              Outstanding Order Details
+              Order Details
             </h1>
-            <p className="mt-2 text-sm text-gray-500">
-              This order has not yet been confirmed completed
-            </p>
+            <div className="mt-2 flex items-center gap-2">
+              <p className="text-md font-medium text-gray-600">Name:</p>
+              <p className="italic text-gray-500">{mainOrder?.name}</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <p className="text-md font-medium text-gray-600">Phone #:</p>
+              <p className="italic text-gray-500">{mainOrder?.phone}</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <p className="text-md font-medium text-gray-600">Language:</p>
+              <p className="italic text-gray-500">{mainOrder?.language}</p>
+            </div>
           </div>
         </div>
 
@@ -52,7 +63,7 @@ const Order = () => {
                     <div>
                       <dt className="font-medium text-gray-900">Order Id</dt>
                       <dd className="mt-1 text-gray-500">
-                        {mainOrder?.id.substring(0, 7)}
+                        {mainOrder?.id.substring(0, 7).toUpperCase()}
                       </dd>
                     </div>
                     <div className="hidden sm:block">
@@ -80,7 +91,7 @@ const Order = () => {
                         Total amount
                       </dt>
                       <dd className="mt-1 font-medium text-gray-900">
-                        {mainOrder?.total}
+                        ${mainOrder?.total}
                       </dd>
                     </div>
                   </dl>
@@ -146,11 +157,11 @@ const Order = () => {
                   </Menu>
 
                   <div className="hidden lg:col-span-2 lg:flex lg:items-center lg:justify-end lg:space-x-4">
-                    <button className="flex items-center justify-center rounded-md border border-gray-300 bg-white py-2 px-2.5 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                    <button className="flex items-center justify-center rounded-md border border-red-500 bg-red-100 py-2 px-2.5 text-sm font-medium text-red-700 shadow-sm hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
                       <span>Delete Order</span>
                       <span className="sr-only">{mainOrder?.id}</span>
                     </button>
-                    <button className="flex items-center justify-center rounded-md border border-gray-300 bg-white py-2 px-2.5 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                    <button className="flex items-center justify-center rounded-md border border-emerald-500 bg-emerald-100 py-2 px-2.5 text-sm font-medium text-emerald-700 shadow-sm hover:bg-emerald-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">
                       <span>Complete Invoice</span>
                       <span className="sr-only">for order {mainOrder?.id}</span>
                     </button>
