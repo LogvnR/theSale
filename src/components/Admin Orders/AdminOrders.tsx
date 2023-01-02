@@ -13,10 +13,6 @@ const AdminOrders = () => {
     },
   });
 
-  const removeItemHandler = async (id: string) => {
-    removeOrder.mutate({ id: id });
-  };
-
   const dateOptionsPre: Intl.DateTimeFormatOptions = {
     month: "short",
     day: "numeric",
@@ -105,14 +101,6 @@ const AdminOrders = () => {
                         </div>
                       </td>
                       <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                        {/* <button
-                          type="button"
-                          onClick={() => removeItemHandler(order.id)}
-                          className="inline-flex items-center rounded-md border border-transparent bg-red-500 p-2 text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
-                        >
-                          <TrashIcon className="h-5 w-5" aria-hidden="true" />
-                        </button> */}
-
                         <Link href={`/orders/${order.id}`}>
                           <button
                             type="button"

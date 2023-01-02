@@ -38,17 +38,15 @@ const CheckoutForm = () => {
   }, [total, cart]);
 
   const checkoutFormHandler = () => {
-    const newCart = myCart!.map((item) => ({
-      title: item.titleEng,
-      price: String(item.price),
-      url: item.photo,
-    }));
+    const prodIds = myCart!.map((item) => {
+      return { prodId: item.prodId };
+    });
     addOrder.mutate({
       name: userName,
       phone: userPhone,
       language: preferredLang,
       total: String(myTotal),
-      orders: newCart,
+      productsIds: prodIds,
     });
   };
 

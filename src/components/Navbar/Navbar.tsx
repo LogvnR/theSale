@@ -70,30 +70,118 @@ const Navbar = () => {
 
               <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                 {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
-                <a
-                  href="#"
-                  className="inline-flex items-center border-b-2 border-indigo-500 px-1 pt-1 text-sm font-medium text-gray-900"
+                <Link
+                  href={"/"}
+                  className={`inline-flex items-center border-b-2 ${
+                    selectedPage === "Home"
+                      ? "border-indigo-500 text-gray-900"
+                      : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                  } px-1 pt-1 text-sm font-medium `}
                 >
-                  Home
-                </a>
-                <a
-                  href="#"
-                  className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                  <button
+                    onClick={() => {
+                      setSelectedPage("Home");
+                      setIsOpen(false);
+                    }}
+                  >
+                    Home
+                  </button>
+                </Link>
+
+                <button
+                  onClick={() => {
+                    setSelectedPage("Vehicles");
+                    setIsOpen(false);
+                  }}
+                  className={`inline-flex items-center border-b-2 ${
+                    selectedPage === "Vehicles"
+                      ? "border-indigo-500 text-gray-900"
+                      : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                  } px-1 pt-1 text-sm font-medium `}
                 >
                   Vehicles
-                </a>
-                <a
-                  href="#"
-                  className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                </button>
+                <Link
+                  href={"/products"}
+                  className={`inline-flex items-center border-b-2 ${
+                    selectedPage === "Items"
+                      ? "border-indigo-500 text-gray-900"
+                      : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                  } px-1 pt-1 text-sm font-medium `}
                 >
-                  Items for sale
-                </a>
-                <a
-                  href="#"
+                  <button
+                    onClick={() => {
+                      setSelectedPage("Items");
+                      setIsOpen(false);
+                    }}
+                  >
+                    Items for sale
+                  </button>
+                </Link>
+
+                <button
+                  onClick={sessionData ? () => signOut() : () => signIn()}
                   className="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700"
                 >
                   Admin
-                </a>
+                </button>
+                {sessionData?.user ? (
+                  <>
+                    <Link
+                      href={"/AddProduct"}
+                      className={`inline-flex items-center border-b-2 ${
+                        selectedPage === "AddItems"
+                          ? "border-emerald-500 text-gray-900"
+                          : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                      } px-1 pt-1 text-sm font-medium `}
+                    >
+                      <button
+                        onClick={() => {
+                          setSelectedPage("AddItems");
+                          setIsOpen(false);
+                        }}
+                      >
+                        Add Items
+                      </button>
+                    </Link>
+
+                    <Link
+                      href={"/AllProducts"}
+                      className={`inline-flex items-center border-b-2 ${
+                        selectedPage === "AllItems"
+                          ? "border-emerald-500 text-gray-900"
+                          : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                      } px-1 pt-1 text-sm font-medium `}
+                    >
+                      <button
+                        onClick={() => {
+                          setSelectedPage("AllItems");
+                          setIsOpen(false);
+                        }}
+                      >
+                        All Items
+                      </button>
+                    </Link>
+
+                    <Link
+                      href={"/orders"}
+                      className={`inline-flex items-center border-b-2 ${
+                        selectedPage === "AllOrders"
+                          ? "border-emerald-500 text-gray-900"
+                          : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                      } px-1 pt-1 text-sm font-medium `}
+                    >
+                      <button
+                        onClick={() => {
+                          setSelectedPage("AllOrders");
+                          setIsOpen(false);
+                        }}
+                      >
+                        All Orders
+                      </button>
+                    </Link>
+                  </>
+                ) : null}
               </div>
             </div>
 

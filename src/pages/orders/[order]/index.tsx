@@ -8,10 +8,7 @@ import { useRouter } from "next/router";
 import { trpc } from "../../../utils/trpc";
 import Image from "next/image";
 import BackButton from "../../../components/Back Button/BackButton";
-
-function classNames(...classes: any[]) {
-  return classes.filter(Boolean).join(" ");
-}
+import { object } from "zod";
 
 const dateOptionsPre: Intl.DateTimeFormatOptions = {
   month: "short",
@@ -26,12 +23,23 @@ const dateOptionsAft: Intl.DateTimeFormatOptions = {
 const Order = () => {
   const router = useRouter();
   const orderId = String(router.query.order);
+  const utils = trpc.useContext();
 
   const mainOrder = trpc.order.oneOrder.useQuery({ orderId: orderId }).data;
+  const removeOrder = trpc.order.removeOrder.useMutation({
+    onSuccess: () => {
+      utils.order.allOrders.invalidate();
+      router.push("/orders");
+    },
+  });
+
+  const removeOrderHandler = async (id: string) => {
+    removeOrder.mutate({ id: id });
+  };
 
   return (
     <div className="bg-white">
-      <div className="py-16 sm:py-24">
+      <div className="py-4 sm:py-24">
         <div className="mx-auto max-w-7xl sm:px-2 lg:px-8">
           <div className="mx-auto max-w-2xl px-4 lg:max-w-4xl lg:px-0">
             <BackButton link="/orders" />
@@ -69,7 +77,7 @@ const Order = () => {
                     <div className="hidden sm:block">
                       <dt className="font-medium text-gray-900">Date placed</dt>
                       <dd className="mt-1 text-gray-500">
-                        <p>
+                        <p className="w-full">
                           <span className="font-medium">
                             {mainOrder?.createdAt.toLocaleDateString(
                               "en-US",
@@ -91,7 +99,7 @@ const Order = () => {
                         Total amount
                       </dt>
                       <dd className="mt-1 font-medium text-gray-900">
-                        ${mainOrder?.total}
+                        $ {mainOrder?.total}
                       </dd>
                     </div>
                   </dl>
@@ -122,16 +130,13 @@ const Order = () => {
                       leaveTo="transform opacity-0 scale-95"
                     >
                       <Menu.Items className="absolute right-0 z-10 mt-2 w-40 origin-bottom-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        <div className="py-1">
+                        <div className="p-1">
                           <Menu.Item>
                             {({ active }) => (
                               <button
-                                className={classNames(
-                                  active
-                                    ? "bg-gray-100 text-gray-900"
-                                    : "text-gray-700",
-                                  "block px-4 py-2 text-sm"
-                                )}
+                                className={
+                                  "block w-full rounded bg-red-100 px-4 py-2 text-left text-sm text-red-700"
+                                }
                               >
                                 Delete
                               </button>
@@ -140,12 +145,9 @@ const Order = () => {
                           <Menu.Item>
                             {({ active }) => (
                               <button
-                                className={classNames(
-                                  active
-                                    ? "bg-gray-100 text-gray-900"
-                                    : "text-gray-700",
-                                  "block px-4 py-2 text-sm"
-                                )}
+                                className={
+                                  "mt-1 block w-full rounded bg-emerald-100 px-4 py-2 text-left text-sm text-emerald-700"
+                                }
                               >
                                 Complete
                               </button>
@@ -157,12 +159,15 @@ const Order = () => {
                   </Menu>
 
                   <div className="hidden lg:col-span-2 lg:flex lg:items-center lg:justify-end lg:space-x-4">
-                    <button className="flex items-center justify-center rounded-md border border-red-500 bg-red-100 py-2 px-2.5 text-sm font-medium text-red-700 shadow-sm hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                    <button
+                      onClick={() => removeOrderHandler(mainOrder!.id)}
+                      className="flex items-center justify-center rounded-md border border-red-500 bg-red-100 py-2 px-2.5 text-sm font-medium text-red-700 shadow-sm hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                    >
                       <span>Delete Order</span>
                       <span className="sr-only">{mainOrder?.id}</span>
                     </button>
                     <button className="flex items-center justify-center rounded-md border border-emerald-500 bg-emerald-100 py-2 px-2.5 text-sm font-medium text-emerald-700 shadow-sm hover:bg-emerald-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2">
-                      <span>Complete Invoice</span>
+                      <span>Complete Order</span>
                       <span className="sr-only">for order {mainOrder?.id}</span>
                     </button>
                   </div>
@@ -171,22 +176,25 @@ const Order = () => {
                 {/* Products */}
                 <h4 className="sr-only">Items</h4>
                 <ul role="list" className="divide-y divide-gray-200">
-                  {mainOrder?.orders.map((order) => (
+                  {mainOrder?.products.map((order) => (
                     <li key={order.id} className="p-4 sm:p-6">
                       <div className="flex items-center sm:items-start">
                         <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-lg bg-gray-200 sm:h-40 sm:w-40">
                           <Image
-                            src={order.url}
-                            alt={order.title}
+                            src={order.photos[0]!.url}
+                            alt={order.titleEng}
                             fill
                             className="object-cover"
                           />
                         </div>
                         <div className="ml-6 flex-1 text-sm">
                           <div className="font-medium text-gray-900 sm:flex sm:justify-between">
-                            <h5>{order.title}</h5>
-                            <p className="mt-2 sm:mt-0">{order.price}</p>
+                            <h5>{order.titleEng}</h5>
+                            <p className="mt-2 sm:mt-0">$ {order.price}</p>
                           </div>
+                          <p className="mt-2 italic text-gray-500">
+                            {order.id.substring(0, 7).toUpperCase()}
+                          </p>
                         </div>
                       </div>
                     </li>

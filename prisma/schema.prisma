@@ -90,6 +90,9 @@ model Product {
 
   Category   Category? @relation(fields: [categoryId], references: [id])
   categoryId String?
+
+  Order   Order?  @relation(fields: [orderId], references: [id])
+  orderId String?
 }
 
 model Photo {
@@ -109,16 +112,16 @@ model Order {
   language String
   total    String @default("0")
 
-  createdAt DateTime       @default(now())
-  orders    OrderProduct[]
+  createdAt DateTime  @default(now())
+  products  Product[]
 }
 
-model OrderProduct {
-  id    String @id @default(uuid())
-  title String
-  url   String
-  price String
+// model OrderProduct {
+//   id    String @id @default(uuid())
+//   title String
+//   url   String
+//   price String
 
-  Order   Order?  @relation(fields: [orderId], references: [id])
-  orderId String?
-}
+//   Order   Order?  @relation(fields: [orderId], references: [id])
+//   orderId String?
+// }

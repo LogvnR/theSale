@@ -15,7 +15,11 @@ export const orderRouter = router({
           id: input.orderId,
         },
         include: {
-          orders: true,
+          products: {
+            include: {
+              photos: true,
+            },
+          },
         },
       });
     }),
@@ -29,11 +33,9 @@ export const orderRouter = router({
         phone: z.string(),
         language: z.string(),
         total: z.string(),
-        orders: z
+        productsIds: z
           .object({
-            title: z.string(),
-            url: z.string(),
-            price: z.string(),
+            prodId: z.string(),
           })
           .array(),
       })
@@ -45,8 +47,8 @@ export const orderRouter = router({
           phone: input.phone,
           language: input.language,
           total: input.total,
-          orders: {
-            create: input.orders,
+          products: {
+            connect: input.productsIds.map((prod) => ({ id: prod.prodId })),
           },
         },
       });
