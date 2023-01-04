@@ -1,4 +1,3 @@
-import React from "react";
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { EllipsisVerticalIcon, TrashIcon } from "@heroicons/react/24/outline";
@@ -28,8 +27,8 @@ const Order = () => {
   const removePhotos = trpc.photo.removePhoto.useMutation();
   const removeProducts = trpc.product.removeProduct.useMutation({
     onSuccess: () => {
-      utils.order.oneOrder.invalidate({ orderId: orderId });
       utils.product.allProducts.invalidate();
+      utils.order.oneOrder.invalidate({ orderId: orderId });
     },
   });
   const removeOrder = trpc.order.removeOrder.useMutation({
@@ -180,7 +179,14 @@ const Order = () => {
 
                 {/* Products */}
                 <h4 className="sr-only">Items</h4>
-                <ul role="list" className="divide-y divide-gray-200">
+                <ul
+                  role="list"
+                  className={`divide-y divide-gray-200 ${
+                    removePhotos.isLoading || removeProducts.isLoading
+                      ? "animate-pulse opacity-25"
+                      : null
+                  }`}
+                >
                   {mainOrder?.products.map((order) => (
                     <li key={order.id} className="p-4 sm:p-6">
                       <div className="flex items-center sm:items-start">
