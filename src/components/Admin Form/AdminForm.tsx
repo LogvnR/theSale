@@ -46,7 +46,22 @@ const AdminForm = () => {
   const [inputContainer, setInputContainer] = useState([{ url: "" }]);
 
   const categories = trpc.category.allCategories.useQuery().data;
-  const addProduct = trpc.product.addProduct.useMutation();
+  const addProduct = trpc.product.addProduct.useMutation({
+    onSuccess: () => {
+      reset({
+        newProductEng: "",
+        newProductEsp: "",
+        newPrice: "",
+        newDescriptionEng: "",
+        newDescriptionEsp: "",
+      });
+      setIsFeatured(false);
+      setCategory("Tech");
+      setInputContainer([{ url: "" }]);
+      setPhoto("");
+      setPhotos([]);
+    },
+  });
 
   const addProductHandler = async () => {
     addProduct.mutate({
@@ -149,7 +164,7 @@ const AdminForm = () => {
           </label>
           <select
             className="mt-1 block w-full rounded-md border border-gray-400 py-2 pl-3 pr-10 text-base focus:border-emerald-500 focus:outline-none focus:ring-emerald-500 sm:text-sm"
-            defaultValue=""
+            defaultValue={category}
             {...register("category")}
             onChange={(e) => setCategory(e.target.value)}
           >
