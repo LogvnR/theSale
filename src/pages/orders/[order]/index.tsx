@@ -28,6 +28,7 @@ const Order = () => {
   const removePhotos = trpc.photo.removePhoto.useMutation();
   const removeProducts = trpc.product.removeProduct.useMutation({
     onSuccess: () => {
+      utils.order.oneOrder.invalidate({ orderId: orderId });
       utils.product.allProducts.invalidate();
     },
   });
@@ -46,7 +47,7 @@ const Order = () => {
     removePhotos.mutate({ id: id });
     setTimeout(() => {
       removeProducts.mutate({ id: id });
-    }, 2000);
+    }, 1500);
   };
 
   return (
@@ -164,7 +165,12 @@ const Order = () => {
                       onClick={() => {
                         removeOrderHandler(mainOrder!.id);
                       }}
-                      className='focus:ring-red-500" flex items-center justify-center rounded-md border border-red-500 bg-red-100 py-2 px-2.5 text-sm font-medium text-red-700 shadow-sm  hover:bg-red-200  focus:outline-none focus:ring-2  focus:ring-offset-2'
+                      disabled={mainOrder?.products.length === 0 ? false : true}
+                      className={` flex items-center justify-center rounded-md border  ${
+                        mainOrder?.products.length === 0
+                          ? "border-red-500 bg-red-100 text-red-700 hover:bg-red-200 focus:ring-red-500"
+                          : "bg-gray-100 text-gray-700"
+                      }  py-2 px-2.5 text-sm font-medium shadow-sm focus:outline-none focus:ring-2  focus:ring-offset-2`}
                     >
                       <span>Delete Order</span>
                       <span className="sr-only">{mainOrder?.id}</span>
