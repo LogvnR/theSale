@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -6,6 +7,8 @@ import * as z from "zod";
 import { trpc } from "../../utils/trpc";
 import useCart from "../../hooks/useCart";
 import { CartProduct } from "../../helpers/types";
+import useEmail from "../../hooks/useEmail";
+import { router } from "../../server/trpc/trpc";
 
 const schema = z.object({
   userName: z
@@ -21,21 +24,32 @@ const CheckoutForm = () => {
   const [userPhone, setUserPhone] = useState<string>("");
   const [preferredLang, setPreferredLang] = useState<string>("English");
   const [myTotal, setMyTotal] = useState<number>(0);
+  const [myQuantity, setMyQuantity] = useState<number>(0);
   const [myCart, setMyCart] = useState<CartProduct[]>();
 
-  const { cart, resetCart, total } = useCart();
+  const router = useRouter();
+
+  const { cart, resetCart, total, quantity } = useCart();
+  const { email } = useEmail({
+    name: userName,
+    quantity: myQuantity,
+    language: preferredLang,
+  });
   const addOrder = trpc.order.addOrder.useMutation({
-    onSuccess: () => {
+    onSuccess: (data) => {
       resetCart();
       reset({ userName: "", userPhone: "" });
       setPreferredLang("English");
+      email();
+      router.push(`/requestconfirmed/${data?.id}`);
     },
   });
 
   useEffect(() => {
     setMyCart(cart);
     setMyTotal(total);
-  }, [total, cart]);
+    setMyQuantity(quantity);
+  }, [total, cart, quantity]);
 
   const checkoutFormHandler = () => {
     const prodIds = myCart!.map((item) => {
