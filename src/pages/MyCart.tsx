@@ -7,6 +7,8 @@ import { CartProduct } from "../helpers/types";
 import Link from "next/link";
 import Image from "next/image";
 import CheckoutForm from "../components/Admin Form/CheckoutForm";
+import emptyCart from "../../public/empty_cart.svg";
+import EmptyCart from "../components/Empty Cart/EmptyCart";
 
 const MyCart = () => {
   const [myTotal, setMyTotal] = useState<number>(0);
@@ -17,6 +19,8 @@ const MyCart = () => {
     setMyCart(cart);
     setMyTotal(total);
   }, [total, cart]);
+
+  if (myCart?.length === 0) return <EmptyCart />;
 
   return (
     <div className="bg-white">
