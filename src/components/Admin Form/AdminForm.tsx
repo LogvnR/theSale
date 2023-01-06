@@ -319,9 +319,9 @@ const AdminForm = () => {
                 type="button"
                 className={`inline-flex items-center rounded-full border border-transparent ${
                   errors.newPhoto
-                    ? "bg-red-600"
-                    : "bg-emerald-600 hover:bg-emerald-700 focus:ring-emerald-500"
-                } p-2 text-white shadow-sm  focus:outline-none focus:ring-2  focus:ring-offset-2`}
+                    ? "bg-red-100 text-red-500"
+                    : "bg-emerald-100 text-green-500 hover:bg-emerald-200 focus:ring-emerald-500"
+                } p-2  shadow-sm  focus:outline-none focus:ring-2  focus:ring-offset-2`}
               >
                 {errors.newPhoto ? (
                   <XMarkIcon className="h-5 w-5" aria-hidden="true" />
@@ -339,7 +339,7 @@ const AdminForm = () => {
                 setInputContainer([...inputContainer, { url: "" }])
               }
               type="button"
-              className="inline-flex items-center rounded-full border border-transparent bg-emerald-600 p-2 text-white shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+              className="inline-flex items-center rounded-full border border-transparent bg-emerald-100 p-2 text-green-500 shadow-sm hover:bg-emerald-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
             >
               <PlusIconMini className="h-5 w-5" aria-hidden="true" />
             </button>
@@ -349,7 +349,7 @@ const AdminForm = () => {
           <div className="mt-4 flex w-full items-center justify-end">
             <button
               type="submit"
-              className="inline-flex items-center rounded-md border border-transparent bg-emerald-100 px-4 py-2 text-sm font-medium text-emerald-700 hover:bg-indigo-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+              className="inline-flex items-center rounded-md border border-transparent bg-emerald-100 px-4 py-2 text-sm font-medium text-green-500 hover:bg-emerald-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
             >
               Add New Items
             </button>

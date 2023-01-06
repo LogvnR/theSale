@@ -36,11 +36,13 @@ const Navbar = () => {
                       className="block h-6 w-6"
                       aria-hidden="true"
                     />
-                    <div className="absolute -right-3 -top-3 flex h-5 w-5 items-center justify-center rounded-full bg-orange-500">
-                      <p className="text-[11px] text-white">
-                        {navQuantity > 9 ? "9+" : navQuantity}
-                      </p>
-                    </div>
+                    {navQuantity === 0 ? null : (
+                      <div className="absolute -right-3 -top-3 flex h-5 w-5 items-center justify-center rounded-full bg-orange-500">
+                        <p className="text-[11px] text-white">
+                          {navQuantity > 9 ? "9+" : navQuantity}
+                        </p>
+                      </div>
+                    )}
                   </div>
                 </button>
               </Link>
@@ -54,7 +56,7 @@ const Navbar = () => {
                   <img
                     className="block h-8 w-auto rounded lg:hidden"
                     src={`${
-                      sessionData?.user?.name === "TooVeryLegit"
+                      sessionData?.user
                         ? sessionData.user.image
                         : "https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                     }`}
@@ -62,8 +64,12 @@ const Navbar = () => {
                   />
                 </Link>
                 <img
-                  className="hidden h-8 w-auto lg:block"
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                  className="hidden h-8 w-auto rounded lg:block"
+                  src={`${
+                    sessionData?.user
+                      ? sessionData.user.image
+                      : "https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                  }`}
                   alt="Your Company"
                 />
               </button>

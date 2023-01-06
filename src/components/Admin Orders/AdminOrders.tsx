@@ -31,15 +31,15 @@ const AdminOrders = () => {
     );
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8">
+    <div className="mt-4 px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
-        <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-          <Link href={"/AddProduct"}>
+        <div className="mt-4 sm:mt-0 sm:flex-none">
+          <Link href={"/AllProducts"}>
             <button
               type="button"
-              className="inline-flex items-center justify-center rounded-md border border-transparent bg-emerald-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 sm:w-auto"
+              className="inline-flex items-center justify-center rounded-md border border-transparent bg-emerald-100 px-4 py-2 text-sm font-medium text-emerald-500 shadow-sm hover:bg-emerald-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 sm:w-auto"
             >
-              Add New Product
+              See All Items
             </button>
           </Link>
         </div>
@@ -75,7 +75,7 @@ const AdminOrders = () => {
                   {orders?.map((order) => (
                     <tr key={order.id}>
                       <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
-                        {order.id.substring(0, 7)}
+                        {order.id.substring(0, 7).toUpperCase()}
                       </td>
                       <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                         <div className="flex flex-col">
@@ -104,8 +104,9 @@ const AdminOrders = () => {
                         <Link href={`/orders/${order.id}`}>
                           <button
                             type="button"
-                            className="inline-flex items-center rounded-md border border-transparent bg-emerald-500 p-2 text-white shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+                            className="inline-flex items-center gap-2 rounded-md border border-transparent bg-emerald-100 p-2 text-green-500 shadow-sm hover:bg-emerald-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
                           >
+                            View Order
                             <ArrowRightIcon
                               className="h-5 w-5"
                               aria-hidden="true"

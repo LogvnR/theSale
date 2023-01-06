@@ -1,6 +1,10 @@
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
-import { EllipsisVerticalIcon, TrashIcon } from "@heroicons/react/24/outline";
+import {
+  EllipsisVerticalIcon,
+  XMarkIcon,
+  CheckIcon,
+} from "@heroicons/react/24/outline";
 
 import { useRouter } from "next/router";
 
@@ -25,6 +29,12 @@ const Order = () => {
 
   const mainOrder = trpc.order.oneOrder.useQuery({ orderId: orderId }).data;
   const removePhotos = trpc.photo.removePhoto.useMutation();
+  const updateOrder = trpc.order.updateOrder.useMutation({
+    onSuccess: () => {
+      utils.product.allProducts.invalidate();
+      utils.order.oneOrder.invalidate({ orderId: orderId });
+    },
+  });
   const removeProducts = trpc.product.removeProduct.useMutation({
     onSuccess: () => {
       utils.product.allProducts.invalidate();
@@ -42,11 +52,15 @@ const Order = () => {
     removeOrder.mutate({ id: id });
   };
 
-  const removeItemHandler = async (id: string) => {
+  const completeItemHandler = async (id: string) => {
     removePhotos.mutate({ id: id });
     setTimeout(() => {
       removeProducts.mutate({ id: id });
     }, 1500);
+  };
+
+  const removeItemHandler = async (id: string, prodId: string) => {
+    updateOrder.mutate({ id: id, productId: prodId });
   };
 
   return (
@@ -167,8 +181,8 @@ const Order = () => {
                       disabled={mainOrder?.products.length === 0 ? false : true}
                       className={` flex items-center justify-center rounded-md border  ${
                         mainOrder?.products.length === 0
-                          ? "border-red-500 bg-red-100 text-red-700 hover:bg-red-200 focus:ring-red-500"
-                          : "bg-gray-100 text-gray-700"
+                          ? "border-red-500 bg-red-100 text-red-500 hover:bg-red-200 focus:ring-red-500"
+                          : "bg-gray-100 text-gray-500"
                       }  py-2 px-2.5 text-sm font-medium shadow-sm focus:outline-none focus:ring-2  focus:ring-offset-2`}
                     >
                       <span>Delete Order</span>
@@ -209,13 +223,25 @@ const Order = () => {
                             </p>
                           </div>
 
-                          <div className="flex w-full justify-end">
+                          <div className="flex w-full justify-end gap-4">
                             <button
                               type="button"
-                              onClick={() => removeItemHandler(order.id)}
-                              className="inline-flex items-center rounded-md border border-transparent bg-red-500 p-2 text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                              onClick={() => completeItemHandler(order.id)}
+                              className="inline-flex items-center rounded-md border border-transparent bg-green-100 p-2 text-green-500 shadow-sm hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
                             >
-                              <TrashIcon
+                              <CheckIcon
+                                className="h-5 w-5"
+                                aria-hidden="true"
+                              />
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() =>
+                                removeItemHandler(mainOrder.id, order.id)
+                              }
+                              className="inline-flex items-center rounded-md border border-transparent bg-red-100 p-2 text-red-500 shadow-sm hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                            >
+                              <XMarkIcon
                                 className="h-5 w-5"
                                 aria-hidden="true"
                               />

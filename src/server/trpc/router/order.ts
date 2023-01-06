@@ -66,4 +66,23 @@ export const orderRouter = router({
         },
       });
     }),
+  updateOrder: publicProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        productId: z.string(),
+      })
+    )
+    .mutation(({ ctx, input }) => {
+      return ctx.prisma.order.update({
+        where: {
+          id: input.id,
+        },
+        data: {
+          products: {
+            disconnect: [{ id: input.productId }],
+          },
+        },
+      });
+    }),
 });

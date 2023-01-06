@@ -22,13 +22,13 @@ const AdminList = () => {
   };
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8">
+    <div className="mt-4 px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
-        <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
+        <div className="mt-4 sm:mt-0 sm:flex-none">
           <Link href={"/AddProduct"}>
             <button
               type="button"
-              className="inline-flex items-center justify-center rounded-md border border-transparent bg-emerald-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 sm:w-auto"
+              className="inline-flex items-center justify-center rounded-md border border-transparent bg-emerald-100 px-4 py-2 text-sm font-medium text-emerald-500 shadow-sm hover:bg-emerald-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 sm:w-auto"
             >
               Add New Product
             </button>
@@ -75,7 +75,7 @@ const AdminList = () => {
                         <button
                           type="button"
                           onClick={() => removeItemHandler(product.id)}
-                          className="inline-flex items-center rounded-md border border-transparent bg-red-500 p-2 text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                          className="inline-flex items-center rounded-md border border-transparent bg-red-100 p-2 text-red-500 shadow-sm hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
                         >
                           <TrashIcon className="h-5 w-5" aria-hidden="true" />
                         </button>
