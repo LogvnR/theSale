@@ -117,12 +117,32 @@ model Order {
   products  Product[]
 }
 
-// model OrderProduct {
-//   id    String @id @default(uuid())
-//   title String
-//   url   String
-//   price String
+model Vehicle {
+  id             String         @id @default(uuid())
+  year           String
+  make           String
+  model          String
+  mileage        String
+  kilometers     String
+  fuelEng        String
+  fuelEsp        String
+  seats          String
+  engine         String
+  drivetrain     String
+  type           String
+  color          String
+  price          String
+  descriptionEng String         @default("")
+  descriptionEsp String         @default("")
+  photos         VehiclePhoto[]
+}
 
-//   Order   Order?  @relation(fields: [orderId], references: [id])
-//   orderId String?
-// }
+model VehiclePhoto {
+  id             String  @id @default(uuid())
+  title          String
+  url            String
+  isFeaturePhoto Boolean @default(false)
+
+  Vehicle   Vehicle? @relation(fields: [vehicleId], references: [id])
+  vehicleId String?
+}
