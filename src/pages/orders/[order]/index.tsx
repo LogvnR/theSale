@@ -4,8 +4,10 @@ import {
   EllipsisVerticalIcon,
   XMarkIcon,
   CheckIcon,
+  ClipboardDocumentListIcon,
 } from "@heroicons/react/24/outline";
 
+import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/router";
 
 import { trpc } from "../../../utils/trpc";
@@ -67,8 +69,19 @@ const Order = () => {
     }, 1500);
   };
 
+  const copy = (text: string | undefined, title: string) => {
+    navigator.clipboard.writeText(String(text));
+    toast(`${title} Copied!`);
+  };
+
   return (
     <div className="bg-white">
+      <Toaster
+        toastOptions={{
+          style: { background: "#d1fae5", color: "#22c55e" },
+          duration: 2000,
+        }}
+      />
       <div className="py-4 sm:py-24">
         <div className="mx-auto max-w-7xl sm:px-2 lg:px-8">
           <div className="mx-auto max-w-2xl px-4 lg:max-w-4xl lg:px-0">
@@ -78,13 +91,23 @@ const Order = () => {
             </h1>
             <div className="mt-2 flex items-center gap-2">
               <p className="text-md font-medium text-gray-600">Name:</p>
-              <p className="italic text-gray-500">{mainOrder?.name}</p>
+              <button
+                onClick={() => copy(mainOrder?.name, "Name")}
+                className="italic text-gray-500 hover:text-emerald-600"
+              >
+                <p>{mainOrder?.name}</p>
+              </button>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="mt-2 flex items-center gap-2">
               <p className="text-md font-medium text-gray-600">Phone #:</p>
-              <p className="italic text-gray-500">{mainOrder?.phone}</p>
+              <button
+                onClick={() => copy(mainOrder?.phone, "Phone Number")}
+                className="italic text-gray-500 hover:text-emerald-600"
+              >
+                <p>{mainOrder?.phone}</p>
+              </button>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="mt-2 flex items-center gap-2">
               <p className="text-md font-medium text-gray-600">Language:</p>
               <p className="italic text-gray-500">{mainOrder?.language}</p>
             </div>
