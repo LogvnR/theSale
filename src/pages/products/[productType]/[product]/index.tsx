@@ -112,10 +112,10 @@ const Product = () => {
 
   return (
     <div className="bg-white">
-      <div className="mx-auto max-w-2xl py-4 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+      <div className="mx-auto max-w-2xl py-4 px-4 sm:py-12 lg:max-w-7xl lg:px-8">
         <BackButton link={`/products/${categoryId.toLowerCase()}`} />
 
-        <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
+        <div className="mt-4 lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
           {/* Image gallery */}
           <Tab.Group as="div" className="flex flex-col-reverse">
             {/* Image selector */}
@@ -192,25 +192,15 @@ const Product = () => {
                   disabled={isDisabled}
                   className={`flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent ${
                     isDisabled
-                      ? "bg-gray-400"
-                      : "bg-blue-600 hover:bg-blue-700 focus:ring-blue-500"
-                  }  py-3 px-8 text-base font-medium text-white  focus:outline-none focus:ring-2  focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full`}
+                      ? "bg-gray-100 text-gray-500"
+                      : "bg-blue-100 text-blue-500 hover:bg-blue-200 focus:ring-blue-500"
+                  }  py-3 px-8 text-base font-medium focus:outline-none focus:ring-2  focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full`}
                 >
                   {isDisabled ? (
                     <p>Item in cart &#x2022; Artículo en carrito</p>
                   ) : (
                     <p>Add to cart &#x2022; Añadir al carrito</p>
                   )}
-                </button>
-              </div>
-              <div className="sm:flex-col1 mt-10 flex">
-                <button
-                  onClick={() => {
-                    console.log(cart, total, quantity);
-                  }}
-                  className="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-blue-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full"
-                >
-                  Test
                 </button>
               </div>
             </div>
@@ -259,10 +249,10 @@ const Product = () => {
                               <li key={item}>{item}</li>
                             ))}
                           </ul> */}
-                          <p className="space-y-6 border-l-4 border-l-blue-500 pl-2 text-base text-gray-700">
+                          <p className="space-y-6 border-l-4 border-l-blue-200 pl-2 text-base text-gray-700">
                             {mainProduct?.descriptionEng}
                           </p>
-                          <p className="mt-3 space-y-6 border-l-4 border-l-orange-500 pl-2 text-base text-gray-700">
+                          <p className="mt-3 space-y-6 border-l-4 border-l-orange-200 pl-2 text-base text-gray-700">
                             {mainProduct?.descriptionEsp}
                           </p>
                         </Disclosure.Panel>

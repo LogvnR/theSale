@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const EmptyCart = () => {
   return (
-    <div className="bg-white">
+    <div className="min-h-screen bg-white">
       <div className="mx-auto flex max-w-2xl flex-col items-center justify-center py-4 px-4 sm:py-24 sm:px-6 lg:px-0">
         <Image src={emptyCart} alt="Empty Cart Photo" width={275} />
 

@@ -23,7 +23,7 @@ const MyCart = () => {
   if (myCart?.length === 0) return <EmptyCart />;
 
   return (
-    <div className="bg-white">
+    <div className="min-h-screen bg-white">
       <div className="mx-auto max-w-2xl py-4 px-4 sm:py-24 sm:px-6 lg:px-0">
         <h1 className="text-left text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
           My Cart

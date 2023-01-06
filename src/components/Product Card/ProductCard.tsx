@@ -17,7 +17,7 @@ const ProductCard = ({ ...props }: ProductCardProps) => {
       href={`/products/${props.catId.toLowerCase()}/${props.prodId.toLowerCase()}`}
     >
       <div className="group">
-        <div className="aspect-w-1 aspect-h-1 xl:aspect-w-7 xl:aspect-h-8 relative h-[343px] w-full overflow-hidden rounded-lg bg-gray-200">
+        <div className="aspect-w-1 aspect-h-1 xl:aspect-w-7 xl:aspect-h-8 relative h-[343px] w-full overflow-hidden rounded-lg bg-gray-200 transition-opacity hover:opacity-75 lg:hover:-translate-y-1">
           <Image
             className="object-cover"
             fill

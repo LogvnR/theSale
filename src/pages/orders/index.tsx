@@ -11,7 +11,7 @@ const AllOrders = () => {
       </p>
     );
   return (
-    <div className="flex w-full justify-center">
+    <div className="flex min-h-screen w-full items-start justify-center">
       <div className="flex w-full flex-col justify-center lg:w-2/3">
         <h2 className="ml-4 mt-4 text-lg text-gray-800">All Orders Page</h2>
         <AdminOrders />
