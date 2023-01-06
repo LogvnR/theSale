@@ -82,6 +82,7 @@ model Product {
   titleEng       String
   titleEsp       String
   isFeatured     Boolean
+  isPending      Boolean @default(false)
   price          String  @default("0")
   descriptionEng String  @default("")
   descriptionEsp String  @default("")

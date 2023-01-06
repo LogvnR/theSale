@@ -29,6 +29,7 @@ const Order = () => {
 
   const mainOrder = trpc.order.oneOrder.useQuery({ orderId: orderId }).data;
   const removePhotos = trpc.photo.removePhoto.useMutation();
+  const updateProduct = trpc.product.updateProduct.useMutation();
   const updateOrder = trpc.order.updateOrder.useMutation({
     onSuccess: () => {
       utils.product.allProducts.invalidate();
@@ -60,7 +61,10 @@ const Order = () => {
   };
 
   const removeItemHandler = async (id: string, prodId: string) => {
-    updateOrder.mutate({ id: id, productId: prodId });
+    updateProduct.mutate({ orderId: id, prodStatus: false });
+    setTimeout(() => {
+      updateOrder.mutate({ id: id, productId: prodId });
+    }, 1500);
   };
 
   return (

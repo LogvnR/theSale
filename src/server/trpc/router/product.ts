@@ -84,4 +84,21 @@ export const productRouter = router({
         },
       });
     }),
+  updateProduct: publicProcedure
+    .input(
+      z.object({
+        orderId: z.string(),
+        prodStatus: z.boolean(),
+      })
+    )
+    .mutation(({ ctx, input }) => {
+      return ctx.prisma.product.updateMany({
+        where: {
+          orderId: input.orderId,
+        },
+        data: {
+          isPending: input.prodStatus,
+        },
+      });
+    }),
 });

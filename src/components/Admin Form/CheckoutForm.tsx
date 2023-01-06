@@ -35,8 +35,10 @@ const CheckoutForm = () => {
     quantity: myQuantity,
     language: preferredLang,
   });
+  const updateProduct = trpc.product.updateProduct.useMutation();
   const addOrder = trpc.order.addOrder.useMutation({
     onSuccess: (data) => {
+      updateProduct.mutate({ orderId: data.id, prodStatus: true });
       resetCart();
       reset({ userName: "", userPhone: "" });
       setPreferredLang("English");
