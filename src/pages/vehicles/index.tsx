@@ -1,4 +1,5 @@
 import React from "react";
+import VehicleCard from "../../components/Vehicle Card/VehicleCard";
 
 import { trpc } from "../../utils/trpc";
 
@@ -14,7 +15,9 @@ const Vehicles = () => {
           </p>
 
           <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
-            <p>Test</p>
+            {vehicles?.map((vehicle) => (
+              <VehicleCard key={vehicle.id} carId={vehicle.id} />
+            ))}
           </div>
         </div>
       </div>
