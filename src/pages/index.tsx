@@ -20,14 +20,21 @@ const Home: NextPage = () => {
         <main className="lg:relative">
           <div className="mx-auto w-full max-w-7xl pt-16 pb-20 text-center lg:py-48 lg:text-left">
             <div className="px-4 sm:px-8 lg:w-1/2 xl:pr-16">
-              <h1 className="font-Jakarta text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl lg:text-5xl xl:text-6xl">
+              <h1 className="font-Jakarta text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl lg:text-4xl xl:text-5xl">
                 <span className="block xl:inline">Welcome to</span>{" "}
+                <span className="block text-blue-600 xl:inline">The Sale</span>
+              </h1>
+              <h1 className="mt-1 font-Inter text-3xl font-medium italic tracking-tight text-gray-500 sm:text-5xl md:text-5xl lg:text-3xl xl:text-4xl">
+                <span className="block xl:inline">Bienvenido a</span>{" "}
                 <span className="block text-blue-600 xl:inline">The Sale</span>
               </h1>
               <p className="mx-auto mt-3 max-w-md font-Inter text-lg text-gray-500 sm:text-xl md:mt-5 md:max-w-3xl">
                 Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
-                lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat
-                fugiat aliqua.
+                lorem cupidatat commodo.
+              </p>
+              <p className="mx-auto mt-1 max-w-md font-Inter text-base italic text-gray-500 sm:text-lg md:mt-2 md:max-w-3xl">
+                Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
+                lorem cupidatat commodo.
               </p>
               <div className="mt-10 sm:flex sm:justify-center lg:justify-start">
                 <div className="rounded-md shadow">
@@ -41,44 +48,23 @@ const Home: NextPage = () => {
             </div>
           </div>
 
-          {test.data?.map((item) => (
-            <div
-              key={item.id}
-              className="relative h-64 w-full overflow-hidden sm:h-72 md:h-96 lg:absolute lg:inset-y-0 lg:right-0 lg:h-full lg:w-1/2"
-            >
-              <div className="relative h-[257px] w-full overflow-hidden lg:h-[730px]">
-                {item.photos.map((photo) => (
-                  <Image
-                    className="object-cover"
-                    fill
-                    src={photo.url}
-                    alt={photo.title}
-                    key={photo.id}
-                  />
-                ))}
-              </div>
+          <div className="relative h-64 w-full overflow-hidden sm:h-72 md:h-96 lg:absolute lg:inset-y-0 lg:right-0 lg:h-full lg:w-1/2">
+            <div className="relative h-[257px] w-full overflow-hidden lg:h-[730px]">
+              <Image
+                className="object-cover"
+                fill
+                src="https://drive.google.com/uc?export=view&id=1uLgazCHz9-3vVjVGRHgihY0QPMetjXNI"
+                alt="Main Photo"
+              />
+            </div>
 
-              <div className="absolute bottom-0 left-0 w-2/3 -translate-x-1 skew-x-12 border-r-4 border-r-blue-500 bg-gray-200">
+            {/* <div className="absolute bottom-0 left-0 w-2/3 -translate-x-1 skew-x-12 border-r-4 border-r-blue-500 bg-gray-200">
                 <h4 className="mx-4 my-1 -skew-x-12 text-sm font-medium tracking-wide text-gray-700">
                   {item.titleEng}
                 </h4>
-              </div>
-            </div>
-          ))}
+              </div> */}
+          </div>
         </main>
-        <div className="relative my-8">
-          <div
-            className="absolute inset-0 flex items-center"
-            aria-hidden="true"
-          >
-            <div className="w-full border-t border-gray-300" />
-          </div>
-          <div className="relative flex justify-center">
-            <span className="bg-gray-50 px-2 font-Jakarta text-sm text-gray-500">
-              Featured
-            </span>
-          </div>
-        </div>
       </div>
     </>
   );
