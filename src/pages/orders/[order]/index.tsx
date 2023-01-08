@@ -86,30 +86,38 @@ const Order = () => {
         <div className="mx-auto max-w-7xl sm:px-2 lg:px-8">
           <div className="mx-auto max-w-2xl px-4 lg:max-w-4xl lg:px-0">
             <BackButton link="/orders" />
-            <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+            <h1 className="font-Jakarta text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
               Order Details
             </h1>
             <div className="mt-2 flex items-center gap-2">
-              <p className="text-md font-medium text-gray-600">Name:</p>
+              <p className="text-md font-Jakarta font-medium text-gray-600">
+                Name:
+              </p>
               <button
                 onClick={() => copy(mainOrder?.name, "Name")}
-                className="italic text-gray-500 hover:text-emerald-600"
+                className="font-Inter italic text-gray-500 hover:text-emerald-600"
               >
                 <p>{mainOrder?.name}</p>
               </button>
             </div>
             <div className="mt-2 flex items-center gap-2">
-              <p className="text-md font-medium text-gray-600">Phone #:</p>
+              <p className="text-md font-Jakarta font-medium text-gray-600">
+                Phone #:
+              </p>
               <button
                 onClick={() => copy(mainOrder?.phone, "Phone Number")}
-                className="italic text-gray-500 hover:text-emerald-600"
+                className="font-Inter italic text-gray-500 hover:text-emerald-600"
               >
                 <p>{mainOrder?.phone}</p>
               </button>
             </div>
             <div className="mt-2 flex items-center gap-2">
-              <p className="text-md font-medium text-gray-600">Language:</p>
-              <p className="italic text-gray-500">{mainOrder?.language}</p>
+              <p className="text-md font-Jakarta font-medium text-gray-600">
+                Language:
+              </p>
+              <p className="font-Inter italic text-gray-500">
+                {mainOrder?.language}
+              </p>
             </div>
           </div>
         </div>
@@ -122,14 +130,18 @@ const Order = () => {
                 <div className="flex items-center border-b border-gray-200 p-4 sm:grid sm:grid-cols-4 sm:gap-x-6 sm:p-6">
                   <dl className="grid flex-1 grid-cols-2 gap-x-6 text-sm sm:col-span-3 sm:grid-cols-3 lg:col-span-2">
                     <div>
-                      <dt className="font-medium text-gray-900">Order Id</dt>
-                      <dd className="mt-1 text-gray-500">
+                      <dt className="font-Jakarta font-medium text-gray-900">
+                        Order Id
+                      </dt>
+                      <dd className="mt-1 font-Inter text-gray-500">
                         {mainOrder?.id.substring(0, 7).toUpperCase()}
                       </dd>
                     </div>
                     <div className="hidden sm:block">
-                      <dt className="font-medium text-gray-900">Date placed</dt>
-                      <dd className="mt-1 text-gray-500">
+                      <dt className="font-Jakarta font-medium text-gray-900">
+                        Date placed
+                      </dt>
+                      <dd className="mt-1 font-Inter text-gray-500">
                         <p className="w-full">
                           <span className="font-medium">
                             {mainOrder?.createdAt.toLocaleDateString(
@@ -148,10 +160,10 @@ const Order = () => {
                       </dd>
                     </div>
                     <div>
-                      <dt className="font-medium text-gray-900">
+                      <dt className="font-Jakarta font-medium text-gray-900">
                         Total amount
                       </dt>
-                      <dd className="mt-1 font-medium text-gray-900">
+                      <dd className="mt-1 font-Inter font-medium text-gray-900">
                         $ {mainOrder?.total}
                       </dd>
                     </div>
@@ -187,9 +199,19 @@ const Order = () => {
                           <Menu.Item>
                             {({ active }) => (
                               <button
-                                className={
-                                  "block w-full rounded bg-red-100 px-4 py-2 text-left text-sm text-red-700"
+                                onClick={() => {
+                                  removeOrderHandler(mainOrder!.id);
+                                }}
+                                disabled={
+                                  mainOrder?.products.length === 0
+                                    ? false
+                                    : true
                                 }
+                                className={`block w-full rounded ${
+                                  mainOrder?.products.length === 0
+                                    ? "bg-red-100 text-red-700"
+                                    : "bg-gray-100 text-gray-500"
+                                }  px-4 py-2 text-left font-Inter text-sm `}
                               >
                                 Delete
                               </button>
@@ -210,7 +232,7 @@ const Order = () => {
                         mainOrder?.products.length === 0
                           ? "border-red-500 bg-red-100 text-red-500 hover:bg-red-200 focus:ring-red-500"
                           : "bg-gray-100 text-gray-500"
-                      }  py-2 px-2.5 text-sm font-medium shadow-sm focus:outline-none focus:ring-2  focus:ring-offset-2`}
+                      }  py-2 px-2.5 font-Inter text-sm font-medium shadow-sm focus:outline-none focus:ring-2  focus:ring-offset-2`}
                     >
                       <span>Delete Order</span>
                       <span className="sr-only">{mainOrder?.id}</span>
@@ -241,11 +263,11 @@ const Order = () => {
                         </div>
                         <div className="flex h-full w-full flex-col justify-between">
                           <div className="ml-6 flex-1 text-sm">
-                            <div className="font-medium text-gray-900 sm:flex sm:justify-between">
+                            <div className="font-Jakarta font-medium text-gray-900 sm:flex sm:justify-between">
                               <h5>{order.titleEng}</h5>
                               <p className="mt-2 sm:mt-0">$ {order.price}</p>
                             </div>
-                            <p className="mt-2 italic text-gray-500">
+                            <p className="mt-2 font-Inter italic text-gray-500">
                               {order.id.substring(0, 7).toUpperCase()}
                             </p>
                           </div>

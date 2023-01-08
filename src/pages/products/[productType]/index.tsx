@@ -19,10 +19,10 @@ const ProductType = () => {
       <div className="mx-auto max-w-2xl py-4 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
         <BackButton link="/products" />
         <section>
-          <h2 className="text-2xl font-bold text-gray-900">
+          <h2 className="font-Jakarta text-2xl font-bold text-gray-900">
             {categoryProducts?.titleEng}
           </h2>
-          <p className="text-xl font-normal italic text-gray-500">
+          <p className="font-Inter text-xl font-normal italic text-gray-500">
             {categoryProducts?.titleEsp}
           </p>
         </section>

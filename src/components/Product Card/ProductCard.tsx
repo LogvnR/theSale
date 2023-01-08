@@ -25,11 +25,13 @@ const ProductCard = ({ ...props }: ProductCardProps) => {
             alt={props.titleEng}
           />
         </div>
-        <h3 className="mt-4 text-base font-medium text-gray-700">
+        <h3 className="mt-4 font-Jakarta text-base font-medium text-gray-700">
           {props.titleEng}
         </h3>
-        <h3 className="text-sm italic text-gray-700">{props.titleEsp}</h3>
-        <p className="mt-1 text-lg font-medium text-gray-900">
+        <h3 className="font-Inter text-sm italic text-gray-700">
+          {props.titleEsp}
+        </h3>
+        <p className="mt-1 font-Jakarta text-lg font-medium text-gray-900">
           $ {props.prodPrice}
         </p>
       </div>

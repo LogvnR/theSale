@@ -25,10 +25,10 @@ const MyCart = () => {
   return (
     <div className="min-h-screen bg-white">
       <div className="mx-auto max-w-2xl py-4 px-4 sm:py-24 sm:px-6 lg:px-0">
-        <h1 className="text-left text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        <h1 className="text-left font-Jakarta text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
           My Cart
         </h1>
-        <h4 className="text-left text-2xl font-normal italic tracking-tight text-gray-900 sm:text-4xl">
+        <h4 className="mt-2 text-left font-Inter text-2xl font-normal italic tracking-tight text-gray-900 sm:text-4xl">
           Mi carrito
         </h4>
 
@@ -40,7 +40,7 @@ const MyCart = () => {
             <div className="mb-2 flex w-full justify-end">
               <button
                 onClick={() => resetCart()}
-                className="text-sm font-medium text-blue-500 hover:text-blue-600"
+                className="font-Inter text-sm font-medium text-blue-500 hover:text-blue-600"
               >
                 Clear Cart &#x2022; Vaciar Carrito
               </button>
@@ -65,15 +65,15 @@ const MyCart = () => {
                     <div>
                       <div className="flex justify-between">
                         <h4 className="text-sm">
-                          <a className="font-medium text-gray-700 hover:text-gray-800">
+                          <a className="font-Jakarta font-medium text-gray-700 hover:text-gray-800">
                             {item.titleEng}
                           </a>
                         </h4>
-                        <p className="ml-4 text-sm font-medium text-gray-900">
+                        <p className="ml-4 font-Jakarta text-sm font-medium text-gray-900">
                           $ {item.price}
                         </p>
                       </div>
-                      <p className="mt-1 text-sm text-gray-500">
+                      <p className="mt-1 font-Inter text-sm text-gray-500">
                         {item.titleEsp}
                       </p>
                     </div>
@@ -83,7 +83,7 @@ const MyCart = () => {
                         <button
                           onClick={() => removeItem(item.prodId, item.price)}
                           type="button"
-                          className="text-sm font-medium text-orange-600 hover:text-orange-700"
+                          className="font-Inter text-sm font-medium text-orange-600 hover:text-orange-700"
                         >
                           <span>Remove</span>
                         </button>
@@ -104,7 +104,7 @@ const MyCart = () => {
             <div>
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <div className="text-base font-medium text-gray-900">
+                  <div className="font-Jakarta text-base font-medium text-gray-900">
                     Total
                   </div>
                   <div className="ml-4 text-base font-medium text-gray-900">
@@ -134,7 +134,7 @@ const MyCart = () => {
             <CheckoutForm />
 
             <Link href={"/products"}>
-              <div className="mt-6 flex cursor-pointer items-center justify-center gap-4 text-center text-sm hover:text-blue-500">
+              <div className="mt-6 flex cursor-pointer items-center justify-center gap-4 text-center font-Inter text-sm hover:text-blue-500">
                 <p>Continue Shopping Seguir comprando</p>
                 <ArrowRightIcon
                   className="-ml-1 mr-2 h-5 w-5"

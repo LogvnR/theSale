@@ -175,16 +175,16 @@ const Product = () => {
 
             {/* Product info */}
             <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
-              <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+              <h1 className="font-Jakarta text-3xl font-bold tracking-tight text-gray-900">
                 {mainProduct?.titleEng}
               </h1>
-              <p className="text-xl font-normal italic tracking-tight text-gray-900">
+              <p className="font-Inter text-xl font-normal italic tracking-tight text-gray-900">
                 {mainProduct?.titleEsp}
               </p>
 
               <div className="mt-3">
                 <h2 className="sr-only">Product information</h2>
-                <p className="text-3xl tracking-tight text-gray-900">
+                <p className="font-Jakarta text-3xl tracking-tight text-gray-900">
                   $ {mainProduct?.price}
                 </p>
               </div>
@@ -200,13 +200,13 @@ const Product = () => {
                       }
                     }}
                     disabled={isDisabled}
-                    className={`flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent ${
+                    className={`flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent font-Inter ${
                       !mainProduct?.isPending
                         ? isDisabled
                           ? "bg-gray-100 text-gray-500"
                           : "bg-blue-100 text-blue-500 hover:bg-blue-200 focus:ring-blue-500"
                         : "bg-yellow-100 text-yellow-500 hover:bg-yellow-200 focus:ring-yellow-500"
-                    }  py-3 px-7 text-base font-medium focus:outline-none focus:ring-2  focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full`}
+                    }  py-3 px-5 text-base font-medium focus:outline-none focus:ring-2  focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full`}
                   >
                     {!mainProduct?.isPending ? (
                       isDisabled ? (
@@ -236,7 +236,7 @@ const Product = () => {
                               <span
                                 className={classNames(
                                   open ? "text-blue-600" : "text-gray-900",
-                                  "text-sm font-medium"
+                                  "font-Inter text-sm font-medium"
                                 )}
                               >
                                 Description &#x2022; Descripción
@@ -265,10 +265,10 @@ const Product = () => {
                               <li key={item}>{item}</li>
                             ))}
                           </ul> */}
-                            <p className="space-y-6 border-l-4 border-l-blue-200 pl-2 text-base text-gray-700">
+                            <p className="space-y-6 border-l-4 border-l-blue-200 pl-2 font-Inter text-base text-gray-500">
                               {mainProduct?.descriptionEng}
                             </p>
-                            <p className="mt-3 space-y-6 border-l-4 border-l-orange-200 pl-2 text-base text-gray-700">
+                            <p className="mt-3 space-y-6 border-l-4 border-l-orange-200 pl-2 font-Inter text-base text-gray-500">
                               {mainProduct?.descriptionEsp}
                             </p>
                           </Disclosure.Panel>

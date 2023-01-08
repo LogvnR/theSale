@@ -150,11 +150,11 @@ const VehicleForm = () => {
 
   return (
     <div className="mx-8 mt-2 mb-6 flex flex-col">
-      <p className="italic">Current Vehicles:</p>
+      <p className="font-Jakarta italic">Current Vehicles:</p>
       <div className="mt-2 flex gap-2">
         {vehicles?.map((vehicle) => (
           <p key={vehicle.id}>
-            <span className="inline-flex items-center gap-1 rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800">
+            <span className="inline-flex items-center gap-1 rounded-full bg-green-100 px-2.5 py-0.5 font-Inter text-xs font-medium text-green-800">
               {vehicle.year} {vehicle.make} {vehicle.model}
             </span>
           </p>
@@ -165,7 +165,7 @@ const VehicleForm = () => {
       </div>
 
       <form
-        className="mt-6 flex flex-col gap-6"
+        className="mt-6 flex flex-col gap-6 font-Inter"
         onSubmit={handleSubmit(addCategoryHandler)}
       >
         {/* ===== Year ===== */}
@@ -552,7 +552,7 @@ const VehicleForm = () => {
           <p className="text-sm italic tracking-wide">
             First Photo is always featured
           </p>
-          <p className="mb-2 flex items-center text-sm font-medium tracking-wide">
+          <p className="mb-2 flex animate-pulse items-center font-Jakarta text-sm font-bold tracking-wide text-blue-700">
             Always click{" "}
             <CheckIcon className="mx-2 h-4 w-4" aria-hidden="true" /> after
             every new photo

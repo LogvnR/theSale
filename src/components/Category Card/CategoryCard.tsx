@@ -21,10 +21,10 @@ const CategoryCard = ({ ...props }: CategoryCardProps) => {
             className="object-cover"
           />
         </div>
-        <p className="mt-2 text-base font-semibold text-gray-900">
+        <p className="mt-2 font-Jakarta text-base font-semibold text-gray-900">
           {props.titleEng}
         </p>
-        <h3 className="mb-6 text-sm italic text-gray-500">
+        <h3 className="mb-6 font-Inter text-sm italic text-gray-500">
           <span className="absolute inset-0" />
           {props.titleEsp}
         </h3>

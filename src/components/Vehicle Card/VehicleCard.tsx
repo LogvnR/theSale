@@ -31,7 +31,7 @@ const VehicleCard = ({ ...props }: VehicleCardProps) => {
             priority
           />
         </div>
-        <p className="mt-2 text-base font-semibold text-gray-900">
+        <p className="mt-2 font-Jakarta text-base font-semibold text-gray-900">
           {vehicle?.year + " " + vehicle?.make + " " + vehicle?.model}
         </p>
       </div>

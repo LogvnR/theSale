@@ -36,20 +36,20 @@ const Footer = () => {
         <div className="flex justify-center space-x-6 md:order-2">
           <button
             type="button"
-            className="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            className="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 font-Inter text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           >
             Contact
           </button>
         </div>
         <div className="mt-8 flex items-center gap-4 md:order-1 md:mt-0">
           <button onClick={() => setIsOpen(!isOpen)}>
-            <p className="text-center text-base text-gray-400">
+            <p className="text-center font-Jakarta text-base text-gray-400">
               &copy; 2023 The Sale
             </p>
           </button>
 
           {isOpen ? (
-            <form className="flex gap-2" onSubmit={passwordHandler}>
+            <form className="flex gap-2 font-Inter" onSubmit={passwordHandler}>
               <label className="sr-only">Email</label>
               <input
                 type="password"
@@ -70,7 +70,7 @@ const Footer = () => {
             <button
               type="button"
               onClick={sessionData ? () => signOut() : () => signIn()}
-              className="inline-flex items-center rounded border border-transparent bg-emerald-100 px-2.5 py-1.5 text-xs font-medium text-green-500 hover:bg-emerald-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+              className="inline-flex items-center rounded border border-transparent bg-emerald-100 px-2.5 py-1.5 font-Inter text-xs font-medium text-green-500 hover:bg-emerald-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
             >
               Admin SignIn
             </button>

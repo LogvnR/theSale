@@ -28,7 +28,7 @@ const AdminList = () => {
           <Link href={"/AddProduct"}>
             <button
               type="button"
-              className="inline-flex items-center justify-center rounded-md border border-transparent bg-emerald-100 px-4 py-2 text-sm font-medium text-emerald-500 shadow-sm hover:bg-emerald-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 sm:w-auto"
+              className="inline-flex items-center justify-center rounded-md border border-transparent bg-emerald-100 px-4 py-2 font-Inter text-sm font-medium text-emerald-500 shadow-sm hover:bg-emerald-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 sm:w-auto"
             >
               Add New Product
             </button>
@@ -40,7 +40,7 @@ const AdminList = () => {
           <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
             <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
               <table className="min-w-full divide-y divide-gray-300">
-                <thead className="bg-gray-50">
+                <thead className="bg-gray-50 font-Jakarta">
                   <tr>
                     <th
                       scope="col"
@@ -65,10 +65,10 @@ const AdminList = () => {
                 <tbody className="divide-y divide-gray-200 bg-white">
                   {products?.map((product) => (
                     <tr key={product.id}>
-                      <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">
+                      <td className="whitespace-nowrap py-4 pl-4 pr-3 font-Jakarta text-sm font-medium uppercase text-gray-900 sm:pl-6">
                         {product.id.substring(0, 7)}
                       </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                      <td className="whitespace-nowrap px-3 py-4 font-Inter text-sm text-gray-500">
                         {product.titleEng}
                       </td>
                       <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">

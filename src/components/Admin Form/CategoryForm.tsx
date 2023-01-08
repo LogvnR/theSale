@@ -59,11 +59,11 @@ const CategoryForm = () => {
 
   return (
     <div className="mx-8 mt-2 mb-6 flex flex-col">
-      <p className="italic">Current Categories:</p>
+      <p className="font-Jakarta italic">Current Categories:</p>
       <div className="mt-2 flex gap-2">
         {categories?.map((category) => (
           <p key={category.id}>
-            <span className="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800">
+            <span className="inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 font-Inter text-xs font-medium text-green-800">
               {category.titleEng}
             </span>
           </p>
@@ -71,7 +71,7 @@ const CategoryForm = () => {
       </div>
 
       <form
-        className="mt-6 flex flex-col gap-6"
+        className="mt-6 flex flex-col gap-6 font-Inter"
         onSubmit={handleSubmit(addCategoryHandler)}
       >
         <div

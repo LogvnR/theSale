@@ -83,7 +83,7 @@ const CheckoutForm = () => {
           errors.userName
             ? "border-red-300 focus-within:border-red-600 focus-within:ring-red-600"
             : "border-gray-300 focus-within:border-emerald-600 focus-within:ring-emerald-600"
-        }  px-3 py-2 shadow-sm  focus-within:ring-1 `}
+        }  px-3 py-2 font-Inter shadow-sm focus-within:ring-1 `}
       >
         {errors.userName ? (
           <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-red-600">
@@ -108,7 +108,7 @@ const CheckoutForm = () => {
           errors.userPhone
             ? "border-red-300 focus-within:border-red-600 focus-within:ring-red-600"
             : "border-gray-300 focus-within:border-emerald-600 focus-within:ring-emerald-600"
-        }  px-3 py-2 shadow-sm  focus-within:ring-1 `}
+        }  px-3 py-2 font-Inter shadow-sm focus-within:ring-1 `}
       >
         {errors.userPhone ? (
           <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-red-600">
@@ -131,14 +131,14 @@ const CheckoutForm = () => {
 
       <div>
         <div className="mb-2">
-          <h4 className="text-lg font-medium">
+          <h4 className="font-Jakarta text-lg font-medium">
             Choose your preferred Language
           </h4>
-          <p className="italic">Elija su idioma preferido</p>
+          <p className="font-Inter italic">Elija su idioma preferido</p>
         </div>
 
         <div>
-          <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
+          <div className="grid grid-cols-3 gap-3 font-Inter sm:grid-cols-6">
             <button
               type="button"
               onClick={() => setPreferredLang("English")}
@@ -168,7 +168,7 @@ const CheckoutForm = () => {
       <div className="mt-4">
         <button
           type="submit"
-          className="w-full rounded-md border border-transparent bg-blue-500 py-3 px-4 text-base font-medium text-white shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+          className="w-full rounded-md border border-transparent bg-blue-500 py-3 px-4 font-Inter text-base font-medium text-white shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-50"
         >
           Request Items
         </button>

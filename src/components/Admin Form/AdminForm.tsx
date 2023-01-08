@@ -105,7 +105,7 @@ const AdminForm = () => {
     <>
       <form
         onSubmit={handleSubmit(addProductHandler)}
-        className="mx-8 my-6 flex flex-col justify-center gap-4"
+        className="mx-8 my-6 flex flex-col justify-center gap-4 font-Inter"
       >
         {/* ===== Item Names ===== */}
         <div
@@ -113,7 +113,7 @@ const AdminForm = () => {
             errors.newProductEng
               ? "border-red-300 focus-within:border-red-600 focus-within:ring-red-600"
               : "border-gray-300 focus-within:border-emerald-600 focus-within:ring-emerald-600"
-          }  px-3 py-2 shadow-sm  focus-within:ring-1 `}
+          }  px-3 py-2 shadow-sm focus-within:ring-1 `}
         >
           {errors.newProduct ? (
             <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-red-600">
@@ -282,7 +282,7 @@ const AdminForm = () => {
           <p className="text-sm italic tracking-wide">
             First Photo is always featured
           </p>
-          <p className="mb-2 flex items-center text-sm font-medium tracking-wide">
+          <p className="mb-2 flex animate-pulse items-center font-Jakarta text-sm font-bold tracking-wide text-blue-700">
             Always click{" "}
             <CheckIcon className="mx-2 h-4 w-4" aria-hidden="true" /> after
             every new photo
@@ -363,7 +363,7 @@ const AdminForm = () => {
           <div className="w-full border-t border-gray-300" />
         </div>
         <div className="relative flex justify-center">
-          <span className="bg-gray-50 px-2 text-sm text-gray-500">
+          <span className="bg-gray-50 px-2 font-Jakarta text-sm text-gray-500">
             Add New Category
           </span>
         </div>
