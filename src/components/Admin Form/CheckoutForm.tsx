@@ -8,7 +8,6 @@ import { trpc } from "../../utils/trpc";
 import useCart from "../../hooks/useCart";
 import { CartProduct } from "../../helpers/types";
 import useEmail from "../../hooks/useEmail";
-import { router } from "../../server/trpc/trpc";
 
 const schema = z.object({
   userName: z

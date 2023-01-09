@@ -1,10 +1,12 @@
-import Link from "next/link";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn, signOut, useSession } from "next-auth/react";
 import * as z from "zod";
 import { ArrowRightIcon } from "@heroicons/react/20/solid";
+import { clientEnv } from "../../env/schema.mjs";
+
+import { useRouter } from "next/router";
 
 const schema = z.object({
   password: z.string().min(1, { message: "Too Short" }),
@@ -13,6 +15,7 @@ const schema = z.object({
 const Footer = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isValid, setIsValid] = useState<boolean>(false);
+  const router = useRouter();
   const { data: sessionData } = useSession();
   const {
     register,
@@ -23,7 +26,7 @@ const Footer = () => {
   } = useForm({ resolver: zodResolver(schema) });
 
   const passwordHandler = handleSubmit((data) => {
-    if (data.password === "Apples") {
+    if (data.password === clientEnv.NEXT_PUBLIC_ADMIN_PASSWORD) {
       setIsValid(true);
       reset({ password: "" });
       setIsOpen(false);
@@ -36,7 +39,8 @@ const Footer = () => {
         <div className="flex justify-center space-x-6 md:order-2">
           <button
             type="button"
-            className="inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 font-Inter text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            onClick={() => router.push("/ContactUs")}
+            className="inline-flex items-center rounded-md border border-gray-200 bg-gray-100 px-4 py-2 font-Inter text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
           >
             Contact
           </button>
@@ -55,7 +59,7 @@ const Footer = () => {
                 type="password"
                 {...register("password")}
                 className="block w-full rounded-md border-gray-300 p-1 shadow-sm focus:border-emerald-500 focus:ring-emerald-500 sm:text-sm"
-                placeholder="password"
+                placeholder="Admin Only"
               />
               <button
                 type="submit"

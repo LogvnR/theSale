@@ -7,7 +7,7 @@ import { CartProduct } from "../helpers/types";
 import Link from "next/link";
 import Image from "next/image";
 import CheckoutForm from "../components/Admin Form/CheckoutForm";
-import emptyCart from "../../public/empty_cart.svg";
+
 import EmptyCart from "../components/Empty Cart/EmptyCart";
 
 const MyCart = () => {

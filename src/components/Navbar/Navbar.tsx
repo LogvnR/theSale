@@ -30,7 +30,13 @@ const Navbar = () => {
           <div className="flex h-16 justify-between md:flex-row-reverse">
             <div className="-mr-2 flex items-center">
               <Link href={"/MyCart"}>
-                <button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                <button
+                  onClick={() => {
+                    setSelectedPage("Cart");
+                    setIsOpen(false);
+                  }}
+                  className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+                >
                   <div className="relative">
                     <ShoppingCartIcon
                       className="block h-6 w-6"
@@ -53,25 +59,27 @@ const Navbar = () => {
                 className="flex flex-shrink-0 items-center"
               >
                 <Link href={"/"}>
-                  <img
-                    className="block h-8 w-auto rounded lg:hidden"
-                    src={`${
-                      sessionData?.user
-                        ? sessionData.user.image
-                        : "https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                    }`}
-                    alt="Your Company"
-                  />
+                  {sessionData?.user ? (
+                    <img
+                      className="block h-8 w-auto rounded"
+                      src={String(sessionData.user.image)}
+                      alt="Your Company"
+                    />
+                  ) : (
+                    <h1 className="min-w-[32px] font-Jakarta text-2xl font-bold text-blue-500">
+                      TS
+                    </h1>
+                  )}
                 </Link>
-                <img
+                {/* <img
                   className="hidden h-8 w-auto rounded lg:block"
                   src={`${
                     sessionData?.user
                       ? sessionData.user.image
-                      : "https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                      : "https://drive.google.com/uc?export=view&id=153kDaSmMMxJ2zcF-cY8H5k0ASwRzdNif"
                   }`}
                   alt="Your Company"
-                />
+                /> */}
               </button>
 
               <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
@@ -89,8 +97,10 @@ const Navbar = () => {
                       setSelectedPage("Home");
                       setIsOpen(false);
                     }}
+                    className="flex flex-col"
                   >
-                    Home
+                    <p>Home</p>
+                    <p className="text-xs italic">Casa</p>
                   </button>
                 </Link>
                 {/* <Link
@@ -124,8 +134,10 @@ const Navbar = () => {
                       setSelectedPage("Items");
                       setIsOpen(false);
                     }}
+                    className="flex flex-col"
                   >
-                    Items for sale
+                    <p>Items for sale</p>
+                    <p className="text-xs italic">Productos en venta</p>
                   </button>
                 </Link>
 
@@ -219,9 +231,10 @@ const Navbar = () => {
                   selectedPage === "Home"
                     ? "border-indigo-500 bg-indigo-50 text-indigo-700"
                     : "border-transparent bg-transparent text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700"
-                }  py-2 pl-3 pr-4 text-left text-base font-medium `}
+                } flex flex-col gap-1 py-2 pl-3 pr-4 text-left text-base font-semibold`}
               >
-                Home
+                <p>Home</p>
+                <p className="text-sm font-normal italic">Casa</p>
               </Disclosure.Button>
             </Link>
             {/* <Link href={"/vehicles"}>
@@ -250,9 +263,10 @@ const Navbar = () => {
                   selectedPage === "Items"
                     ? "border-indigo-500 bg-indigo-50 text-indigo-700"
                     : "border-transparent bg-transparent text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700"
-                }  py-2 pl-3 pr-4 text-left text-base font-medium `}
+                } flex flex-col gap-1 py-2 pl-3 pr-4 text-left text-base font-semibold `}
               >
-                Items for sale
+                <p>Items for sale</p>
+                <p className="text-sm font-normal italic">Productos en venta</p>
               </Disclosure.Button>
             </Link>
 

@@ -108,74 +108,103 @@ const AdminForm = () => {
         className="mx-8 my-6 flex flex-col justify-center gap-4 font-Inter"
       >
         {/* ===== Item Names ===== */}
-        <div
-          className={`relative rounded-md border ${
-            errors.newProductEng
-              ? "border-red-300 focus-within:border-red-600 focus-within:ring-red-600"
-              : "border-gray-300 focus-within:border-emerald-600 focus-within:ring-emerald-600"
-          }  px-3 py-2 shadow-sm focus-within:ring-1 `}
-        >
-          {errors.newProduct ? (
-            <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-red-600">
-              {String(errors.newProductEng?.message)}
-            </label>
-          ) : (
-            <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900">
-              New Title Eng
-            </label>
-          )}
-          <input
-            type="text"
-            className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 outline-none focus:ring-0 sm:text-sm"
-            placeholder="New Item"
-            {...register("newProductEng")}
-            onChange={(e) => setTitleEng(e.target.value)}
-          />
-        </div>
-
-        <div
-          className={`relative rounded-md border ${
-            errors.newProductEsp
-              ? "border-red-300 focus-within:border-red-600 focus-within:ring-red-600"
-              : "border-gray-300 focus-within:border-emerald-600 focus-within:ring-emerald-600"
-          }  px-3 py-2 shadow-sm  focus-within:ring-1 `}
-        >
-          {errors.newProduct ? (
-            <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-red-600">
-              {String(errors.newProductEsp?.message)}
-            </label>
-          ) : (
-            <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900">
-              New Title Esp
-            </label>
-          )}
-          <input
-            type="text"
-            className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 outline-none focus:ring-0 sm:text-sm"
-            placeholder="Nuevo Título"
-            {...register("newProductEsp")}
-            onChange={(e) => setTitleEsp(e.target.value)}
-          />
-        </div>
-
-        {/* ===== Item Category ===== */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Category
-          </label>
-          <select
-            className="mt-1 block w-full rounded-md border border-gray-400 py-2 pl-3 pr-10 text-base focus:border-emerald-500 focus:outline-none focus:ring-emerald-500 sm:text-sm"
-            defaultValue={category}
-            {...register("category")}
-            onChange={(e) => setCategory(e.target.value)}
+        <div className="flex flex-col gap-4 md:flex-row">
+          <div
+            className={`relative rounded-md border ${
+              errors.newProductEng
+                ? "border-red-300 focus-within:border-red-600 focus-within:ring-red-600"
+                : "border-gray-300 focus-within:border-emerald-600 focus-within:ring-emerald-600"
+            }  w-full px-3 py-2 shadow-sm focus-within:ring-1 `}
           >
-            <option value="">Select Category</option>
-            {categories?.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.titleEng}
-              </option>
-            ))}
-          </select>
+            {errors.newProduct ? (
+              <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-red-600">
+                {String(errors.newProductEng?.message)}
+              </label>
+            ) : (
+              <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900">
+                New Title Eng
+              </label>
+            )}
+            <input
+              type="text"
+              className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 outline-none focus:ring-0 sm:text-sm"
+              placeholder="New Item"
+              {...register("newProductEng")}
+              onChange={(e) => setTitleEng(e.target.value)}
+            />
+          </div>
+
+          <div
+            className={`relative rounded-md border ${
+              errors.newProductEsp
+                ? "border-red-300 focus-within:border-red-600 focus-within:ring-red-600"
+                : "border-gray-300 focus-within:border-emerald-600 focus-within:ring-emerald-600"
+            }  w-full px-3 py-2 shadow-sm  focus-within:ring-1 `}
+          >
+            {errors.newProduct ? (
+              <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-red-600">
+                {String(errors.newProductEsp?.message)}
+              </label>
+            ) : (
+              <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900">
+                New Title Esp
+              </label>
+            )}
+            <input
+              type="text"
+              className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 outline-none focus:ring-0 sm:text-sm"
+              placeholder="New Item in Spanish"
+              {...register("newProductEsp")}
+              onChange={(e) => setTitleEsp(e.target.value)}
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-col items-end gap-4 md:flex-row">
+          {/* ===== Item Category ===== */}
+          <div className="w-full">
+            <label className="block text-sm font-medium text-gray-700">
+              Category
+            </label>
+            <select
+              className="mt-1 block w-full rounded-md border border-gray-300 py-2 pl-3 pr-10 text-base focus:border-emerald-500 focus:outline-none focus:ring-emerald-500 sm:text-sm"
+              defaultValue={category}
+              {...register("category")}
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              <option value="">Select Category</option>
+              {categories?.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.titleEng}
+                </option>
+              ))}
+            </select>
+          </div>
+          {/* ===== Item Price ===== */}
+          <div
+            className={`relative rounded-md border ${
+              errors.newPrice
+                ? "border-red-300 focus-within:border-red-600 focus-within:ring-red-600"
+                : "border-gray-300 focus-within:border-emerald-600 focus-within:ring-emerald-600"
+            }  w-full px-3 py-2 shadow-sm  focus-within:ring-1 `}
+          >
+            {errors.newPrice ? (
+              <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-red-600">
+                {String(errors.newPrice?.message)}
+              </label>
+            ) : (
+              <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900">
+                New Price
+              </label>
+            )}
+            <input
+              type="text"
+              className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 outline-none focus:ring-0 sm:text-sm"
+              placeholder="Enter a price"
+              {...register("newPrice")}
+              onChange={(e) => setPrice(e.target.value)}
+            />
+          </div>
         </div>
 
         {/* ===== Is Featured Item? ===== */}
@@ -196,32 +225,6 @@ const AdminForm = () => {
               } pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out`}
             />
           </Switch>
-        </div>
-
-        {/* ===== Item Price ===== */}
-        <div
-          className={`relative rounded-md border ${
-            errors.newPrice
-              ? "border-red-300 focus-within:border-red-600 focus-within:ring-red-600"
-              : "border-gray-300 focus-within:border-emerald-600 focus-within:ring-emerald-600"
-          }  px-3 py-2 shadow-sm  focus-within:ring-1 `}
-        >
-          {errors.newPrice ? (
-            <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-red-600">
-              {String(errors.newPrice?.message)}
-            </label>
-          ) : (
-            <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900">
-              New Price
-            </label>
-          )}
-          <input
-            type="text"
-            className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 outline-none focus:ring-0 sm:text-sm"
-            placeholder="Enter a price"
-            {...register("newPrice")}
-            onChange={(e) => setPrice(e.target.value)}
-          />
         </div>
 
         {/* ===== Item Description ===== */}
@@ -270,7 +273,7 @@ const AdminForm = () => {
                   ? "border-red-300 focus:border-red-600 focus:ring-red-600"
                   : "border-gray-300 focus:border-emerald-500 focus:ring-emerald-500"
               } p-1 shadow-sm sm:text-sm`}
-              placeholder="Escriba una descripción para este producto"
+              placeholder="Type a description for this product in Spanish"
               {...register("newDescriptionEsp")}
               onChange={(e) => setDescriptionEsp(e.target.value)}
             />

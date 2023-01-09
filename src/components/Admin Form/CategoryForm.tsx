@@ -74,54 +74,57 @@ const CategoryForm = () => {
         className="mt-6 flex flex-col gap-6 font-Inter"
         onSubmit={handleSubmit(addCategoryHandler)}
       >
-        <div
-          className={`relative rounded-md border ${
-            errors.newCategoryEng
-              ? "border-red-300 focus-within:border-red-600 focus-within:ring-red-600"
-              : "border-gray-300 focus-within:border-emerald-600 focus-within:ring-emerald-600"
-          }  px-3 py-2 shadow-sm  focus-within:ring-1 `}
-        >
-          {errors.newCategoryEng ? (
-            <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-red-600">
-              {String(errors.newCategoryEng?.message)}
-            </label>
-          ) : (
-            <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900">
-              New Category Eng
-            </label>
-          )}
-          <input
-            type="text"
-            className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 outline-none focus:ring-0 sm:text-sm"
-            placeholder="New Category"
-            {...register("newCategoryEng")}
-            onChange={(e) => setCategoryEng(e.target.value)}
-          />
+        <div className="flex flex-col gap-4 md:flex-row">
+          <div
+            className={`relative rounded-md border ${
+              errors.newCategoryEng
+                ? "border-red-300 focus-within:border-red-600 focus-within:ring-red-600"
+                : "border-gray-300 focus-within:border-emerald-600 focus-within:ring-emerald-600"
+            }  w-full px-3 py-2 shadow-sm  focus-within:ring-1 `}
+          >
+            {errors.newCategoryEng ? (
+              <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-red-600">
+                {String(errors.newCategoryEng?.message)}
+              </label>
+            ) : (
+              <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900">
+                New Category Eng
+              </label>
+            )}
+            <input
+              type="text"
+              className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 outline-none focus:ring-0 sm:text-sm"
+              placeholder="New Category"
+              {...register("newCategoryEng")}
+              onChange={(e) => setCategoryEng(e.target.value)}
+            />
+          </div>
+          <div
+            className={`relative rounded-md border ${
+              errors.newCategoryEsp
+                ? "border-red-300 focus-within:border-red-600 focus-within:ring-red-600"
+                : "border-gray-300 focus-within:border-emerald-600 focus-within:ring-emerald-600"
+            }  w-full px-3 py-2 shadow-sm  focus-within:ring-1 `}
+          >
+            {errors.newCategoryEsp ? (
+              <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-red-600">
+                {String(errors.newCategoryEsp?.message)}
+              </label>
+            ) : (
+              <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900">
+                New Category Esp
+              </label>
+            )}
+            <input
+              type="text"
+              className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 outline-none focus:ring-0 sm:text-sm"
+              placeholder="New Category in Spanish"
+              {...register("newCategoryEsp")}
+              onChange={(e) => setCategoryEsp(e.target.value)}
+            />
+          </div>
         </div>
-        <div
-          className={`relative rounded-md border ${
-            errors.newCategoryEsp
-              ? "border-red-300 focus-within:border-red-600 focus-within:ring-red-600"
-              : "border-gray-300 focus-within:border-emerald-600 focus-within:ring-emerald-600"
-          }  px-3 py-2 shadow-sm  focus-within:ring-1 `}
-        >
-          {errors.newCategoryEsp ? (
-            <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-red-600">
-              {String(errors.newCategoryEsp?.message)}
-            </label>
-          ) : (
-            <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900">
-              New Category Esp
-            </label>
-          )}
-          <input
-            type="text"
-            className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 outline-none focus:ring-0 sm:text-sm"
-            placeholder="Nueva Categoría"
-            {...register("newCategoryEsp")}
-            onChange={(e) => setCategoryEsp(e.target.value)}
-          />
-        </div>
+
         <div
           className={`relative rounded-md border ${
             errors.coverPhoto

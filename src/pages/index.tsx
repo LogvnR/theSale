@@ -39,7 +39,7 @@ const Home: NextPage = () => {
               <div className="mt-10 sm:flex sm:justify-center lg:justify-start">
                 <div className="rounded-md shadow">
                   <Link href={"/products"}>
-                    <button className="flex w-full items-center justify-center rounded-md border border-transparent bg-blue-600 px-8 py-3 font-Inter text-sm font-medium text-white hover:bg-indigo-700 md:py-4 md:px-10 md:text-lg">
+                    <button className="flex w-full items-center justify-center rounded-md border border-transparent bg-blue-600 px-4 py-3 font-Inter text-sm font-medium text-white hover:bg-indigo-700 md:py-4 md:px-10 md:text-lg">
                       Shop by Category &#x2022; Compra por Categoría
                     </button>
                   </Link>
