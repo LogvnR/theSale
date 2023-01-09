@@ -48,7 +48,7 @@ export const orderRouter = router({
           language: input.language,
           total: input.total,
           products: {
-            connect: input.productsIds.map((prod) => ({ id: prod.prodId })),
+            connect: input.productsIds?.map((prod) => ({ id: prod.prodId })),
           },
         },
       });

@@ -93,7 +93,7 @@ const Navbar = () => {
                     Home
                   </button>
                 </Link>
-                <Link
+                {/* <Link
                   href={"/vehicles"}
                   className={`inline-flex items-center border-b-2 ${
                     selectedPage === "Vehicles"
@@ -109,7 +109,7 @@ const Navbar = () => {
                   >
                     Vehicles
                   </button>
-                </Link>
+                </Link> */}
 
                 <Link
                   href={"/products"}
@@ -224,7 +224,7 @@ const Navbar = () => {
                 Home
               </Disclosure.Button>
             </Link>
-            <Link href={"/vehicles"}>
+            {/* <Link href={"/vehicles"}>
               <Disclosure.Button
                 onClick={() => {
                   setSelectedPage("Vehicles");
@@ -238,7 +238,7 @@ const Navbar = () => {
               >
                 Vehicles
               </Disclosure.Button>
-            </Link>
+            </Link> */}
 
             <Link href={"/products"}>
               <Disclosure.Button

@@ -11,7 +11,7 @@ import * as z from "zod";
 
 import { trpc } from "../../utils/trpc";
 import CategoryForm from "./CategoryForm";
-import VehicleForm from "./VehicleForm";
+// import VehicleForm from "./VehicleForm";
 
 const schema = z.object({
   newProductEng: z
@@ -369,7 +369,7 @@ const AdminForm = () => {
         </div>
       </div>
       <CategoryForm />
-      {/* ===== Divider ===== */}
+      {/* ===== Divider =====
       <div className="relative my-4 mx-8">
         <div className="absolute inset-0 flex items-center" aria-hidden="true">
           <div className="w-full border-t border-gray-300" />
@@ -380,7 +380,7 @@ const AdminForm = () => {
           </span>
         </div>
       </div>
-      <VehicleForm />
+      <VehicleForm /> */}
     </>
   );
 };
