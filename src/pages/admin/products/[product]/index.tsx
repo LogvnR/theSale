@@ -1,8 +1,11 @@
 import { useSession } from "next-auth/react";
-import AdminList from "../components/Admin List/AdminList";
+import { useRouter } from "next/router";
+import EditForm from "../../../../components/Admin Form/EditForm";
 
-const AllProducts = () => {
+const ProductEditPage = () => {
   const { data: sessionData } = useSession();
+  const router = useRouter();
+  const productId = String(router.query.product);
 
   if (!sessionData)
     return (
@@ -10,16 +13,19 @@ const AllProducts = () => {
         Sorry, you do not have access to this page
       </p>
     );
+
+  console.log(productId);
+
   return (
     <div className="flex min-h-screen w-full items-start justify-center">
-      <div className="flex w-full flex-col justify-center lg:w-2/3">
+      <div className="flex w-full flex-col justify-center lg:w-1/2">
         <h2 className="ml-4 mt-4 font-Jakarta text-lg text-gray-800">
-          All Products Page
+          Edit Product Page
         </h2>
-        <AdminList />
+        <EditForm productId={productId} />
       </div>
     </div>
   );
 };
 
-export default AllProducts;
+export default ProductEditPage;

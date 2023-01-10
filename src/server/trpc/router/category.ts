@@ -23,6 +23,19 @@ export const categoryRouter = router({
         },
       });
     }),
+  oneCategory: publicProcedure
+    .input(
+      z.object({
+        categoryId: z.string(),
+      })
+    )
+    .query(({ ctx, input }) => {
+      return ctx.prisma.category.findUnique({
+        where: {
+          id: input.categoryId,
+        },
+      });
+    }),
   products: publicProcedure
     .input(
       z.object({

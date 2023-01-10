@@ -8,6 +8,7 @@ import { trpc } from "../../utils/trpc";
 import useCart from "../../hooks/useCart";
 import { CartProduct } from "../../helpers/types";
 import useEmail from "../../hooks/useEmail";
+import Spinner from "../Spinner/Spinner";
 
 const schema = z.object({
   userName: z
@@ -72,6 +73,9 @@ const CheckoutForm = () => {
     formState,
     formState: { errors, isSubmitSuccessful },
   } = useForm({ resolver: zodResolver(schema) });
+
+  if (!myCart || myCart?.length === 0) return <Spinner />;
+
   return (
     <form
       className="mt-6 flex flex-col gap-6"

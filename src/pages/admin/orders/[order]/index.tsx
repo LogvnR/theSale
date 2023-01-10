@@ -10,9 +10,9 @@ import {
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/router";
 
-import { trpc } from "../../../utils/trpc";
+import { trpc } from "../../../../utils/trpc";
 import Image from "next/image";
-import BackButton from "../../../components/Back Button/BackButton";
+import BackButton from "../../../../components/Back Button/BackButton";
 
 const dateOptionsPre: Intl.DateTimeFormatOptions = {
   month: "short",

@@ -1,5 +1,5 @@
 import { useSession } from "next-auth/react";
-import AdminOrders from "../../components/Admin Orders/AdminOrders";
+import AdminOrders from "../../../components/Admin Orders/AdminOrders";
 
 const AllOrders = () => {
   const { data: sessionData } = useSession();

@@ -1,4 +1,4 @@
-import { TrashIcon } from "@heroicons/react/24/outline";
+import { TrashIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 import { trpc } from "../../utils/trpc";
@@ -71,7 +71,20 @@ const AdminList = () => {
                       <td className="whitespace-nowrap px-3 py-4 font-Inter text-sm text-gray-500">
                         {product.titleEng}
                       </td>
-                      <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                      <td className="relative flex justify-end gap-4 whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                        {/* <Link href={`/admin/products/${product.id}`}>
+                          <button
+                            type="button"
+                            // onClick={() => removeItemHandler(product.id)}
+                            className="inline-flex items-center rounded-md border border-transparent bg-orange-100 p-2 text-yellow-500 shadow-sm hover:bg-orange-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                          >
+                            <PencilSquareIcon
+                              className="h-5 w-5"
+                              aria-hidden="true"
+                            />
+                          </button>
+                        </Link> */}
+
                         <button
                           type="button"
                           onClick={() => removeItemHandler(product.id)}

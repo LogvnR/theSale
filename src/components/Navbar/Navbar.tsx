@@ -144,7 +144,7 @@ const Navbar = () => {
                 {sessionData?.user ? (
                   <>
                     <Link
-                      href={"/AddProduct"}
+                      href={"/admin/products/add_products"}
                       className={`inline-flex items-center border-b-2 ${
                         selectedPage === "AddItems"
                           ? "border-emerald-500 text-gray-900"
@@ -162,7 +162,7 @@ const Navbar = () => {
                     </Link>
 
                     <Link
-                      href={"/AllProducts"}
+                      href={"/admin/products"}
                       className={`inline-flex items-center border-b-2 ${
                         selectedPage === "AllItems"
                           ? "border-emerald-500 text-gray-900"
@@ -180,7 +180,7 @@ const Navbar = () => {
                     </Link>
 
                     <Link
-                      href={"/orders"}
+                      href={"/admin/orders"}
                       className={`inline-flex items-center border-b-2 ${
                         selectedPage === "AllOrders"
                           ? "border-emerald-500 text-gray-900"

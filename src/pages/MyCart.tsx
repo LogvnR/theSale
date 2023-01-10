@@ -9,6 +9,7 @@ import Image from "next/image";
 import CheckoutForm from "../components/Admin Form/CheckoutForm";
 
 import EmptyCart from "../components/Empty Cart/EmptyCart";
+import Spinner from "../components/Spinner/Spinner";
 
 const MyCart = () => {
   const [myTotal, setMyTotal] = useState<number>(0);
@@ -20,6 +21,7 @@ const MyCart = () => {
     setMyTotal(total);
   }, [total, cart]);
 
+  if (!myCart) return <Spinner />;
   if (myCart?.length === 0) return <EmptyCart />;
 
   return (

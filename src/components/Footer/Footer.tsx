@@ -17,13 +17,9 @@ const Footer = () => {
   const [isValid, setIsValid] = useState<boolean>(false);
   const router = useRouter();
   const { data: sessionData } = useSession();
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState,
-    formState: { errors, isSubmitSuccessful },
-  } = useForm({ resolver: zodResolver(schema) });
+  const { register, handleSubmit, reset } = useForm({
+    resolver: zodResolver(schema),
+  });
 
   const passwordHandler = handleSubmit((data) => {
     if (data.password === clientEnv.NEXT_PUBLIC_ADMIN_PASSWORD) {

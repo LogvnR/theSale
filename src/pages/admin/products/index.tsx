@@ -1,7 +1,7 @@
 import { useSession } from "next-auth/react";
-import AdminForm from "../components/Admin Form/AdminForm";
+import AdminList from "../../../components/Admin List/AdminList";
 
-const AddProductPage = () => {
+const AllProducts = () => {
   const { data: sessionData } = useSession();
 
   if (!sessionData)
@@ -10,17 +10,16 @@ const AddProductPage = () => {
         Sorry, you do not have access to this page
       </p>
     );
-
   return (
     <div className="flex min-h-screen w-full items-start justify-center">
-      <div className="flex w-full flex-col justify-center lg:w-1/2">
+      <div className="flex w-full flex-col justify-center lg:w-2/3">
         <h2 className="ml-4 mt-4 font-Jakarta text-lg text-gray-800">
-          Add Product Page
+          All Products Page
         </h2>
-        <AdminForm />
+        <AdminList />
       </div>
     </div>
   );
 };
 
-export default AddProductPage;
+export default AllProducts;

@@ -16,7 +16,7 @@ const ProductType = () => {
   console.log(categoryProducts);
   return (
     <div className="min-h-screen bg-white">
-      <div className="mx-auto max-w-2xl py-4 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+      <div className="mx-auto max-w-2xl py-4 px-4 sm:py-12 sm:px-6 lg:max-w-7xl lg:px-8">
         <BackButton link="/products" />
         <section>
           <h2 className="font-Jakarta text-2xl font-bold text-gray-900">
