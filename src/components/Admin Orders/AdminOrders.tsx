@@ -101,7 +101,7 @@ const AdminOrders = () => {
                         </div>
                       </td>
                       <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
-                        <Link href={`/orders/${order.id}`}>
+                        <Link href={`/admin/orders/${order.id}`}>
                           <button
                             type="button"
                             className="inline-flex items-center gap-2 rounded-md border border-transparent bg-emerald-100 p-2 font-Inter text-green-500 shadow-sm hover:bg-emerald-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"

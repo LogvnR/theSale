@@ -47,7 +47,7 @@ const Order = () => {
   const removeOrder = trpc.order.removeOrder.useMutation({
     onSuccess: () => {
       utils.order.allOrders.invalidate();
-      router.push("/orders");
+      router.push("/admin/orders");
     },
   });
 
