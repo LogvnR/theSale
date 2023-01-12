@@ -9,6 +9,7 @@ import BackButton from "../../../../components/Back Button/BackButton";
 import Image from "next/image";
 import useCart from "../../../../hooks/useCart";
 import Modal from "../../../../components/Modal/Modal";
+import Head from "next/head";
 
 const classNames = (...classes: string[]) => {
   return classes.filter(Boolean).join(" ");
@@ -51,11 +52,17 @@ const Product = () => {
     }
   }, [cart]);
 
-  console.log(mainProduct);
-
   return (
     <>
       <Modal modalOpen={modalIsOpen} setModalOpen={setModalIsOpen} />
+      <Head>
+        <title>The Sale</title>
+        <meta
+          name="description"
+          content="A digital garage sale application for the Ricard Family"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <div className="bg-white">
         <div className="mx-auto max-w-2xl py-4 px-4 sm:py-12 lg:max-w-7xl lg:px-8">
           <BackButton link={`/products/${categoryId.toLowerCase()}`} />

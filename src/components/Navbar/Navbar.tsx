@@ -21,8 +21,6 @@ const Navbar = () => {
     setNavQuantity(quantity);
   }, [quantity]);
 
-  console.log(sessionData?.user);
-
   return (
     <Disclosure as="nav" className="bg-white font-Jakarta font-medium shadow">
       <>
