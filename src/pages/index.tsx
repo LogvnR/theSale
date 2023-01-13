@@ -53,6 +53,8 @@ const Home: NextPage = () => {
                 fill
                 src="https://drive.google.com/uc?export=view&id=1lNWDiW4vLa_ZoG2hygR4jIdbFDrzBLNM"
                 alt="Main Photo"
+                priority
+                quality={50}
               />
             </div>
 
