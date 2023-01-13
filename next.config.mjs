@@ -24,6 +24,7 @@ const config = {
         hostname: "cdn.discordapp.com",
       },
     ],
+    domains: ["drive.google.com", "cdn.discordapp.com"],
   },
 };
 export default config;
