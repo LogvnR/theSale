@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { ArrowRightIcon, IdentificationIcon } from "@heroicons/react/20/solid";
 import useCart from "../hooks/useCart";
 
-import { CartProduct } from "../helpers/types";
+import type { CartProduct } from "../helpers/types";
 import Link from "next/link";
 import Image from "next/image";
 import CheckoutForm from "../components/Admin Form/CheckoutForm";
@@ -14,6 +14,7 @@ import Spinner from "../components/Spinner/Spinner";
 const MyCart = () => {
   const [myTotal, setMyTotal] = useState<number>(0);
   const [myCart, setMyCart] = useState<CartProduct[]>();
+  const [orderIsLoading, setOrderIsLoading] = useState<boolean>(false);
   const { cart, total, removeItem, resetCart } = useCart();
 
   useEffect(() => {
@@ -21,8 +22,8 @@ const MyCart = () => {
     setMyTotal(total);
   }, [total, cart]);
 
-  if (!myCart) return <Spinner />;
-  if (myCart?.length === 0) return <EmptyCart />;
+  if (orderIsLoading) return <Spinner />;
+  if (myCart?.length === 0 && !orderIsLoading) return <EmptyCart />;
 
   return (
     <div className="min-h-screen bg-white">
@@ -133,7 +134,7 @@ const MyCart = () => {
               </div>
             </div>
 
-            <CheckoutForm />
+            <CheckoutForm orderIsLoading={setOrderIsLoading} />
 
             <Link href={"/products"}>
               <div className="mt-6 flex cursor-pointer items-center justify-center gap-4 text-center font-Inter text-sm hover:text-blue-500">

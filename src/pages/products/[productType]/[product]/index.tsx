@@ -50,7 +50,7 @@ const Product = () => {
     } else {
       setIsDisabled(false);
     }
-  }, [cart]);
+  }, [cart, mainProduct?.id]);
 
   return (
     <>
@@ -126,7 +126,7 @@ const Product = () => {
               <h1 className="font-Jakarta text-3xl font-bold tracking-tight text-gray-900">
                 {mainProduct?.titleEng}
               </h1>
-              <p className="font-Inter text-xl font-normal italic tracking-tight text-gray-900">
+              <p className="mt-1 font-Inter text-xl font-normal italic tracking-tight text-gray-500">
                 {mainProduct?.titleEsp}
               </p>
 
@@ -154,7 +154,7 @@ const Product = () => {
                           ? "bg-gray-100 text-gray-500"
                           : "bg-blue-100 text-blue-500 hover:bg-blue-200 focus:ring-blue-500"
                         : "bg-yellow-100 text-yellow-500 hover:bg-yellow-200 focus:ring-yellow-500"
-                    }  py-3 px-5 text-base font-medium focus:outline-none focus:ring-2  focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full`}
+                    }  py-3 px-4 text-base font-medium focus:outline-none focus:ring-2  focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full`}
                   >
                     {!mainProduct?.isPending ? (
                       isDisabled ? (

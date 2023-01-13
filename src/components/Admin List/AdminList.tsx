@@ -1,4 +1,4 @@
-import { TrashIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
+import { TrashIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 import { trpc } from "../../utils/trpc";

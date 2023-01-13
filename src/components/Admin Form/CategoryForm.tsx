@@ -55,7 +55,7 @@ const CategoryForm = () => {
     if (isSubmitSuccessful) {
       reset({ newCategoryEng: "", newCategoryEsp: "" });
     }
-  }, [formState, reset]);
+  }, [formState, reset, isSubmitSuccessful]);
 
   return (
     <div className="mx-8 mt-2 mb-6 flex flex-col">

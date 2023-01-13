@@ -97,8 +97,7 @@ const AdminForm = () => {
     register,
     handleSubmit,
     reset,
-    formState,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
   } = useForm({ resolver: zodResolver(schema) });
 
   return (

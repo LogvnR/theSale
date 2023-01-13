@@ -6,9 +6,8 @@ import * as z from "zod";
 
 import { trpc } from "../../utils/trpc";
 import useCart from "../../hooks/useCart";
-import { CartProduct } from "../../helpers/types";
+import type { CartProduct } from "../../helpers/types";
 import useEmail from "../../hooks/useEmail";
-import Spinner from "../Spinner/Spinner";
 
 const schema = z.object({
   userName: z
@@ -19,7 +18,11 @@ const schema = z.object({
     .min(1, { message: "Category must be greater than 1 character" }),
 });
 
-const CheckoutForm = () => {
+interface CheckoutFormProps {
+  orderIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const CheckoutForm = ({ orderIsLoading }: CheckoutFormProps) => {
   const [userName, setUserName] = useState<string>("");
   const [userPhone, setUserPhone] = useState<string>("");
   const [preferredLang, setPreferredLang] = useState<string>("English");
@@ -64,17 +67,17 @@ const CheckoutForm = () => {
       total: String(myTotal),
       productsIds: prodIds,
     });
+    orderIsLoading(addOrder.isLoading);
   };
 
   const {
     register,
     handleSubmit,
     reset,
-    formState,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
   } = useForm({ resolver: zodResolver(schema) });
 
-  if (!myCart || myCart?.length === 0) return <Spinner />;
+  if (addOrder.isLoading) orderIsLoading(addOrder.isLoading);
 
   return (
     <form

@@ -123,7 +123,7 @@ const VehicleForm = () => {
     if (isSubmitSuccessful) {
       reset({ newCategoryEng: "", newCategoryEsp: "" });
     }
-  }, [formState, reset]);
+  }, [formState, reset, isSubmitSuccessful]);
 
   const setURL = (idx: number) => {
     // modify URL string for upload

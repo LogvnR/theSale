@@ -119,8 +119,7 @@ const EditForm = ({ productId }: EditFormProps) => {
     register,
     handleSubmit,
     reset,
-    formState,
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
   } = useForm({ resolver: zodResolver(schema) });
 
   console.log(mainProduct);

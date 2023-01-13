@@ -49,7 +49,7 @@ const Vehicle = () => {
     } else {
       setIsDisabled(false);
     }
-  }, [cart]);
+  }, [cart, mainProduct?.id]);
 
   console.log(mainProduct);
 

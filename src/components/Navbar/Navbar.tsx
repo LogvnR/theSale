@@ -6,8 +6,9 @@ import {
   ShoppingCartIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import useCart from "../../hooks/useCart";
+import Image from "next/image";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -58,10 +59,12 @@ const Navbar = () => {
               >
                 <Link href={"/"}>
                   {sessionData?.user ? (
-                    <img
+                    <Image
                       className="block h-8 w-auto rounded"
+                      width={64}
+                      height={64}
                       src={String(sessionData.user.image)}
-                      alt="Your Company"
+                      alt="My Icon"
                     />
                   ) : (
                     <h1 className="min-w-[32px] font-Jakarta text-2xl font-bold text-blue-500">
@@ -270,7 +273,7 @@ const Navbar = () => {
 
             {sessionData?.user ? (
               <>
-                <Link href={"/AddProduct"}>
+                <Link href={"/admin/products/add_products"}>
                   <Disclosure.Button
                     onClick={() => {
                       setSelectedPage("AddItems");
@@ -285,7 +288,7 @@ const Navbar = () => {
                     Add Items
                   </Disclosure.Button>
                 </Link>
-                <Link href={"/AllProducts"}>
+                <Link href={"/admin/products"}>
                   <Disclosure.Button
                     onClick={() => {
                       setSelectedPage("AllItems");
@@ -300,7 +303,7 @@ const Navbar = () => {
                     All Items
                   </Disclosure.Button>
                 </Link>
-                <Link href={"/orders"}>
+                <Link href={"/admin/orders"}>
                   <Disclosure.Button
                     onClick={() => {
                       setSelectedPage("AllOrders");

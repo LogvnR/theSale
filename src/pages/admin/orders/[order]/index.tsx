@@ -4,7 +4,6 @@ import {
   EllipsisVerticalIcon,
   XMarkIcon,
   CheckIcon,
-  ClipboardDocumentListIcon,
 } from "@heroicons/react/24/outline";
 
 import toast, { Toaster } from "react-hot-toast";
@@ -197,25 +196,21 @@ const Order = () => {
                       <Menu.Items className="absolute right-0 z-10 mt-2 w-40 origin-bottom-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <div className="p-1">
                           <Menu.Item>
-                            {({ active }) => (
-                              <button
-                                onClick={() => {
-                                  removeOrderHandler(mainOrder!.id);
-                                }}
-                                disabled={
-                                  mainOrder?.products.length === 0
-                                    ? false
-                                    : true
-                                }
-                                className={`block w-full rounded ${
-                                  mainOrder?.products.length === 0
-                                    ? "bg-red-100 text-red-700"
-                                    : "bg-gray-100 text-gray-500"
-                                }  px-4 py-2 text-left font-Inter text-sm `}
-                              >
-                                Delete
-                              </button>
-                            )}
+                            <button
+                              onClick={() => {
+                                removeOrderHandler(mainOrder!.id);
+                              }}
+                              disabled={
+                                mainOrder?.products.length === 0 ? false : true
+                              }
+                              className={`block w-full rounded ${
+                                mainOrder?.products.length === 0
+                                  ? "bg-red-100 text-red-700"
+                                  : "bg-gray-100 text-gray-500"
+                              }  px-4 py-2 text-left font-Inter text-sm `}
+                            >
+                              Delete
+                            </button>
                           </Menu.Item>
                         </div>
                       </Menu.Items>
