@@ -69,7 +69,7 @@ const Vehicle = () => {
                   {mainProduct?.photos.map((photo) => (
                     <Tab
                       key={photo.id}
-                      className="relative flex h-24 cursor-pointer items-center justify-center rounded-md bg-white text-sm font-medium uppercase text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-offset-4"
+                      className="relative flex h-24 cursor-pointer items-center justify-center rounded-md bg-red-500 text-sm font-medium uppercase text-blue-900 hover:bg-gray-50 focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-offset-4"
                     >
                       {({ selected }) => (
                         <>
@@ -116,7 +116,7 @@ const Vehicle = () => {
 
             {/* Product info */}
             <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
-              <h1 className="font-Jakarta text-3xl font-bold tracking-tight text-gray-900">
+              <h1 className="font-Jakarta text-3xl font-bold tracking-tight text-purple-500">
                 {mainProduct?.titleEng}
               </h1>
               <p className="font-Inter text-xl font-normal italic tracking-tight text-gray-900">

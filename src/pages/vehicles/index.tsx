@@ -12,7 +12,7 @@ const Vehicles = () => {
           <h2 className="font-Jakarta text-2xl font-bold text-gray-900">
             Shop Vehicles
           </h2>
-          <p className="font-Inter text-xl font-normal italic text-gray-500">
+          <p className="font-Inter text-xl font-normal italic text-green-500">
             Tienda de vehículos
           </p>
 
