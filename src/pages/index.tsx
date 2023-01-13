@@ -51,8 +51,7 @@ const Home: NextPage = () => {
               <Image
                 className="object-cover"
                 fill
-                // src="https://drive.google.com/uc?export=view&id=1lNWDiW4vLa_ZoG2hygR4jIdbFDrzBLNM"
-                src="https://drive.google.com/uc?export=download&id=1lNWDiW4vLa_ZoG2hygR4jIdbFDrzBLNM"
+                src="https://drive.google.com/uc?export=view&id=1lNWDiW4vLa_ZoG2hygR4jIdbFDrzBLNM"
                 alt="Landing Page Photo"
               />
             </div>
