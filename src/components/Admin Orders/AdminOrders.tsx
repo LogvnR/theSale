@@ -1,17 +1,10 @@
-import { TrashIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
+import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 import { trpc } from "../../utils/trpc";
 
 const AdminOrders = () => {
-  const utils = trpc.useContext();
-
   const orders = trpc.order.allOrders.useQuery().data;
-  const removeOrder = trpc.order.removeOrder.useMutation({
-    onSuccess: () => {
-      utils.order.allOrders.invalidate();
-    },
-  });
 
   const dateOptionsPre: Intl.DateTimeFormatOptions = {
     month: "short",

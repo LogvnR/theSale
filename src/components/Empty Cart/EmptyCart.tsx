@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { PlusIcon } from "@heroicons/react/20/solid";
 import emptyCart from "../../../public/empty_cart.svg";
 import Link from "next/link";
 
