@@ -48,9 +48,8 @@ const Home: NextPage = () => {
 
           <div className="relative h-64 w-full overflow-hidden sm:h-72 md:h-96 lg:absolute lg:inset-y-0 lg:right-0 lg:h-full lg:w-1/2">
             <div className="relative h-[257px] w-full overflow-hidden lg:h-[730px]">
-              <Image
+              <img
                 className="object-cover"
-                fill
                 src="https://drive.google.com/uc?export=view&id=1lNWDiW4vLa_ZoG2hygR4jIdbFDrzBLNM"
                 alt="Landing Page Photo"
               />

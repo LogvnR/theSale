@@ -21,10 +21,14 @@ const config = {
       },
       {
         protocol: "https",
+        hostname: "photos.google.com",
+      },
+      {
+        protocol: "https",
         hostname: "cdn.discordapp.com",
       },
     ],
-    domains: ["drive.google.com", "cdn.discordapp.com"],
+    domains: ["drive.google.com", "photos.google.com", "cdn.discordapp.com"],
   },
 };
 export default config;
