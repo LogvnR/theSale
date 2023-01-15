@@ -83,11 +83,10 @@ const Product = () => {
                           <span className="sr-only"> {photo.title} </span>
                           <span className="absolute inset-0 overflow-hidden rounded-md">
                             <div className="relative h-[128px] w-full">
-                              <Image
+                              <img
                                 src={photo.url}
-                                fill
                                 alt={photo.title}
-                                className="object-cover sm:rounded-lg"
+                                className="h-full object-cover sm:rounded-lg"
                               />
                             </div>
                           </span>
@@ -109,9 +108,8 @@ const Product = () => {
                 {mainProduct?.photos.map((photo) => (
                   <Tab.Panel key={photo.id}>
                     <div className="relative h-[257px] w-full lg:h-[444px]">
-                      <Image
+                      <img
                         src={photo.url}
-                        fill
                         alt={photo.title}
                         className="rounded-lg object-cover"
                       />
