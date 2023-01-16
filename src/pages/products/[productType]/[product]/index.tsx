@@ -10,6 +10,8 @@ import Image from "next/image";
 import useCart from "../../../../hooks/useCart";
 import Modal from "../../../../components/Modal/Modal";
 import Head from "next/head";
+import PhotoPreview from "../../../../components/Photo Preview/PhotoPreview";
+import { photoRouter } from "../../../../server/trpc/router/photo";
 
 const classNames = (...classes: string[]) => {
   return classes.filter(Boolean).join(" ");
@@ -18,14 +20,17 @@ const classNames = (...classes: string[]) => {
 const Product = () => {
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+  const [previewIsOpen, setPreviewIsOpen] = useState<boolean>(false);
+  const [previewPhoto, setPreviewPhoto] = useState<string>("");
+
   const router = useRouter();
   const productId = String(router.query.product);
   const categoryId = String(router.query.productType);
-  const { cart, addToCart } = useCart();
-
   const mainProduct = trpc.product.oneProduct.useQuery({
     productId: productId,
   }).data;
+
+  const { cart, addToCart } = useCart();
 
   const addToCartHandler = () => {
     if (cart.filter((item) => item.prodId === mainProduct?.id).length > 0) {
@@ -52,9 +57,22 @@ const Product = () => {
     }
   }, [cart, mainProduct?.id]);
 
+  // useEffect(() => {
+  //   const previewArr = mainProduct?.photos.filter((photo) => {
+  //     if (photo.isFeaturePhoto === true) return photo.url;
+  //   });
+
+  //   setPreviewPhoto(String(previewArr?.pop()?.url));
+  // }, []);
+
   return (
     <>
       <Modal modalOpen={modalIsOpen} setModalOpen={setModalIsOpen} />
+      <PhotoPreview
+        setPreviewOpen={setPreviewIsOpen}
+        previewOpen={previewIsOpen}
+        previewPhoto={previewPhoto}
+      />
       <Head>
         <title>The Sale</title>
         <meta
@@ -82,14 +100,17 @@ const Product = () => {
                         <>
                           <span className="sr-only"> {photo.title} </span>
                           <span className="absolute inset-0 overflow-hidden rounded-md">
-                            <div className="relative h-[128px] w-full">
+                            <button
+                              onClick={() => setPreviewPhoto(photo.url)}
+                              className="relative h-[128px] w-full"
+                            >
                               <Image
                                 src={photo.url}
                                 fill
-                                alt={photo.title}
+                                alt={`Preview for ${photo.title}`}
                                 className="object-cover sm:rounded-lg"
                               />
-                            </div>
+                            </button>
                           </span>
                           <span
                             className={classNames(
@@ -107,16 +128,25 @@ const Product = () => {
 
               <Tab.Panels className="aspect-w-1 aspect-h-1 w-full">
                 {mainProduct?.photos.map((photo) => (
-                  <Tab.Panel key={photo.id}>
-                    <div className="relative h-[257px] w-full lg:h-[444px]">
-                      <Image
-                        src={photo.url}
-                        fill
-                        alt={photo.title}
-                        className="rounded-lg object-cover"
-                      />
-                    </div>
-                  </Tab.Panel>
+                  <>
+                    <Tab.Panel key={photo.id}>
+                      <div className="relative h-[257px] w-full lg:h-[444px]">
+                        <button
+                          onClick={() => {
+                            setPreviewPhoto(photo.url);
+                            setPreviewIsOpen(true);
+                          }}
+                        >
+                          <Image
+                            src={photo.url}
+                            fill
+                            alt={photo.title}
+                            className="rounded-lg object-cover"
+                          />
+                        </button>
+                      </div>
+                    </Tab.Panel>
+                  </>
                 ))}
               </Tab.Panels>
             </Tab.Group>
