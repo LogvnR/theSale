@@ -72,19 +72,10 @@ const Navbar = () => {
                     </h1>
                   )}
                 </Link>
-                {/* <img
-                  className="hidden h-8 w-auto rounded lg:block"
-                  src={`${
-                    sessionData?.user
-                      ? sessionData.user.image
-                      : "https://drive.google.com/uc?export=view&id=153kDaSmMMxJ2zcF-cY8H5k0ASwRzdNif"
-                  }`}
-                  alt="Your Company"
-                /> */}
               </button>
 
-              <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-                {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
+              {/* ==== Desktop ==== */}
+              <div className="hidden md:ml-6 md:flex md:space-x-8">
                 <Link
                   href={"/"}
                   className={`inline-flex items-center border-b-2 ${
@@ -202,8 +193,8 @@ const Navbar = () => {
               </div>
             </div>
 
-            <div className="-mr-2 flex items-center sm:hidden">
-              {/* Mobile menu button */}
+            {/* ==== Mobile ==== */}
+            <div className="-mr-2 flex items-center md:hidden">
               <Disclosure.Button
                 onClick={() => setIsOpen(!isOpen)}
                 className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
@@ -219,7 +210,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        <Disclosure.Panel className="sm:hidden">
+        <Disclosure.Panel className="md:hidden">
           <div className="space-y-1 pt-2 pb-3">
             {/* Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-500 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-700" */}
             <Link href={"/"}>
