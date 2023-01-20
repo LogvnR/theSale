@@ -1,11 +1,13 @@
 import Head from "next/head";
 import React from "react";
 import CategoryCard from "../../components/Category Card/CategoryCard";
+import CategorySkeleton from "../../components/Category Card/CategorySkeleton";
 
 import { trpc } from "../../utils/trpc";
 
 const ProductCategories = () => {
-  const categories = trpc.category.allCategories.useQuery().data;
+  const categories = trpc.category.allCategories.useQuery();
+
   return (
     <>
       <Head>
@@ -27,7 +29,16 @@ const ProductCategories = () => {
             </p>
 
             <div className="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
-              {categories?.map((category) => (
+              {categories.isInitialLoading || categories.isLoading
+                ? [...Array(6).keys()].map((skeleton) => {
+                    return (
+                      <div key={skeleton}>
+                        <CategorySkeleton />
+                      </div>
+                    );
+                  })
+                : null}
+              {categories.data?.map((category) => (
                 <CategoryCard
                   key={category.id}
                   catId={category.id}

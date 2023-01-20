@@ -6,13 +6,14 @@ import ProductCard from "../../../components/Product Card/ProductCard";
 import { trpc } from "../../../utils/trpc";
 import BackButton from "../../../components/Back Button/BackButton";
 import Head from "next/head";
+import ProductSkeleton from "../../../components/Product Card/ProductSkeleton";
 
 const ProductType = () => {
   const router = useRouter();
   const productType = String(router.query.productType);
   const categoryProducts = trpc.category.products.useQuery({
     categoryId: productType,
-  }).data;
+  });
 
   return (
     <>
@@ -28,12 +29,21 @@ const ProductType = () => {
         <div className="mx-auto max-w-2xl py-4 px-4 sm:py-12 sm:px-6 lg:max-w-7xl lg:px-8">
           <BackButton link="/products" />
           <section>
-            <h2 className="font-Jakarta text-2xl font-bold text-gray-900">
-              {categoryProducts?.titleEng}
-            </h2>
-            <p className="font-Inter text-xl font-normal italic text-gray-500">
-              {categoryProducts?.titleEsp}
-            </p>
+            {categoryProducts.isInitialLoading || categoryProducts.isLoading ? (
+              <div className="h-7 w-1/4 animate-pulse rounded-xl bg-gray-400" />
+            ) : (
+              <h2 className="font-Jakarta text-2xl font-bold text-gray-900">
+                {categoryProducts.data?.titleEng}
+              </h2>
+            )}
+
+            {categoryProducts.isInitialLoading || categoryProducts.isLoading ? (
+              <div className="mt-1 h-5 w-1/3 animate-pulse rounded-xl bg-gray-300" />
+            ) : (
+              <p className="font-Inter text-xl font-normal italic text-gray-500">
+                {categoryProducts.data?.titleEsp}
+              </p>
+            )}
           </section>
           <div className="relative mb-4">
             <div
@@ -53,10 +63,19 @@ const ProductType = () => {
           </div>
 
           <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-            {categoryProducts?.products?.map((product) => (
+            {categoryProducts.isInitialLoading || categoryProducts.isLoading
+              ? [...Array(6).keys()].map((skeleton) => {
+                  return (
+                    <div key={skeleton}>
+                      <ProductSkeleton />
+                    </div>
+                  );
+                })
+              : null}
+            {categoryProducts.data?.products?.map((product) => (
               <ProductCard
                 key={product.id}
-                catId={categoryProducts.id}
+                catId={String(categoryProducts.data?.id)}
                 prodId={product.id}
                 titleEng={product.titleEng}
                 titleEsp={product.titleEsp}
