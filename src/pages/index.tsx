@@ -50,7 +50,7 @@ const Home: NextPage = () => {
             <div className="relative h-[257px] w-full overflow-hidden lg:h-[730px]">
               <Image
                 className="object-cover"
-                src="https://drive.google.com/uc?export=view&id=1lNWDiW4vLa_ZoG2hygR4jIdbFDrzBLNM"
+                src="https://i.ibb.co/MGr9LbW/hero-img.jpg"
                 alt="Landing Page Photo"
                 fill
                 priority

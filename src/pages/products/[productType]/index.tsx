@@ -79,7 +79,7 @@ const ProductType = () => {
                 prodId={product.id}
                 titleEng={product.titleEng}
                 titleEsp={product.titleEsp}
-                featurePhoto={product.photos[0]!.url}
+                featurePhoto={String(product.photos.at(0)?.url)}
                 prodPrice={product.price}
               />
             ))}
