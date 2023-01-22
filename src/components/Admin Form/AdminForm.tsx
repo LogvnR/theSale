@@ -79,17 +79,17 @@ const AdminForm = () => {
 
   const setURL = (idx: number) => {
     // modify URL string for upload
-    const newUrl = photo
-      .replace("file/d/", "uc?export=view&id=")
-      .replace("/view", "");
+    // const newUrl = photo
+    //   .replace("file/d/", "uc?export=view&id=")
+    //   .replace("/view", "");
 
     if (photos.length === 0) {
       setPhotos([
         ...photos,
-        { title: titleEng + `${idx + 1}`, url: newUrl, isFeaturePhoto: true },
+        { title: titleEng + `${idx + 1}`, url: photo, isFeaturePhoto: true },
       ]);
     } else {
-      setPhotos([...photos, { title: titleEng + `${idx + 1}`, url: newUrl }]);
+      setPhotos([...photos, { title: titleEng + `${idx + 1}`, url: photo }]);
     }
   };
 

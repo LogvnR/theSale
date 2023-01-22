@@ -30,16 +30,16 @@ const CategoryForm = () => {
   });
 
   const addCategoryHandler = () => {
-    const newCoverPhoto = coverPhoto
-      .replace("file/d/", "uc?export=view&id=")
-      .replace("/view", "");
+    // const newCoverPhoto = coverPhoto
+    //   .replace("file/d/", "uc?export=view&id=")
+    //   .replace("/view", "");
 
     //
 
     addProduct.mutate({
       categoryEng: categoryEng,
       categoryEsp: categoryEsp,
-      coverPhoto: newCoverPhoto,
+      coverPhoto: coverPhoto,
     });
   };
 
