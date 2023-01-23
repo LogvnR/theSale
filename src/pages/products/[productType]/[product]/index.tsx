@@ -22,6 +22,7 @@ const Product = () => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [previewIsOpen, setPreviewIsOpen] = useState<boolean>(false);
   const [previewPhoto, setPreviewPhoto] = useState<string>("");
+  const [userOffer, setUserOffer] = useState<number>(0);
 
   const router = useRouter();
   const productId = String(router.query.product);
@@ -29,6 +30,7 @@ const Product = () => {
   const mainProduct = trpc.product.oneProduct.useQuery({
     productId: productId,
   }).data;
+  const addOffer = trpc.product.addOfferToProduct.useMutation();
 
   const { cart, addToCart } = useCart();
 
@@ -41,11 +43,16 @@ const Product = () => {
         titleEng: mainProduct!.titleEng,
         titleEsp: mainProduct!.titleEsp,
         price: +mainProduct!.price,
+        userOffer: userOffer,
         photo: mainProduct!.photos!.find(
           (photo) => photo.isFeaturePhoto === true
         )!.url,
       });
-      setIsDisabled(false);
+      addOffer.mutate({
+        productId: mainProduct!.id,
+        userOffer: String(userOffer),
+      });
+      setIsDisabled(true);
     }
   };
 
@@ -160,15 +167,44 @@ const Product = () => {
                 {mainProduct?.titleEsp}
               </p>
 
-              <div className="mt-3">
+              <div className="mt-4">
                 <h2 className="sr-only">Product information</h2>
                 <p className="font-Jakarta text-3xl tracking-tight text-gray-900">
                   $ {mainProduct?.price}
                 </p>
+                {mainProduct?.isObo ? (
+                  <p className="mt-2 font-Jakarta text-base italic tracking-tight text-gray-600">
+                    Or your best offer <span className="mx-2">&#x2022;</span> O
+                    tu mejor oferta
+                  </p>
+                ) : null}
               </div>
 
               <div className="mt-6 flex flex-col">
-                <div className="sm:flex-col1 mt-10 flex">
+                {!mainProduct?.isPending ? (
+                  !isDisabled ? (
+                    <div className="mt-10 max-w-xs">
+                      <label
+                        htmlFor="offer"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Your offer <span className="mx-2">&#x2022;</span> Tu
+                        oferta
+                      </label>
+                      <div className="mt-1">
+                        <input
+                          type="number"
+                          name="offer"
+                          id="offer"
+                          className="block w-full rounded-md bg-gray-100 py-3 px-4 text-gray-600 shadow-sm outline-gray-600 sm:text-sm"
+                          placeholder="$"
+                          onChange={(e) => setUserOffer(e.target.valueAsNumber)}
+                        />
+                      </div>
+                    </div>
+                  ) : null
+                ) : null}
+                <div className="sm:flex-col1 mt-4 flex">
                   <button
                     onClick={() => {
                       if (mainProduct?.isPending) {
@@ -205,48 +241,23 @@ const Product = () => {
                 </h2>
 
                 <div className="divide-y divide-gray-200 border-t">
-                  <Disclosure as="div">
-                    {({ open }) => (
-                      <>
-                        <h3>
-                          <Disclosure.Button className="group relative flex w-full items-center justify-between py-6 text-left">
-                            <span
-                              className={classNames(
-                                open ? "text-blue-600" : "text-gray-900",
-                                "font-Inter text-sm font-medium"
-                              )}
-                            >
-                              Description &#x2022; Descripción
-                            </span>
-                            <span className="ml-6 flex items-center">
-                              {open ? (
-                                <MinusIcon
-                                  className="block h-6 w-6 text-indigo-400 group-hover:text-blue-500"
-                                  aria-hidden="true"
-                                />
-                              ) : (
-                                <PlusIcon
-                                  className="block h-6 w-6 text-gray-400 group-hover:text-gray-500"
-                                  aria-hidden="true"
-                                />
-                              )}
-                            </span>
-                          </Disclosure.Button>
-                        </h3>
-                        <Disclosure.Panel
-                          as="div"
-                          className="prose prose-sm pb-6"
-                        >
-                          <p className="space-y-6 border-l-4 border-l-blue-200 pl-2 font-Inter text-base text-gray-500">
-                            {mainProduct?.descriptionEng}
-                          </p>
-                          <p className="mt-3 space-y-6 border-l-4 border-l-orange-200 pl-2 font-Inter text-base text-gray-500">
-                            {mainProduct?.descriptionEsp}
-                          </p>
-                        </Disclosure.Panel>
-                      </>
-                    )}
-                  </Disclosure>
+                  <div>
+                    <h3>
+                      <div className="group relative flex w-full items-center justify-between py-6 text-left">
+                        <span className="font-Inter text-sm font-medium text-gray-900">
+                          Description &#x2022; Descripción
+                        </span>
+                      </div>
+                    </h3>
+                    <div className="prose prose-sm pb-6">
+                      <p className="space-y-6 border-l-4 border-l-blue-200 pl-2 font-Inter text-base text-gray-500">
+                        {mainProduct?.descriptionEng}
+                      </p>
+                      <p className="mt-3 space-y-6 border-l-4 border-l-orange-200 pl-2 font-Inter text-base text-gray-500">
+                        {mainProduct?.descriptionEsp}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </section>
             </div>

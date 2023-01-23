@@ -20,7 +20,10 @@ const useCart = create<CartStore>()(
       addToCart: ({ ...props }: CartProduct) =>
         set((state) => ({
           cart: [...state.cart, props],
-          total: state.total + props.price,
+          total:
+            props.userOffer > 0
+              ? state.total + props.userOffer
+              : state.total + props.price,
           quantity: state.quantity + 1,
         })),
       removeItem: (id: string, price: number) => {

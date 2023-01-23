@@ -38,6 +38,7 @@ export const productRouter = router({
         titleEng: z.string(),
         titleEsp: z.string(),
         isFeatured: z.boolean(),
+        isObo: z.boolean(),
         price: z.string(),
         descriptionEng: z.string(),
         descriptionEsp: z.string(),
@@ -56,6 +57,7 @@ export const productRouter = router({
         data: {
           titleEng: input.titleEng,
           titleEsp: input.titleEsp,
+          isObo: input.isObo,
           isFeatured: input.isFeatured,
           price: input.price,
           descriptionEng: input.descriptionEng,
@@ -81,6 +83,23 @@ export const productRouter = router({
       return ctx.prisma.product.delete({
         where: {
           id: input.id,
+        },
+      });
+    }),
+  addOfferToProduct: publicProcedure
+    .input(
+      z.object({
+        productId: z.string(),
+        userOffer: z.string(),
+      })
+    )
+    .mutation(({ ctx, input }) => {
+      return ctx.prisma.product.update({
+        where: {
+          id: input.productId,
+        },
+        data: {
+          offer: input.userOffer,
         },
       });
     }),

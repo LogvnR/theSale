@@ -5,6 +5,7 @@ const CartSchema = z.object({
   titleEng: z.string(),
   titleEsp: z.string(),
   price: z.number(),
+  userOffer: z.number(),
   photo: z.string(),
 });
 

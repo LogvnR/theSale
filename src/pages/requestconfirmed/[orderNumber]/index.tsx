@@ -78,7 +78,7 @@ const RequestConfirmed = () => {
                           Price
                         </dt>
                         <dd className="ml-2 font-Jakarta text-gray-700">
-                          $ {product.price}
+                          $ {+product.offer > 0 ? product.offer : product.price}
                         </dd>
                       </div>
                     </dl>

@@ -72,19 +72,54 @@ const MyCart = () => {
                             {item.titleEng}
                           </a>
                         </h4>
-                        <p className="ml-4 font-Jakarta text-sm font-medium text-gray-900">
-                          $ {item.price}
-                        </p>
+                        {item?.userOffer <= 0 ? (
+                          <p className="ml-4 font-Jakarta text-sm font-medium text-gray-900">
+                            $ {item.price}
+                          </p>
+                        ) : null}
                       </div>
                       <p className="mt-1 font-Inter text-sm text-gray-500">
                         {item.titleEsp}
                       </p>
+
+                      {item?.userOffer > 0 ? (
+                        <>
+                          <div className="mt-3 flex justify-end">
+                            <p
+                              className={`ml-4 font-Jakarta text-sm font-medium  ${
+                                item.userOffer
+                                  ? "text-gray-400 line-through"
+                                  : "text-gray-900"
+                              }`}
+                            >
+                              $ {item.price}
+                            </p>
+                          </div>
+                          <div className="flex justify-between">
+                            <h4 className="text-sm">
+                              <a className="mt-1 font-Inter text-sm italic text-gray-500">
+                                Your offer{" "}
+                                <span className="mx-1">&#x2022;</span> Tu oferta
+                              </a>
+                            </h4>
+                            <p className="ml-4 font-Jakarta text-sm font-medium text-green-600">
+                              $ {item.userOffer}
+                            </p>
+                          </div>
+                        </>
+                      ) : null}
                     </div>
 
                     <div className="mt-4 flex flex-1 items-end justify-end">
                       <div className="ml-4">
                         <button
-                          onClick={() => removeItem(item.prodId, item.price)}
+                          onClick={() => {
+                            if (item.userOffer > 0) {
+                              removeItem(item.prodId, item.userOffer);
+                            } else {
+                              removeItem(item.prodId, item.price);
+                            }
+                          }}
                           type="button"
                           className="font-Inter text-sm font-medium text-orange-600 hover:text-orange-700"
                         >

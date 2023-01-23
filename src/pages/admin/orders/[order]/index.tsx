@@ -84,7 +84,7 @@ const Order = () => {
       <div className="py-4 sm:py-24">
         <div className="mx-auto max-w-7xl sm:px-2 lg:px-8">
           <div className="mx-auto max-w-2xl px-4 lg:max-w-4xl lg:px-0">
-            <BackButton link="/orders" />
+            <BackButton link="/admin/orders" />
             <h1 className="font-Jakarta text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
               Order Details
             </h1>
@@ -260,12 +260,31 @@ const Order = () => {
                           <div className="ml-6 flex-1 text-sm">
                             <div className="font-Jakarta font-medium text-gray-900 sm:flex sm:justify-between">
                               <h5>{order.titleEng}</h5>
-                              <p className="mt-2 sm:mt-0">$ {order.price}</p>
+                              {+order.offer <= 0 ? (
+                                <p className="mt-2 sm:mt-0">$ {order.price}</p>
+                              ) : null}
                             </div>
                             <p className="mt-2 font-Inter italic text-gray-500">
                               {order.id.substring(0, 7).toUpperCase()}
                             </p>
                           </div>
+                          {+order.offer > 0 ? (
+                            <div className="ml-6 mb-4 flex-1 text-sm">
+                              <div className="font-Jakarta font-medium text-gray-400 sm:flex sm:justify-end">
+                                <p className="mt-2 line-through sm:mt-0">
+                                  $ {order.price}
+                                </p>
+                              </div>
+                              <div className="mt-1 font-Jakarta font-medium text-gray-900 sm:flex sm:justify-between">
+                                <a className="font-Inter text-sm italic text-gray-500">
+                                  Their Offer
+                                </a>
+                                <p className="mt-2 text-green-600 sm:mt-0">
+                                  $ {order.offer}
+                                </p>
+                              </div>
+                            </div>
+                          ) : null}
 
                           <div className="flex w-full justify-end gap-4">
                             <button
