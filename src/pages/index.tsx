@@ -27,12 +27,10 @@ const Home: NextPage = () => {
                 <span className=" inline text-blue-600">The Sale</span>
               </h1>
               <p className="mx-auto mt-12 max-w-md font-Inter text-lg text-gray-500 sm:mt-0 sm:text-xl md:mt-5 md:max-w-3xl">
-                Your digital garage sale platform. Designed to get your items
-                directly to your intended customers.
+                The Ricard Family's digital garage sale.
               </p>
               <p className="mx-auto mt-1 max-w-md font-Inter text-base italic text-gray-500 sm:text-lg md:mt-2 md:max-w-3xl">
-                Tu plataforma digital de venta de garaje. Diseñado para llevar
-                sus artículos directamente a sus clientes previstos.
+                La venta de garaje digital de la Familia Ricard.
               </p>
               <div className="mt-12 sm:flex sm:justify-center lg:justify-start">
                 <div className="rounded-md shadow">
