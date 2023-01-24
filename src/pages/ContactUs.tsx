@@ -19,14 +19,14 @@ const ContactUs = () => {
               Phone &#x2022;{" "}
               <span className="font-normal italic">Teléfono</span>
             </p>
-            <p className="italic">507-1234-5678</p>
+            <p className="italic">+507-6424-8753</p>
           </div>
           <div className="flex flex-col gap-2">
             <h3 className="font-Jakarta font-bold">
               Email &#x2022;{" "}
               <span className="font-normal italic">Correo electrónico</span>
             </h3>
-            <p className="italic">testemail@email.com</p>
+            <p className="italic">ricardfamilycontact@gmail.com</p>
           </div>
         </div>
 
