@@ -44,6 +44,7 @@ const EditForm = ({ productId }: EditFormProps) => {
   const [isFeatured, setIsFeatured] = useState<boolean>(
     Boolean(mainProduct?.isFeatured)
   );
+  const [isObo, setIsObo] = useState<boolean>(Boolean(mainProduct?.isObo));
   const [titleEng, setTitleEng] = useState<string>(
     String(mainProduct?.titleEng)
   );
@@ -91,6 +92,7 @@ const EditForm = ({ productId }: EditFormProps) => {
       titleEng: titleEng,
       titleEsp: titleEsp,
       isFeatured: isFeatured,
+      isObo: isObo,
       price: price,
       descriptionEng: descriptionEng,
       descriptionEsp: descriptionEsp,
@@ -236,24 +238,44 @@ const EditForm = ({ productId }: EditFormProps) => {
           </div>
         </div>
 
-        {/* ===== Is Featured Item? ===== */}
-        <div className="flex w-full items-center gap-4">
-          <p className="text-gray-900">Is Featured?</p>
-          <Switch
-            checked={isFeatured}
-            onChange={setIsFeatured}
-            className={`${
-              isFeatured ? "bg-emerald-500" : "bg-gray-200"
-            } relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2`}
-          >
-            <span className="sr-only">Use setting</span>
-            <span
-              aria-hidden="true"
+        {/* ===== Is Featured Item | Is OBO Item ===== */}
+        <div className="block md:flex">
+          <div className="flex w-full items-center gap-4">
+            <p className="text-gray-900">Is Featured?</p>
+            <Switch
+              checked={isFeatured}
+              onChange={setIsFeatured}
               className={`${
-                isFeatured ? "translate-x-5" : "translate-x-0"
-              } pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out`}
-            />
-          </Switch>
+                isFeatured ? "bg-emerald-500" : "bg-gray-200"
+              } relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2`}
+            >
+              <span className="sr-only">Use setting</span>
+              <span
+                aria-hidden="true"
+                className={`${
+                  isFeatured ? "translate-x-5" : "translate-x-0"
+                } pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out`}
+              />
+            </Switch>
+          </div>
+          <div className="flex w-full items-center gap-4">
+            <p className="text-gray-900">Is OBO?</p>
+            <Switch
+              checked={isObo}
+              onChange={setIsObo}
+              className={`${
+                isObo ? "bg-emerald-500" : "bg-gray-200"
+              } relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2`}
+            >
+              <span className="sr-only">Use setting</span>
+              <span
+                aria-hidden="true"
+                className={`${
+                  isObo ? "translate-x-5" : "translate-x-0"
+                } pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out`}
+              />
+            </Switch>
+          </div>
         </div>
 
         {/* ===== Item Description ===== */}

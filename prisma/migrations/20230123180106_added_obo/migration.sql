@@ -1,0 +1,6 @@
+-- AlterTable
+ALTER TABLE "Order" ADD COLUMN     "isObo" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "offer" TEXT NOT NULL DEFAULT '0';
+
+-- AlterTable
+ALTER TABLE "Product" ADD COLUMN     "isObo" BOOLEAN NOT NULL DEFAULT false;
