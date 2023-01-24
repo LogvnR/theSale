@@ -75,7 +75,13 @@ const RequestConfirmed = () => {
                     <dl className="flex space-x-4 divide-x divide-gray-200 text-sm sm:space-x-6">
                       <div className="flex">
                         <dt className="font-Jakarta font-medium text-gray-900">
-                          Price
+                          {+product.offer > 0
+                            ? myOrder.language === "English"
+                              ? "My offer"
+                              : "Mi oferta"
+                            : myOrder.language === "English"
+                            ? "Price"
+                            : "Precio"}
                         </dt>
                         <dd className="ml-2 font-Jakarta text-gray-700">
                           $ {+product.offer > 0 ? product.offer : product.price}

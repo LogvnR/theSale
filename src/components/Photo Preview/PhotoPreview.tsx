@@ -41,7 +41,7 @@ const PhotoPreview = ({
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <Dialog.Panel className="flex w-full flex-col-reverse justify-center sm:landscape:my-auto sm:landscape:flex-row sm:landscape:items-start md:min-w-[975px] md:flex-row">
-                <div className="relative flex h-72 w-full transform overflow-hidden rounded-lg bg-amber-50 px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:p-6 sm:landscape:max-w-sm md:md:h-[700px] md:max-w-4xl landscape:h-80">
+                <div className="relative flex h-72 w-full transform overflow-hidden rounded-lg bg-amber-50 px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:p-6 sm:landscape:max-w-sm md:md:h-[700px] md:max-w-4xl ">
                   <Image
                     fill
                     src={previewPhoto}

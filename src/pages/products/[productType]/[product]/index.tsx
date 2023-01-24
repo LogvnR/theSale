@@ -181,27 +181,31 @@ const Product = () => {
               </div>
 
               <div className="mt-6 flex flex-col">
-                {!mainProduct?.isPending ? (
-                  !isDisabled ? (
-                    <div className="mt-10 max-w-xs">
-                      <label
-                        htmlFor="offer"
-                        className="block text-sm font-medium text-gray-700"
-                      >
-                        Your offer <span className="mx-2">&#x2022;</span> Tu
-                        oferta
-                      </label>
-                      <div className="mt-1">
-                        <input
-                          type="number"
-                          name="offer"
-                          id="offer"
-                          className="block w-full rounded-md bg-gray-100 py-3 px-4 text-gray-600 shadow-sm outline-gray-600 sm:text-sm"
-                          placeholder="$"
-                          onChange={(e) => setUserOffer(e.target.valueAsNumber)}
-                        />
+                {mainProduct?.isObo ? (
+                  !mainProduct?.isPending ? (
+                    !isDisabled ? (
+                      <div className="mt-10 max-w-xs">
+                        <label
+                          htmlFor="offer"
+                          className="block text-sm font-medium text-gray-700"
+                        >
+                          Your offer <span className="mx-2">&#x2022;</span> Tu
+                          oferta
+                        </label>
+                        <div className="mt-1">
+                          <input
+                            type="number"
+                            name="offer"
+                            id="offer"
+                            className="block w-full rounded-md bg-gray-100 py-3 px-4 text-gray-600 shadow-sm outline-gray-600 sm:text-sm"
+                            placeholder="$"
+                            onChange={(e) =>
+                              setUserOffer(e.target.valueAsNumber)
+                            }
+                          />
+                        </div>
                       </div>
-                    </div>
+                    ) : null
                   ) : null
                 ) : null}
                 <div className="sm:flex-col1 mt-4 flex">
