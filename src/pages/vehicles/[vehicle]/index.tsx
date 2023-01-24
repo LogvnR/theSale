@@ -17,6 +17,7 @@ const classNames = (...classes: string[]) => {
 const Vehicle = () => {
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+  const [userOffer, setUserOffer] = useState<number>(0);
   const router = useRouter();
   const productId = String(router.query.product);
   const categoryId = String(router.query.productType);
@@ -35,6 +36,7 @@ const Vehicle = () => {
         titleEng: mainProduct!.titleEng,
         titleEsp: mainProduct!.titleEsp,
         price: +mainProduct!.price,
+        userOffer: userOffer,
         photo: mainProduct!.photos!.find(
           (photo) => photo.isFeaturePhoto === true
         )!.url,
