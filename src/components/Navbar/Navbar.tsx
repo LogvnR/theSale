@@ -95,24 +95,6 @@ const Navbar = () => {
                     <p className="text-xs italic">Casa</p>
                   </button>
                 </Link>
-                {/* <Link
-                  href={"/vehicles"}
-                  className={`inline-flex items-center border-b-2 ${
-                    selectedPage === "Vehicles"
-                      ? "border-indigo-500 text-gray-900"
-                      : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
-                  } px-1 pt-1 text-sm font-medium `}
-                >
-                  <button
-                    onClick={() => {
-                      setSelectedPage("Vehicles");
-                      setIsOpen(false);
-                    }}
-                  >
-                    Vehicles
-                  </button>
-                </Link> */}
-
                 <Link
                   href={"/products"}
                   className={`inline-flex items-center border-b-2 ${
@@ -130,6 +112,25 @@ const Navbar = () => {
                   >
                     <p>Items for sale</p>
                     <p className="text-xs italic">Productos en venta</p>
+                  </button>
+                </Link>
+                <Link
+                  href={"/vehicles"}
+                  className={`inline-flex items-center border-b-2 ${
+                    selectedPage === "Vehicles"
+                      ? "border-indigo-500 text-gray-900"
+                      : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                  } px-1 pt-1 text-sm font-medium `}
+                >
+                  <button
+                    onClick={() => {
+                      setSelectedPage("Vehicles");
+                      setIsOpen(false);
+                    }}
+                    className="flex flex-col"
+                  >
+                    <p>Vehicles for sale</p>
+                    <p className="text-xs italic">Venta de vehículos</p>
                   </button>
                 </Link>
 
@@ -150,6 +151,23 @@ const Navbar = () => {
                         }}
                       >
                         Add Items
+                      </button>
+                    </Link>
+                    <Link
+                      href={"/admin/products/add_vehicles"}
+                      className={`inline-flex items-center border-b-2 ${
+                        selectedPage === "AddVehicle"
+                          ? "border-emerald-500 text-gray-900"
+                          : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
+                      } px-1 pt-1 text-sm font-medium `}
+                    >
+                      <button
+                        onClick={() => {
+                          setSelectedPage("AddVehicle");
+                          setIsOpen(false);
+                        }}
+                      >
+                        Add Vehicle
                       </button>
                     </Link>
 
@@ -229,7 +247,7 @@ const Navbar = () => {
                 <p className="text-sm font-normal italic">Casa</p>
               </Disclosure.Button>
             </Link>
-            {/* <Link href={"/vehicles"}>
+            <Link href={"/vehicles"}>
               <Disclosure.Button
                 onClick={() => {
                   setSelectedPage("Vehicles");
@@ -239,11 +257,12 @@ const Navbar = () => {
                   selectedPage === "Vehicles"
                     ? "border-indigo-500 bg-indigo-50 text-indigo-700"
                     : "border-transparent bg-transparent text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700"
-                }  py-2 pl-3 pr-4 text-left text-base font-medium `}
+                } flex flex-col gap-1 py-2 pl-3 pr-4 text-left text-base font-semibold `}
               >
-                Vehicles
+                <p>Vehicles for sale</p>
+                <p className="text-sm font-normal italic">Venta de vehículos</p>
               </Disclosure.Button>
-            </Link> */}
+            </Link>
 
             <Link href={"/products"}>
               <Disclosure.Button
@@ -277,6 +296,21 @@ const Navbar = () => {
                     }  py-2 pl-3 pr-4 text-left text-base font-medium `}
                   >
                     Add Items
+                  </Disclosure.Button>
+                </Link>
+                <Link href={"/admin/products/add_vehicles"}>
+                  <Disclosure.Button
+                    onClick={() => {
+                      setSelectedPage("AddVehicle");
+                      setIsOpen(false);
+                    }}
+                    className={`block w-full border-l-4 ${
+                      selectedPage === "AddVehicle"
+                        ? "border-emerald-500 bg-emerald-50 text-emerald-600"
+                        : "border-transparent bg-transparent text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700"
+                    }  py-2 pl-3 pr-4 text-left text-base font-medium `}
+                  >
+                    Add Vehicle
                   </Disclosure.Button>
                 </Link>
                 <Link href={"/admin/products"}>

@@ -9,6 +9,7 @@ import BackButton from "../../../components/Back Button/BackButton";
 import Image from "next/image";
 import useCart from "../../../hooks/useCart";
 import Modal from "../../../components/Modal/Modal";
+import VehicleSpecs from "../../../components/Vehicle Specs/VehicleSpecs";
 
 const classNames = (...classes: string[]) => {
   return classes.filter(Boolean).join(" ");
@@ -19,48 +20,48 @@ const Vehicle = () => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [userOffer, setUserOffer] = useState<number>(0);
   const router = useRouter();
-  const productId = String(router.query.product);
-  const categoryId = String(router.query.productType);
+  const carId = String(router.query.vehicle);
   const { cart, addToCart } = useCart();
 
-  const mainProduct = trpc.product.oneProduct.useQuery({
-    productId: productId,
+  const mainVehicle = trpc.vehicle.oneVehicle.useQuery({
+    vehicleId: carId,
   }).data;
 
   const addToCartHandler = () => {
-    if (cart.filter((item) => item.prodId === mainProduct?.id).length > 0) {
-      setIsDisabled(true);
-    } else {
-      addToCart({
-        prodId: mainProduct!.id,
-        titleEng: mainProduct!.titleEng,
-        titleEsp: mainProduct!.titleEsp,
-        price: +mainProduct!.price,
-        userOffer: userOffer,
-        photo: mainProduct!.photos!.find(
-          (photo) => photo.isFeaturePhoto === true
-        )!.url,
-      });
-      setIsDisabled(false);
-    }
+    // if (cart.filter((item) => item.prodId === mainProduct?.id).length > 0) {
+    //   setIsDisabled(true);
+    // } else {
+    //   addToCart({
+    //     prodId: mainProduct!.id,
+    //     titleEng: mainProduct!.titleEng,
+    //     titleEsp: mainProduct!.titleEsp,
+    //     price: +mainProduct!.price,
+    //     userOffer: userOffer,
+    //     photo: mainProduct!.photos!.find(
+    //       (photo) => photo.isFeaturePhoto === true
+    //     )!.url,
+    //   });
+    //   setIsDisabled(false);
+    // }
   };
 
   useEffect(() => {
-    if (cart.filter((item) => item.prodId === mainProduct?.id).length > 0) {
+    if (cart.filter((item) => item.prodId === mainVehicle?.id).length > 0) {
       setIsDisabled(true);
     } else {
       setIsDisabled(false);
     }
-  }, [cart, mainProduct?.id]);
+  }, [cart, mainVehicle?.id]);
 
-  console.log(mainProduct);
+  console.log(carId);
+  console.log(mainVehicle);
 
   return (
     <>
       <Modal modalOpen={modalIsOpen} setModalOpen={setModalIsOpen} />
       <div className="bg-white">
         <div className="mx-auto max-w-2xl py-4 px-4 sm:py-12 lg:max-w-7xl lg:px-8">
-          <BackButton link={`/products/${categoryId.toLowerCase()}`} />
+          <BackButton link={`/vehicles`} />
 
           <div className="mt-4 lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
             {/* Image gallery */}
@@ -68,7 +69,7 @@ const Vehicle = () => {
               {/* Image selector */}
               <div className="mx-auto mt-6 w-full max-w-2xl sm:block lg:max-w-none">
                 <Tab.List className="grid grid-cols-4 gap-6">
-                  {mainProduct?.photos.map((photo) => (
+                  {mainVehicle?.photos.map((photo) => (
                     <Tab
                       key={photo.id}
                       className="relative flex h-24 cursor-pointer items-center justify-center rounded-md bg-red-500 text-sm font-medium uppercase text-blue-900 hover:bg-gray-50 focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-offset-4"
@@ -101,7 +102,7 @@ const Vehicle = () => {
               </div>
 
               <Tab.Panels className="aspect-w-1 aspect-h-1 w-full">
-                {mainProduct?.photos.map((photo) => (
+                {mainVehicle?.photos.map((photo) => (
                   <Tab.Panel key={photo.id}>
                     <div className="relative h-[257px] w-full lg:h-[444px]">
                       <Image
@@ -118,25 +119,59 @@ const Vehicle = () => {
 
             {/* Product info */}
             <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
-              <h1 className="font-Jakarta text-3xl font-bold tracking-tight text-purple-500">
-                {mainProduct?.titleEng}
+              <h1 className="flex gap-2 font-Jakarta text-3xl font-bold tracking-tight text-purple-500">
+                <span>{mainVehicle?.year}</span>{" "}
+                <span>{mainVehicle?.make}</span>
               </h1>
               <p className="font-Inter text-xl font-normal italic tracking-tight text-gray-900">
-                {mainProduct?.titleEsp}
+                {mainVehicle?.model}
               </p>
 
               <div className="mt-3">
                 <h2 className="sr-only">Product information</h2>
                 <p className="font-Jakarta text-3xl tracking-tight text-gray-900">
-                  $ {mainProduct?.price}
+                  $ {mainVehicle?.price}
                 </p>
+                {mainVehicle?.isObo ? (
+                  <p className="mt-2 font-Jakarta text-base italic tracking-tight text-gray-600">
+                    Or your best offer <span className="mx-2">&#x2022;</span> O
+                    tu mejor oferta
+                  </p>
+                ) : null}
               </div>
 
               <div className="mt-6 flex flex-col">
-                <div className="sm:flex-col1 mt-10 flex">
+                {mainVehicle?.isObo ? (
+                  !mainVehicle?.isPending ? (
+                    !isDisabled ? (
+                      <div className="mt-10 max-w-xs">
+                        <label
+                          htmlFor="offer"
+                          className="block text-sm font-medium text-gray-700"
+                        >
+                          Your offer <span className="mx-2">&#x2022;</span> Tu
+                          oferta
+                        </label>
+                        <div className="mt-1">
+                          <input
+                            type="number"
+                            name="offer"
+                            id="offer"
+                            className="block w-full rounded-md bg-gray-100 py-3 px-4 text-gray-600 shadow-sm outline-gray-600 sm:text-sm"
+                            placeholder="$"
+                            onChange={(e) =>
+                              setUserOffer(e.target.valueAsNumber)
+                            }
+                          />
+                        </div>
+                      </div>
+                    ) : null
+                  ) : null
+                ) : null}
+                <div className="sm:flex-col1 mt-4 flex">
                   <button
                     onClick={() => {
-                      if (mainProduct?.isPending) {
+                      if (mainVehicle?.isPending) {
                         setModalIsOpen(true);
                       } else {
                         addToCartHandler();
@@ -144,14 +179,14 @@ const Vehicle = () => {
                     }}
                     disabled={isDisabled}
                     className={`flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent font-Inter ${
-                      !mainProduct?.isPending
+                      !mainVehicle?.isPending
                         ? isDisabled
                           ? "bg-gray-100 text-gray-500"
                           : "bg-blue-100 text-blue-500 hover:bg-blue-200 focus:ring-blue-500"
                         : "bg-yellow-100 text-yellow-500 hover:bg-yellow-200 focus:ring-yellow-500"
-                    }  py-3 px-5 text-base font-medium focus:outline-none focus:ring-2  focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full`}
+                    }  py-3 px-4 text-base font-medium focus:outline-none focus:ring-2  focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full`}
                   >
-                    {!mainProduct?.isPending ? (
+                    {!mainVehicle?.isPending ? (
                       isDisabled ? (
                         <p>Item in cart &#x2022; Artículo en carrito</p>
                       ) : (
@@ -162,6 +197,13 @@ const Vehicle = () => {
                     )}
                   </button>
                 </div>
+              </div>
+
+              <div className="mt-8">
+                <h3 className="font-Inter text-sm font-medium text-gray-900">
+                  Vehicle Details
+                </h3>
+                <VehicleSpecs vehicle={mainVehicle} />
               </div>
 
               <section aria-labelledby="details-heading" className="mt-12">
@@ -181,7 +223,7 @@ const Vehicle = () => {
                                 "font-Inter text-sm font-medium"
                               )}
                             >
-                              Description &#x2022; Descripción
+                              Vehicle Description &#x2022; Descripción
                             </span>
                             <span className="ml-6 flex items-center">
                               {open ? (
@@ -203,10 +245,10 @@ const Vehicle = () => {
                           className="prose prose-sm pb-6"
                         >
                           <p className="space-y-6 border-l-4 border-l-blue-200 pl-2 font-Inter text-base text-gray-500">
-                            {mainProduct?.descriptionEng}
+                            {mainVehicle?.descriptionEng}
                           </p>
                           <p className="mt-3 space-y-6 border-l-4 border-l-orange-200 pl-2 font-Inter text-base text-gray-500">
-                            {mainProduct?.descriptionEsp}
+                            {mainVehicle?.descriptionEsp}
                           </p>
                         </Disclosure.Panel>
                       </>

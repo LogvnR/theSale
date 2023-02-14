@@ -20,7 +20,7 @@ const VehicleCard = ({ ...props }: VehicleCardProps) => {
   if (!vehicle) return <p className="animate-pulse">Loading...</p>;
 
   return (
-    <Link href={`/products/${props.carId.toLowerCase()}`}>
+    <Link href={`/vehicles/${props.carId.toLowerCase()}`}>
       <div key={props.carId} className="group relative mb-4">
         <div className="sm:aspect-w-2 sm:aspect-h-1 lg:aspect-w-1 lg:aspect-h-1 relative h-80 w-full overflow-hidden rounded-lg bg-white transition group-hover:grayscale-0 sm:h-64 lg:grayscale">
           <Image
