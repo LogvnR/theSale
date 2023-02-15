@@ -1,64 +1,48 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
-import { Disclosure, Tab } from "@headlessui/react";
-import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { Tab } from "@headlessui/react";
 
 import { trpc } from "../../../utils/trpc";
 
 import BackButton from "../../../components/Back Button/BackButton";
 import Image from "next/image";
-import useCart from "../../../hooks/useCart";
+
 import Modal from "../../../components/Modal/Modal";
+import PhotoPreview from "../../../components/Photo Preview/PhotoPreview";
 import VehicleSpecs from "../../../components/Vehicle Specs/VehicleSpecs";
+import Head from "next/head";
 
 const classNames = (...classes: string[]) => {
   return classes.filter(Boolean).join(" ");
 };
 
 const Vehicle = () => {
-  const [isDisabled, setIsDisabled] = useState<boolean>(false);
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
-  const [userOffer, setUserOffer] = useState<number>(0);
+  const [previewIsOpen, setPreviewIsOpen] = useState<boolean>(false);
+  const [previewPhoto, setPreviewPhoto] = useState<string>("");
   const router = useRouter();
   const carId = String(router.query.vehicle);
-  const { cart, addToCart } = useCart();
 
   const mainVehicle = trpc.vehicle.oneVehicle.useQuery({
     vehicleId: carId,
   }).data;
 
-  const addToCartHandler = () => {
-    // if (cart.filter((item) => item.prodId === mainProduct?.id).length > 0) {
-    //   setIsDisabled(true);
-    // } else {
-    //   addToCart({
-    //     prodId: mainProduct!.id,
-    //     titleEng: mainProduct!.titleEng,
-    //     titleEsp: mainProduct!.titleEsp,
-    //     price: +mainProduct!.price,
-    //     userOffer: userOffer,
-    //     photo: mainProduct!.photos!.find(
-    //       (photo) => photo.isFeaturePhoto === true
-    //     )!.url,
-    //   });
-    //   setIsDisabled(false);
-    // }
-  };
-
-  useEffect(() => {
-    if (cart.filter((item) => item.prodId === mainVehicle?.id).length > 0) {
-      setIsDisabled(true);
-    } else {
-      setIsDisabled(false);
-    }
-  }, [cart, mainVehicle?.id]);
-
-  console.log(carId);
-  console.log(mainVehicle);
-
   return (
     <>
+      <Head>
+        <title>The Moving Sale</title>
+        <meta
+          name="description"
+          content="A digital garage sale application for the Ricard Family"
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
       <Modal modalOpen={modalIsOpen} setModalOpen={setModalIsOpen} />
+      <PhotoPreview
+        setPreviewOpen={setPreviewIsOpen}
+        previewOpen={previewIsOpen}
+        previewPhoto={previewPhoto}
+      />
       <div className="bg-white">
         <div className="mx-auto max-w-2xl py-4 px-4 sm:py-12 lg:max-w-7xl lg:px-8">
           <BackButton link={`/vehicles`} />
@@ -78,14 +62,17 @@ const Vehicle = () => {
                         <>
                           <span className="sr-only"> {photo.title} </span>
                           <span className="absolute inset-0 overflow-hidden rounded-md">
-                            <div className="relative h-[128px] w-full">
+                            <button
+                              onClick={() => setPreviewPhoto(photo.url)}
+                              className="relative h-[128px] w-full"
+                            >
                               <Image
                                 src={photo.url}
                                 fill
                                 alt={photo.title}
                                 className="object-cover sm:rounded-lg"
                               />
-                            </div>
+                            </button>
                           </span>
                           <span
                             className={classNames(
@@ -105,12 +92,19 @@ const Vehicle = () => {
                 {mainVehicle?.photos.map((photo) => (
                   <Tab.Panel key={photo.id}>
                     <div className="relative h-[257px] w-full lg:h-[444px]">
-                      <Image
-                        src={photo.url}
-                        fill
-                        alt={photo.title}
-                        className="rounded-lg object-cover"
-                      />
+                      <button
+                        onClick={() => {
+                          setPreviewPhoto(photo.url);
+                          setPreviewIsOpen(true);
+                        }}
+                      >
+                        <Image
+                          src={photo.url}
+                          fill
+                          alt={photo.title}
+                          className="rounded-lg object-cover"
+                        />
+                      </button>
                     </div>
                   </Tab.Panel>
                 ))}
@@ -119,7 +113,7 @@ const Vehicle = () => {
 
             {/* Product info */}
             <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
-              <h1 className="flex gap-2 font-Jakarta text-3xl font-bold tracking-tight text-purple-500">
+              <h1 className="flex gap-2 font-Jakarta text-3xl font-bold tracking-tight text-gray-500">
                 <span>{mainVehicle?.year}</span>{" "}
                 <span>{mainVehicle?.make}</span>
               </h1>
@@ -141,65 +135,24 @@ const Vehicle = () => {
               </div>
 
               <div className="mt-6 flex flex-col">
-                {mainVehicle?.isObo ? (
-                  !mainVehicle?.isPending ? (
-                    !isDisabled ? (
-                      <div className="mt-10 max-w-xs">
-                        <label
-                          htmlFor="offer"
-                          className="block text-sm font-medium text-gray-700"
-                        >
-                          Your offer <span className="mx-2">&#x2022;</span> Tu
-                          oferta
-                        </label>
-                        <div className="mt-1">
-                          <input
-                            type="number"
-                            name="offer"
-                            id="offer"
-                            className="block w-full rounded-md bg-gray-100 py-3 px-4 text-gray-600 shadow-sm outline-gray-600 sm:text-sm"
-                            placeholder="$"
-                            onChange={(e) =>
-                              setUserOffer(e.target.valueAsNumber)
-                            }
-                          />
-                        </div>
-                      </div>
-                    ) : null
-                  ) : null
-                ) : null}
-                <div className="sm:flex-col1 mt-4 flex">
-                  <button
-                    onClick={() => {
-                      if (mainVehicle?.isPending) {
-                        setModalIsOpen(true);
-                      } else {
-                        addToCartHandler();
-                      }
-                    }}
-                    disabled={isDisabled}
-                    className={`flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent font-Inter ${
-                      !mainVehicle?.isPending
-                        ? isDisabled
-                          ? "bg-gray-100 text-gray-500"
-                          : "bg-blue-100 text-blue-500 hover:bg-blue-200 focus:ring-blue-500"
-                        : "bg-yellow-100 text-yellow-500 hover:bg-yellow-200 focus:ring-yellow-500"
-                    }  py-3 px-4 text-base font-medium focus:outline-none focus:ring-2  focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full`}
-                  >
-                    {!mainVehicle?.isPending ? (
-                      isDisabled ? (
-                        <p>Item in cart &#x2022; Artículo en carrito</p>
-                      ) : (
-                        <p>Add to cart &#x2022; Añadir al carrito</p>
-                      )
-                    ) : (
-                      <p>Item Pending &#x2022; Elemento Pendiente</p>
-                    )}
-                  </button>
+                <h3 className="animate-pulse text-lg font-medium text-blue-700">
+                  Contact Us! &#x2022; Contacta con Nosotros!
+                </h3>
+                <div className="mt-2">
+                  <p className="font-bold text-gray-600">
+                    Telephone &#x2022; Teléfono:
+                  </p>
+                  <p className="italic">+507-6284-8753</p>
+                </div>
+                <div className="mt-2">
+                  <p className="font-bold text-gray-600">
+                    Email &#x2022; E-Mail:
+                  </p>
+                  <p className="italic">ricardfamilycontact@gmail.com</p>
                 </div>
               </div>
 
-              <div className="mt-8">
+              <div className="mt-6 divide-gray-200 border-t pt-4">
                 <h3 className="font-Inter text-sm font-medium text-gray-900">
                   Vehicle Details
                 </h3>
@@ -212,48 +165,23 @@ const Vehicle = () => {
                 </h2>
 
                 <div className="divide-y divide-gray-200 border-t">
-                  <Disclosure as="div">
-                    {({ open }) => (
-                      <>
-                        <h3>
-                          <Disclosure.Button className="group relative flex w-full items-center justify-between py-6 text-left">
-                            <span
-                              className={classNames(
-                                open ? "text-blue-600" : "text-gray-900",
-                                "font-Inter text-sm font-medium"
-                              )}
-                            >
-                              Vehicle Description &#x2022; Descripción
-                            </span>
-                            <span className="ml-6 flex items-center">
-                              {open ? (
-                                <MinusIcon
-                                  className="block h-6 w-6 text-indigo-400 group-hover:text-blue-500"
-                                  aria-hidden="true"
-                                />
-                              ) : (
-                                <PlusIcon
-                                  className="block h-6 w-6 text-gray-400 group-hover:text-gray-500"
-                                  aria-hidden="true"
-                                />
-                              )}
-                            </span>
-                          </Disclosure.Button>
-                        </h3>
-                        <Disclosure.Panel
-                          as="div"
-                          className="prose prose-sm pb-6"
-                        >
-                          <p className="space-y-6 border-l-4 border-l-blue-200 pl-2 font-Inter text-base text-gray-500">
-                            {mainVehicle?.descriptionEng}
-                          </p>
-                          <p className="mt-3 space-y-6 border-l-4 border-l-orange-200 pl-2 font-Inter text-base text-gray-500">
-                            {mainVehicle?.descriptionEsp}
-                          </p>
-                        </Disclosure.Panel>
-                      </>
-                    )}
-                  </Disclosure>
+                  <div>
+                    <h3>
+                      <div className="group relative flex w-full items-center justify-between py-6 text-left">
+                        <span className="font-Inter text-sm font-medium text-gray-900">
+                          Vehicle Description &#x2022; Descripcion Del Vehiculo
+                        </span>
+                      </div>
+                    </h3>
+                    <div className="prose prose-sm pb-6">
+                      <p className="space-y-6 border-l-4 border-l-blue-200 pl-2 font-Inter text-base text-gray-500">
+                        {mainVehicle?.descriptionEng}
+                      </p>
+                      <p className="mt-3 space-y-6 border-l-4 border-l-orange-200 pl-2 font-Inter text-base text-gray-500">
+                        {mainVehicle?.descriptionEsp}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </section>
             </div>

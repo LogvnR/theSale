@@ -13,7 +13,7 @@ interface VehicleSpecProps {
 
 const VehicleSpecs = ({ ...props }: VehicleSpecProps) => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col gap-2 md:flex-row md:flex-wrap">
       <VehicleDetail
         title="Body Style &#x2022; Tipo De Cuerpo"
         info={props.vehicle?.type}

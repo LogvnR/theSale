@@ -7,7 +7,7 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>The Sale</title>
+        <title>The Moving Sale</title>
         <meta
           name="description"
           content="A digital garage sale application for the Ricard Family"
@@ -20,11 +20,11 @@ const Home: NextPage = () => {
             <div className="px-4 sm:px-8 lg:w-1/2 xl:pr-16">
               <h1 className="font-Jakarta text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl lg:text-4xl xl:text-5xl">
                 <span className="inline">Welcome to</span>{" "}
-                <span className=" inline text-blue-600">The Sale</span>
+                <span className=" inline text-blue-600">The Moving Sale</span>
               </h1>
               <h1 className="mt-1 font-Inter text-2xl font-medium italic tracking-tight text-gray-500 sm:text-5xl md:text-5xl lg:text-3xl xl:text-4xl">
                 <span className="inline">Bienvenido a</span>{" "}
-                <span className=" inline text-blue-600">The Sale</span>
+                <span className=" inline text-blue-600">The Moving Sale</span>
               </h1>
               <p className="mx-auto mt-12 max-w-md font-Inter text-lg text-gray-500 sm:mt-0 sm:text-xl md:mt-5 md:max-w-3xl">
                 The Ricard Family&#39;s digital garage sale.

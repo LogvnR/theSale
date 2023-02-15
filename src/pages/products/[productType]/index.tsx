@@ -18,7 +18,7 @@ const ProductType = () => {
   return (
     <>
       <Head>
-        <title>The Sale</title>
+        <title>The Moving Sale</title>
         <meta
           name="description"
           content="A digital garage sale application for the Ricard Family"
