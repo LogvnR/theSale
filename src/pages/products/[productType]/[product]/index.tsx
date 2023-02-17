@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { Disclosure, Tab } from "@headlessui/react";
-import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { Tab } from "@headlessui/react";
+import toast, { Toaster } from "react-hot-toast";
 
 import { trpc } from "../../../../utils/trpc";
 
@@ -11,7 +11,6 @@ import useCart from "../../../../hooks/useCart";
 import Modal from "../../../../components/Modal/Modal";
 import Head from "next/head";
 import PhotoPreview from "../../../../components/Photo Preview/PhotoPreview";
-import { photoRouter } from "../../../../server/trpc/router/photo";
 
 const classNames = (...classes: string[]) => {
   return classes.filter(Boolean).join(" ");
@@ -53,6 +52,7 @@ const Product = () => {
         userOffer: String(userOffer),
       });
       setIsDisabled(true);
+      toast("Item Added To Cart!");
     }
   };
 
@@ -64,14 +64,6 @@ const Product = () => {
     }
   }, [cart, mainProduct?.id]);
 
-  // useEffect(() => {
-  //   const previewArr = mainProduct?.photos.filter((photo) => {
-  //     if (photo.isFeaturePhoto === true) return photo.url;
-  //   });
-
-  //   setPreviewPhoto(String(previewArr?.pop()?.url));
-  // }, []);
-
   return (
     <>
       <Modal modalOpen={modalIsOpen} setModalOpen={setModalIsOpen} />
@@ -79,6 +71,12 @@ const Product = () => {
         setPreviewOpen={setPreviewIsOpen}
         previewOpen={previewIsOpen}
         previewPhoto={previewPhoto}
+      />
+      <Toaster
+        toastOptions={{
+          style: { background: "#d1fae5", color: "#22c55e" },
+          duration: 2000,
+        }}
       />
       <Head>
         <title>The Moving Sale</title>
