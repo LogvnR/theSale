@@ -31,8 +31,9 @@ const VehicleCard = ({ ...props }: VehicleCardProps) => {
             priority
           />
         </div>
-        <p className="mt-2 font-Jakarta text-base font-semibold text-gray-900">
-          {vehicle?.year + " " + vehicle?.make + " " + vehicle?.model}
+        <p className="mt-2 flex gap-1 font-Jakarta text-base font-semibold text-gray-900">
+          <span>{vehicle?.year}</span> <span>{vehicle?.make}</span>
+          <span>{vehicle?.model}</span>
         </p>
       </div>
     </Link>

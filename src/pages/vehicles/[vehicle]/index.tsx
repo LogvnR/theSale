@@ -124,7 +124,7 @@ const Vehicle = () => {
               <div className="mt-3">
                 <h2 className="sr-only">Product information</h2>
                 <p className="font-Jakarta text-3xl tracking-tight text-gray-900">
-                  $ {mainVehicle?.price}
+                  $ {Number(mainVehicle?.price).toLocaleString()}
                 </p>
                 {mainVehicle?.isObo ? (
                   <p className="mt-2 font-Jakarta text-base italic tracking-tight text-gray-600">

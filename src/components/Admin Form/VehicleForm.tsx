@@ -27,9 +27,13 @@ const schema = z.object({
   newDrivetrain: z
     .string()
     .min(1, { message: "Please enter a valid drivetrain type" }),
+  newTransmission: z
+    .string()
+    .min(1, { message: "Please enter a valid transmission type" }),
   newType: z.string().min(1, { message: "Please enter a valid vehicle type" }),
   newPrice: z.string().min(1, { message: "Please enter a valid price" }),
-  newColor: z.string().min(1, { message: "Please enter a valid color" }),
+  newColorEng: z.string().min(1, { message: "Please enter a valid color" }),
+  newColorEsp: z.string().min(1, { message: "Please enter a valid color" }),
   newDescriptionEng: z
     .string()
     .min(1, { message: "Please enter a valid description" }),
@@ -49,9 +53,11 @@ const VehicleForm = () => {
   const [seats, setSeats] = useState<number>(0);
   const [engine, setEngine] = useState<string>("");
   const [drivetrain, setDrivetrain] = useState<string>("");
+  const [transmission, setTransmission] = useState<string>("");
   const [type, setType] = useState<string>("");
   const [price, setPrice] = useState<number>(0);
-  const [color, setColor] = useState<string>("");
+  const [colorEng, setColorEng] = useState<string>("");
+  const [colorEsp, setColorEsp] = useState<string>("");
   const [descriptionEng, setDescriptionEng] = useState<string>("");
   const [descriptionEsp, setDescriptionEsp] = useState<string>("");
   const [photo, setPhoto] = useState<string>("");
@@ -102,9 +108,11 @@ const VehicleForm = () => {
       seats: String(seats),
       engine: engine,
       drivetrain: drivetrain,
+      transmission: transmission,
       type: type,
       price: String(price),
-      color: color,
+      colorEng: colorEng,
+      colorEsp: colorEsp,
       descriptionEng: descriptionEng,
       descriptionEsp: descriptionEsp,
       photos: photos,
@@ -421,6 +429,31 @@ const VehicleForm = () => {
             onChange={(e) => setDrivetrain(e.target.value)}
           />
         </div>
+        {/* ===== Transmission ===== */}
+        <div
+          className={`relative rounded-md border ${
+            errors.newTransmission
+              ? "border-red-300 focus-within:border-red-600 focus-within:ring-red-600"
+              : "border-gray-300 focus-within:border-emerald-600 focus-within:ring-emerald-600"
+          }  px-3 py-2 shadow-sm  focus-within:ring-1 `}
+        >
+          {errors.newTransmission ? (
+            <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-red-600">
+              {String(errors.newTransmission?.message)}
+            </label>
+          ) : (
+            <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900">
+              Vehicle Transmission
+            </label>
+          )}
+          <input
+            type="text"
+            className="block w-full border-0 p-0 text-gray-900 placeholder-gray-300 outline-none focus:ring-0 sm:text-sm"
+            placeholder="Automatic"
+            {...register("newTransmission")}
+            onChange={(e) => setTransmission(e.target.value)}
+          />
+        </div>
         {/* ===== Vehicle Type ===== */}
         <div
           className={`relative rounded-md border ${
@@ -471,29 +504,54 @@ const VehicleForm = () => {
             onChange={(e) => setPrice(Number(e.target.value))}
           />
         </div>
-        {/* ===== Color ===== */}
+        {/* ===== Color Eng ===== */}
         <div
           className={`relative rounded-md border ${
-            errors.newColor
+            errors.newColorEng
               ? "border-red-300 focus-within:border-red-600 focus-within:ring-red-600"
               : "border-gray-300 focus-within:border-emerald-600 focus-within:ring-emerald-600"
           }  px-3 py-2 shadow-sm  focus-within:ring-1 `}
         >
-          {errors.newColor ? (
+          {errors.newColorEng ? (
             <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-red-600">
-              {String(errors.newColor?.message)}
+              {String(errors.newColorEng?.message)}
             </label>
           ) : (
             <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900">
-              Vehicle Color
+              Vehicle Color Eng
             </label>
           )}
           <input
             type="text"
             className="block w-full border-0 p-0 text-gray-900 placeholder-gray-300 outline-none focus:ring-0 sm:text-sm"
             placeholder="Ruby Metallic Red"
-            {...register("newColor")}
-            onChange={(e) => setColor(e.target.value)}
+            {...register("newColorEng")}
+            onChange={(e) => setColorEng(e.target.value)}
+          />
+        </div>
+        {/* ===== Color Esp ===== */}
+        <div
+          className={`relative rounded-md border ${
+            errors.newColorEsp
+              ? "border-red-300 focus-within:border-red-600 focus-within:ring-red-600"
+              : "border-gray-300 focus-within:border-emerald-600 focus-within:ring-emerald-600"
+          }  px-3 py-2 shadow-sm  focus-within:ring-1 `}
+        >
+          {errors.newColorEsp ? (
+            <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-red-600">
+              {String(errors.newColorEsp?.message)}
+            </label>
+          ) : (
+            <label className="absolute -top-2 left-2 -mt-px inline-block bg-white px-1 text-xs font-medium text-gray-900">
+              Vehicle Color Esp
+            </label>
+          )}
+          <input
+            type="text"
+            className="block w-full border-0 p-0 text-gray-900 placeholder-gray-300 outline-none focus:ring-0 sm:text-sm"
+            placeholder="Rojo rubí metalizado"
+            {...register("newColorEsp")}
+            onChange={(e) => setColorEsp(e.target.value)}
           />
         </div>
         {/* ===== Description Eng ===== */}

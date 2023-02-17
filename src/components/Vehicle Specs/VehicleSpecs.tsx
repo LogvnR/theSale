@@ -40,7 +40,9 @@ const VehicleSpecs = ({ ...props }: VehicleSpecProps) => {
       />
       <VehicleDetail
         title="Miles &#x2022; Kilómetros"
-        info={`${props.vehicle?.mileage} / ${props.vehicle?.kilometers}`}
+        info={`${Number(props.vehicle?.mileage).toLocaleString()} / ${Number(
+          props.vehicle?.kilometers
+        ).toLocaleString()}`}
       />
     </div>
   );
