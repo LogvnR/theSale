@@ -84,9 +84,11 @@ const VehicleForm = () => {
         newSeats: "",
         newEngine: "",
         newDrivetrain: "",
+        newTransmission: "",
         newType: "",
         newPrice: "",
-        newColor: "",
+        newColorEng: "",
+        newColorEsp: "",
         newDescriptionEng: "",
         newDescriptionEsp: "",
       });
@@ -571,13 +573,16 @@ const VehicleForm = () => {
               Vehicle Description Eng
             </label>
           )}
-          <input
-            type="text"
-            className="block w-full border-0 p-0 text-gray-900 placeholder-gray-300 outline-none focus:ring-0 sm:text-sm"
-            placeholder="Information"
-            {...register("newDescriptionEng")}
-            onChange={(e) => setDescriptionEng(e.target.value)}
-          />
+          <div className="mt-1">
+            <textarea
+              rows={4}
+              draggable={false}
+              className="block w-full p-1 shadow-sm outline-none ring-transparent sm:text-sm"
+              placeholder="Type a description for this vehicle"
+              {...register("newDescriptionEng")}
+              onChange={(e) => setDescriptionEng(e.target.value)}
+            />
+          </div>
         </div>
         {/* ===== Description Esp ===== */}
         <div
@@ -596,13 +601,16 @@ const VehicleForm = () => {
               Vehicle Description Esp
             </label>
           )}
-          <input
-            type="text"
-            className="block w-full border-0 p-0 text-gray-900 placeholder-gray-300 outline-none focus:ring-0 sm:text-sm"
-            placeholder="Información"
-            {...register("newDescriptionEsp")}
-            onChange={(e) => setDescriptionEsp(e.target.value)}
-          />
+          <div className="mt-1">
+            <textarea
+              rows={4}
+              draggable={false}
+              className="block w-full p-1 shadow-sm outline-none ring-transparent sm:text-sm"
+              placeholder="Type a description for this vehicle Esp"
+              {...register("newDescriptionEsp")}
+              onChange={(e) => setDescriptionEsp(e.target.value)}
+            />
+          </div>
         </div>
 
         {/* ===== Add New Photos ===== */}
