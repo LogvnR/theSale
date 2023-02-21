@@ -167,9 +167,16 @@ const Product = () => {
 
               <div className="mt-4">
                 <h2 className="sr-only">Product information</h2>
-                <p className="font-Jakarta text-3xl tracking-tight text-gray-900">
-                  $ {mainProduct?.price}
-                </p>
+                {mainProduct?.price === "0" ? (
+                  <p className="font-Jakarta text-3xl italic tracking-tight text-gray-600">
+                    Free &#x2022; Gratis
+                  </p>
+                ) : (
+                  <p className="font-Jakarta text-3xl tracking-tight text-gray-900">
+                    mainProduct?.price
+                  </p>
+                )}
+
                 {mainProduct?.isObo ? (
                   <p className="mt-2 font-Jakarta text-base italic tracking-tight text-gray-600">
                     Or your best offer <span className="mx-2">&#x2022;</span> O

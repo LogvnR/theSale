@@ -31,9 +31,15 @@ const ProductCard = ({ ...props }: ProductCardProps) => {
         <h3 className="font-Inter text-sm italic text-gray-700">
           {props.titleEsp}
         </h3>
-        <p className="mt-1 font-Jakarta text-lg font-medium text-gray-900">
-          $ {props.prodPrice}
-        </p>
+        {props.prodPrice === "0" ? (
+          <p className="mt-1 font-Jakarta text-lg font-medium italic text-gray-600">
+            Free &#x2022; Gratis
+          </p>
+        ) : (
+          <p className="mt-1 font-Jakarta text-lg font-medium text-gray-900">
+            $ {props.prodPrice}
+          </p>
+        )}
       </div>
     </Link>
   );
