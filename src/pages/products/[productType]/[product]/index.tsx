@@ -173,7 +173,7 @@ const Product = () => {
                   </p>
                 ) : (
                   <p className="font-Jakarta text-3xl tracking-tight text-gray-900">
-                    {mainProduct?.price}
+                    $ {mainProduct?.price}
                   </p>
                 )}
 
