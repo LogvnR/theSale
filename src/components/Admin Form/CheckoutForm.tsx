@@ -15,7 +15,7 @@ const schema = z.object({
     .min(1, { message: "Name must be greater than 1 character" }),
   userPhone: z
     .string()
-    .min(1, { message: "Category must be greater than 1 character" }),
+    .min(1, { message: "Phone number must be longer than 1 character" }),
 });
 
 interface CheckoutFormProps {
@@ -104,7 +104,7 @@ const CheckoutForm = ({ orderIsLoading }: CheckoutFormProps) => {
         <input
           type="text"
           className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 outline-none focus:ring-0 sm:text-sm"
-          placeholder="John Doe"
+          placeholder="name / nombre"
           {...register("userName")}
           onChange={(e) => setUserName(e.target.value)}
         />
@@ -129,7 +129,7 @@ const CheckoutForm = ({ orderIsLoading }: CheckoutFormProps) => {
         <input
           type="text"
           className="block w-full border-0 p-0 text-gray-900 placeholder-gray-500 outline-none focus:ring-0 sm:text-sm"
-          placeholder="507-1234-5678"
+          placeholder="xxx-xxxx-xxxx"
           {...register("userPhone")}
           onChange={(e) => setUserPhone(e.target.value)}
         />

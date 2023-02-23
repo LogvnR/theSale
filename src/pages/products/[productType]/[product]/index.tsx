@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { Tab } from "@headlessui/react";
 import toast, { Toaster } from "react-hot-toast";
+import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 
 import { trpc } from "../../../../utils/trpc";
 
@@ -11,6 +12,7 @@ import useCart from "../../../../hooks/useCart";
 import Modal from "../../../../components/Modal/Modal";
 import Head from "next/head";
 import PhotoPreview from "../../../../components/Photo Preview/PhotoPreview";
+import Link from "next/link";
 
 const classNames = (...classes: string[]) => {
   return classes.filter(Boolean).join(" ");
@@ -242,6 +244,22 @@ const Product = () => {
                     )}
                   </button>
                 </div>
+                {isDisabled ? (
+                  <Link href="/MyCart">
+                    <div className="sm:flex-col1 mt-4 flex">
+                      <button className="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-orange-100 py-3 px-4 font-Inter text-base  font-medium text-orange-500 hover:bg-orange-200 focus:outline-none focus:ring-2 focus:ring-orange-500  focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full">
+                        <div className="flex items-center justify-center gap-2">
+                          <p>Go To Cart</p>
+                          <ShoppingCartIcon
+                            className="block h-5 w-5 animate-pulse"
+                            aria-hidden="true"
+                          />
+                          <p>Ir Al Carrito</p>
+                        </div>
+                      </button>
+                    </div>
+                  </Link>
+                ) : null}
               </div>
 
               <section aria-labelledby="details-heading" className="mt-12">

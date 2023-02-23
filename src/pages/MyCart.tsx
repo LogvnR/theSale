@@ -44,6 +44,16 @@ const MyCart = () => {
           <h4 className="mt-2 text-left font-Inter text-2xl font-normal italic tracking-tight text-gray-900 sm:text-4xl">
             Mi carrito
           </h4>
+          <div className="mt-1 flex flex-col gap-2 text-gray-500 md:mt-3">
+            <p className="font-Inter text-xs italic">
+              Review your order and then complete the form at the bottom to make
+              a request for your items
+            </p>
+            <p className="font-Inter text-xs italic">
+              Revise su pedido y luego complete el formulario en la parte
+              inferior para hacer una solicitud de sus artículos
+            </p>
+          </div>
 
           <div className="mt-8">
             <section aria-labelledby="cart-heading">
