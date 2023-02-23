@@ -171,7 +171,38 @@ const CheckoutForm = ({ orderIsLoading }: CheckoutFormProps) => {
         </div>
       </div>
 
-      <div className="mt-4">
+      <div className="flex w-full flex-col gap-1 font-medium text-orange-600">
+        <div className="flex gap-2">
+          <p className="text-lg">&#x2022;</p>
+          {preferredLang === "English" ? (
+            <p>
+              You will be contacted within 72 hours of the request for payment
+              options.
+            </p>
+          ) : (
+            <p>
+              Será contactado dentro de las 72 horas posteriores a la solicitud
+              de pago. opciones
+            </p>
+          )}
+        </div>
+        <div className="flex gap-2">
+          <p className="text-lg">&#x2022;</p>
+          {preferredLang === "English" ? (
+            <p>
+              If you are outside of the Coronado area, you will need to make
+              arrangements for pick-up.
+            </p>
+          ) : (
+            <p>
+              Si se encuentra fuera del área de Coronado, deberá hacer arreglos
+              para la recogida.
+            </p>
+          )}
+        </div>
+      </div>
+
+      <div className="w-full">
         <button
           type="submit"
           className="w-full rounded-md border border-transparent bg-blue-500 py-3 px-4 font-Inter text-base font-medium text-white shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-50"
